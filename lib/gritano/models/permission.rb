@@ -3,11 +3,14 @@ module Gritano
     belongs_to :user
     belongs_to :repository
     
+    READ = 1
+    WRITE = 2
+    
     def add_access(access)
       if access == :read
-        self.access = 1 | (self.access || 0)
+        self.access = READ | (self.access || 0)
       elsif access == :write
-        self.access = 2 | (self.access || 0)
+        self.access = WRITE | (self.access || 0)
       else
         return false
       end
@@ -16,9 +19,9 @@ module Gritano
     
     def remove_access(access)
       if access == :read
-        self.access = (self.access || 0) & (~1)
+        self.access = (self.access || 0) & (~ READ)
       elsif access == :write
-        self.access = (self.access || 0) & (~2)
+        self.access = (self.access || 0) & (~ WRITE)
       else
         return false
       end
