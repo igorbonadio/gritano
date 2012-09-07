@@ -13,31 +13,22 @@ module Gritano
     end
     
     def add_access(repo, access)
-      permission = Permission.find_by_user_id_and_repository_id(self.id, repo.id) || Permission.new
-      permission.user_id = self.id
-      permission.repository_id = repo.id
-      if access == :read
-        permission.access = 1 | (permission.access || 0)
-      elsif access == :write
-        permission.access = 2 | (permission.access || 0)
-      else
-        return false
-      end
-      permission.save
+      change_access(repo, "add", access)
     end
     
     def remove_access(repo, access)
+      change_access(repo, "remove", access)
+    end
+    
+    def change_access(repo, op, access)
       permission = Permission.find_by_user_id_and_repository_id(self.id, repo.id) || Permission.new
       permission.user_id = self.id
       permission.repository_id = repo.id
-      if access == :read
-        permission.access = (permission.access || 0) & (~1)
-      elsif access == :write
-        permission.access = (permission.access || 0) & (~2)
+      if permission.send("#{op}_access", access)
+        return permission.save
       else
         return false
       end
-      permission.save
     end
     
     def check_access(repo, access)

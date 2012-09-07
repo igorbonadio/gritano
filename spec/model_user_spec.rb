@@ -16,13 +16,13 @@ describe Gritano::User do
   
   it 'should add read access to a repository' do
     user = Gritano::User.create(login: 'test')
-    repo = Gritano::User.create(login: 'repo')
+    repo = Gritano::Repository.create(name: 'repo')
     user.add_access(repo, :read).should be_true
   end
   
   it 'should add write access to a repository' do
     user = Gritano::User.create(login: 'test')
-    repo = Gritano::User.create(login: 'repo')
+    repo = Gritano::Repository.create(name: 'repo')
     user.add_access(repo, :read).should be_true
   end
   
@@ -42,8 +42,14 @@ describe Gritano::User do
   
   it 'should not add an wrong type access to a repository' do
     user = Gritano::User.create(login: 'test')
-    repo = Gritano::User.create(login: 'repo')
+    repo = Gritano::Repository.create(name: 'repo')
     user.add_access(repo, :wrong).should be_false
+  end
+  
+  it 'should not remove an wrong type access to a repository' do
+    user = Gritano::User.create(login: 'test')
+    repo = Gritano::Repository.create(name: 'repo')
+    user.remove_access(repo, :wrong).should be_false
   end
   
   it 'should have read access to a repository' do
