@@ -10,7 +10,7 @@ Feature: Policies
 		  | jessicaeto  |
 		  
 	  And the following repositories exist:
-	    | repo    |
+	    | name    |
 	    | gritano |
 	    | jeka    |
 	    

@@ -5,8 +5,9 @@ Given /^the following users exist:$/ do |table|
 end
 
 Given /^the following repositories exist:$/ do |table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+  table.hashes.each do |repo|
+    Gritano::Repository.create(repo)
+  end
 end
 
 Given /^the following permissions exist:$/ do |table|
