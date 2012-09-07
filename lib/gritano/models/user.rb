@@ -8,21 +8,17 @@ module Gritano
     
     def create_repository(repo)
       repository = Repository.create(repo)
-      permission = Permission.new
-      permission.user_id = self.id
-      permission.repository_id = repository.id
-      permission.access = 2
-      permission.save
+      add_access(repository, :write)
     end
     
     def add_access(repo, access)
-      permission = Permission.new
+      permission = Permission.find_by_user_id_and_repository_id(self.id, repo.id) || Permission.new
       permission.user_id = self.id
       permission.repository_id = repo.id
       if access == :read
-        permission.access = 1
+        permission.access = 1 | (permission.access || 0)
       elsif access == :write
-        permission.access = 2
+        permission.access = 2 | (permission.access || 0)
       else
         return false
       end
@@ -30,11 +26,13 @@ module Gritano
     end
     
     def check_access(repo, access)
-      if access == :read
-        return true if Permission.find_by_user_id_and_repository_id_and_access(self.id, repo.id, 1)
-        return true if Permission.find_by_user_id_and_repository_id_and_access(self.id, repo.id, 2)
-      elsif access == :write
-        return true if Permission.find_by_user_id_and_repository_id_and_access(self.id, repo.id, 2)
+      permission = Permission.find_by_user_id_and_repository_id(self.id, repo.id)
+      if permission
+        if access == :read
+          return true if permission.access & 1
+        elsif access == :write
+          return true if permission.access & 2
+        end
       end
       return false
     end
