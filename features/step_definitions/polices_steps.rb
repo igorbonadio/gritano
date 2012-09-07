@@ -48,6 +48,7 @@ Then /^I should see that only "(.*?)" has access to "(.*?)"$/ do |login, repo|
   end
 end
 
-Given /^I (add|remove) "(.*?)" (read|write) access to "(.*?)"$/ do |arg1, arg2, arg3, arg4|
-  pending # express the regexp above with the code you wish you had
+Given /^I (add|remove) "(.*?)" (read|write) access to "(.*?)"$/ do |op, user, permission, repo|
+  @user = Gritano::User.find_by_login(user)
+  @user.send("#{op}_access", Gritano::Repository.find_by_name(repo), permission.to_sym)
 end

@@ -26,6 +26,20 @@ describe Gritano::User do
     user.add_access(repo, :read).should be_true
   end
   
+  it 'should remove read access to a repository' do
+    user = Gritano::User.create(login: 'test')
+    user.create_repository(name: 'repo')
+    user.remove_access(Gritano::Repository.find_by_name('repo'), :read).should be_true
+    user.check_access(Gritano::Repository.find_by_name('repo'), :read).should be_false
+  end
+  
+  it 'should remove write access to a repository' do
+    user = Gritano::User.create(login: 'test')
+    user.create_repository(name: 'repo')
+    user.remove_access(Gritano::Repository.find_by_name('repo'), :write).should be_true
+    user.check_access(Gritano::Repository.find_by_name('repo'), :write).should be_false
+  end
+  
   it 'should not add an wrong type access to a repository' do
     user = Gritano::User.create(login: 'test')
     repo = Gritano::User.create(login: 'repo')

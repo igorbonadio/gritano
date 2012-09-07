@@ -48,7 +48,7 @@ Feature: Policies
 		  | op     | user        | permission | repo | access | result  |
 		  | add    | igorbonadio | read       | jeka | read   | allowed |
 		  | add    | igorbonadio | read       | jeka | write  | denied  |
-		  | add    | igorbonadio | write      | jeka | read   | denied  |
+		  | add    | igorbonadio | write      | jeka | read   | allowed |
 		  | add    | igorbonadio | write      | jeka | write  | allowed |
 		  | remove | jessicaeto  | read       | jeka | read   | denied  |
 		  | remove | jessicaeto  | read       | jeka | write  | allowed |
