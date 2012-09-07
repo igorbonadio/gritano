@@ -10,44 +10,45 @@ Feature: Console operations
 		  | jessicaeto  |
 		  
 	  And the following repositories exist:
-	    | name    |
-	    | gritano |
-	    | jeka    |
+	    | name            |
+	    | tmp/gritano.git |
+	    | tmp/jeka.git    |
 	    
 	  And the following permissions exist:
-	     | user        | repo    | access |
-	     | igorbonadio | gritano | read   |
-	     | igorbonadio | gritano | write  |
-	     | igorbonadio | jeka    | read   |
-	     | jessicaeto  | jeka    | read   |
-	     | jessicaeto  | jeka    | write  |
+	     | user        | repo            | access |
+	     | igorbonadio | tmp/gritano.git | read   |
+	     | igorbonadio | tmp/gritano.git | write  |
+	     | igorbonadio | tmp/jeka.git    | read   |
+	     | jessicaeto  | tmp/jeka.git    | read   |
+	     | jessicaeto  | tmp/jeka.git    | write  |
 	
 	Scenario Outline: Add user
 	  Given I start the gritano console
 	  When I execute "<command>"
 	  Then I should see a <message> message
 	  Examples:
-	    | command                         | message |
-	    | user add jose                   | success |
-	    | user rm igorbonadio             | success |
-	    | repo add p-lang                 | success |
-	    | repo rm jeka                    | success |
-	    | repo +read jessicaeto gritano   | success |
-	    | repo +write jessicaeto gritano  | success |
-	    | repo -read igorbonadio jeka     | success |
-	    | repo -write igorbonadio gritano | success |
-	    | repo rename gritano newname     | success |
-	    | user add igorbonadio            | error   |
-	    | user rm jose                    | error   |
-	    | repo add jeka                   | error   |
-	    | repo rm p-lang                  | error   |
-	    | repo +read arybonadio gritano   | error   |
-	    | repo +read jessicaeto p-lang    | error   |
-	    | repo +write arybonadio gritano  | error   |
-	    | repo +write jessicaeto p-lang   | error   |
-	    | repo -read aribonadio jeka      | error   |
-	    | repo -read igorbonadio p-lang   | error   |
-	    | repo -write arybonadio gritano  | error   |
-	    | repo -write igorbonadio p-lang  | error   |
-	    | repo rename p-lang newname      | error   |
-	    | repo rename gritano jeka        | error   |
+	    | command                                     | message |
+	    | user add jose                               | success |
+	    | user rm igorbonadio                         | success |
+	    | repo add tmp/p-lang.git                     | success |
+	    | repo rm tmp/jeka.git                        | success |
+	    | repo +read jessicaeto tmp/gritano.git       | success |
+	    | repo +write jessicaeto tmp/gritano.git      | success |
+	    | repo -read igorbonadio tmp/jeka.git         | success |
+	    | repo -write igorbonadio tmp/gritano.git     | success |
+	    | repo rename tmp/gritano.git tmp/newname.git | success |
+	    | user add igorbonadio                        | error   |
+	    | user rm jose                                | error   |
+	    | repo add tmp/jeka.git                       | error   |
+	    | repo rm tmp/p-lang.git                      | error   |
+	    | repo +read arybonadio tmp/gritano.git       | error   |
+	    | repo +read jessicaeto tmp/p-lang.git        | error   |
+	    | repo +write arybonadio tmp/gritano.git      | error   |
+	    | repo +write jessicaeto tmp/p-lang.git       | error   |
+	    | repo -read aribonadio tmp/jeka.git          | error   |
+	    | repo -read igorbonadio tmp/p-lang.git       | error   |
+	    | repo -write arybonadio tmp/gritano.git      | error   |
+	    | repo -write igorbonadio tmp/p-lang.git      | error   |
+	    | repo rename tmp/p-lang.git tmp/newname.git  | error   |
+	    | repo rename tmp/gritano.git tmp/jeka.git    | error   |
+	    
