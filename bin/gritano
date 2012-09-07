@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+
+require 'gritano'
+
+# commands
+
+# > gritano user add igorbonadio
+# > gritano user rm igorbonadio
+# > gritano repo add igorbonadio reponame
+# > gritano repo rm igorbonadio reponame
+# > gritano repo +read igorbonadio reponame
+# > gritano repo +write igorbonadio reponame
+# > gritano repo -read igorbonadio reponame
+# > gritano repo -write igorbonadio reponame
+# > gritano repo fork reponame forkedrepo
+# > gritano repo rename reponame newname
