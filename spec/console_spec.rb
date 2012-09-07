@@ -13,16 +13,16 @@ describe Gritano::Console do
     console.execute("user rm igorbonadio".split(' '))
   end
   
-  it "should respond to gritano repo add igorbonadio reponame" do
+  it "should respond to gritano repo add reponame" do
     console = Gritano::Console.new
     console.should_receive(:repo_add)
-    console.execute("repo add igorbonadio reponame".split(' '))
+    console.execute("repo add reponame".split(' '))
   end
   
-  it "should respond to gritano repo rm igorbonadio reponame" do
+  it "should respond to gritano repo rm reponame" do
     console = Gritano::Console.new
     console.should_receive(:repo_rm)
-    console.execute("repo rm igorbonadio reponame".split(' '))
+    console.execute("repo rm reponame".split(' '))
   end
   
   it "should respond to gritano repo +read igorbonadio reponame" do
