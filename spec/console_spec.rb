@@ -13,45 +13,46 @@ describe Gritano::Console do
     console.execute("user rm igorbonadio".split(' '))
   end
   
-  it "should respond to gritano repo add reponame" do
+  it "should respond to gritano repo add tmp/reponame.git" do
     console = Gritano::Console.new
     console.should_receive(:repo_add)
-    console.execute("repo add reponame".split(' '))
+    #Grit::Repo.should_receive(:init_bare).with("tmp/reponame.git")
+    console.execute("repo add tmp/reponame.git".split(' '))
   end
   
-  it "should respond to gritano repo rm reponame" do
+  it "should respond to gritano repo rm tmp/reponame.git" do
     console = Gritano::Console.new
     console.should_receive(:repo_rm)
-    console.execute("repo rm reponame".split(' '))
+    console.execute("repo rm tmp/reponame.git".split(' '))
   end
   
-  it "should respond to gritano repo +read igorbonadio reponame" do
+  it "should respond to gritano repo +read igorbonadio tmp/reponame.git" do
     console = Gritano::Console.new
     console.should_receive(:repo_add_read)
-    console.execute("repo +read igorbonadio reponame".split(' '))
+    console.execute("repo +read igorbonadio tmp/reponame.git".split(' '))
   end
   
-  it "should respond to gritano repo +write igorbonadio reponame" do
+  it "should respond to gritano repo +write igorbonadio tmp/reponame.git" do
     console = Gritano::Console.new
     console.should_receive(:repo_add_write)
-    console.execute("repo +write igorbonadio reponame".split(' '))
+    console.execute("repo +write igorbonadio tmp/reponame.git".split(' '))
   end
   
-  it "should respond to gritano repo -read igorbonadio reponame" do
+  it "should respond to gritano repo -read igorbonadio tmp/reponame.git" do
     console = Gritano::Console.new
     console.should_receive(:repo_remove_read)
-    console.execute("repo -read igorbonadio reponame".split(' '))
+    console.execute("repo -read igorbonadio tmp/reponame.git".split(' '))
   end
   
-  it "should respond to gritano repo -write igorbonadio reponame" do
+  it "should respond to gritano repo -write igorbonadio tmp/reponame.git" do
     console = Gritano::Console.new
     console.should_receive(:repo_remove_write)
-    console.execute("repo -write igorbonadio reponame".split(' '))
+    console.execute("repo -write igorbonadio tmp/reponame.git".split(' '))
   end
   
-  it "should respond to gritano repo rename reponame newname" do
+  it "should respond to gritano repo rename tmp/reponame.git tmp/newname" do
     console = Gritano::Console.new
     console.should_receive(:repo_rename)
-    console.execute("repo rename reponame newname".split(' '))
+    console.execute("repo rename tmp/reponame.git tmp/newname".split(' '))
   end
 end
