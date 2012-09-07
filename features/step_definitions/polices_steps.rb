@@ -17,28 +17,35 @@ Given /^the following permissions exist:$/ do |table|
   end
 end
 
-Given /^I create a new user called "(.*?)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Given /^I create a new user called "(.*?)"$/ do |login|
+  @user = Gritano::User.create(login: login)
 end
 
-When /^I check if "(.*?)" has read access to "(.*?)"$/ do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+When /^I check if "(.*?)" has (read|write) access to "(.*?)"$/ do |login, access, repo|
+  @access_result = @user.check_access(Gritano::Repository.find_by_name(repo), access.to_sym)
 end
 
-Then /^I should see that the access is (denied|allowed)$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then /^I should see that the access is (denied|allowed)$/ do |result|
+  @expected_result = false if result == 'denied'
+  @expected_result = true if result == 'allowed'
+  @access_result.should be == @expected_result
 end
 
-When /^I check if "(.*?)" has write access to "(.*?)"$/ do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+Given /^I create a new repository called "(.*?)" to "(.*?)"$/ do |repo, login|
+  Gritano::User.find_by_login(login).create_repository(name: repo)
 end
 
-Given /^I create a new repository called "(.*?)" to "(.*?)"$/ do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^I should see that only "(.*?)" has access to "(.*?)"$/ do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
+Then /^I should see that only "(.*?)" has access to "(.*?)"$/ do |login, repo|
+  repository = Gritano::Repository.find_by_name(repo)
+  user = Gritano::User.find_by_login(login)
+  user.check_access(repository, :read).should be_true
+  user.check_access(repository, :write).should be_true
+  Gritano::User.all.each do |u|
+    unless u.login == user.login
+      u.check_access(repository, :read).should be_false
+      u.check_access(repository, :write).should be_false
+    end
+  end
 end
 
 Given /^I (add|remove) "(.*?)" (read|write) access to "(.*?)"$/ do |arg1, arg2, arg3, arg4|

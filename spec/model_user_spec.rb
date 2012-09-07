@@ -31,4 +31,34 @@ describe Gritano::User do
     repo = Gritano::User.create(login: 'repo')
     user.add_access(repo, :wrong).should be_false
   end
+  
+  it 'should have read access to a repository' do
+    user = Gritano::User.create(login: 'test')
+    user.create_repository(name: 'gritano')
+    user.check_access(Gritano::Repository.find_by_name('gritano'), :read).should be_true
+  end
+  
+  it 'should have write access to a repository' do
+    user = Gritano::User.create(login: 'test')
+    user.create_repository(name: 'gritano')
+    user.check_access(Gritano::Repository.find_by_name('gritano'), :write).should be_true
+  end
+  
+  it 'should not have read access to a repository' do
+    user = Gritano::User.create(login: 'test')
+    repo = Gritano::Repository.create(name: 'repo')
+    user.check_access(repo, :read).should be_false
+  end
+  
+  it 'should not have write access to a repository' do
+    user = Gritano::User.create(login: 'test')
+    repo = Gritano::Repository.create(name: 'repo')
+    user.check_access(repo, :write).should be_false
+  end
+  
+  it 'should not have wrong access to a repository' do
+    user = Gritano::User.create(login: 'test')
+    repo = Gritano::Repository.create(name: 'repo')
+    user.check_access(repo, :wrong).should be_false
+  end
 end
