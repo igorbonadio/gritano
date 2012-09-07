@@ -4,11 +4,30 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'gritano'
 
+def help
+  puts "
+  gritano [user|repo] [command] parameters
+  
+  Examples:
+  gritano user add username
+  gritano user rm username
+  gritano repo add username reponame.git
+  gritano repo rm username reponame.git
+  gritano repo +read username reponame.git
+  gritano repo +write username reponame.git
+  gritano repo -read username reponame.git
+  gritano repo -write username reponame.git"
+end
+
 ActiveRecord::Base.establish_connection(YAML::load(File.open('db/database.yml')))
 
 console = Gritano::Console.new
-if console.execute(ARGV)
-  puts "success"
-else
-  puts "error"
+begin
+  if console.execute(ARGV)
+    puts "success"
+  else
+    puts "error"
+  end
+rescue NoMethodError
+  puts help
 end
