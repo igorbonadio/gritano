@@ -11,8 +11,10 @@ Given /^the following repositories exist:$/ do |table|
 end
 
 Given /^the following permissions exist:$/ do |table|
-  # table is a Cucumber::Ast::Table
-  pending # express the regexp above with the code you wish you had
+  table.hashes.each do |permission|
+    Gritano::User.find_by_login(permission['user'])
+      .add_access(Gritano::Repository.find_by_name(permission['repo']), permission['access'].to_sym)
+  end
 end
 
 Given /^I create a new user called "(.*?)"$/ do |arg1|
@@ -39,6 +41,6 @@ Then /^I should see that only "(.*?)" has access to "(.*?)"$/ do |arg1, arg2|
   pending # express the regexp above with the code you wish you had
 end
 
-Given /^I (add|remove) "(.*?)" (read|write) access to "(.*?)"$/ do |arg1, arg2, arg3|
+Given /^I (add|remove) "(.*?)" (read|write) access to "(.*?)"$/ do |arg1, arg2, arg3, arg4|
   pending # express the regexp above with the code you wish you had
 end
