@@ -27,5 +27,13 @@ module Gritano
       end
       return true
     end
+    
+    def is(access)
+      if access == :read
+        return (self.access & READ) == READ
+      elsif access == :write
+        return (self.access & WRITE) == WRITE
+      end
+    end
   end
 end

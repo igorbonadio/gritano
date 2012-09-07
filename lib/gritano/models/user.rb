@@ -33,13 +33,7 @@ module Gritano
     
     def check_access(repo, access)
       permission = Permission.find_by_user_id_and_repository_id(self.id, repo.id)
-      if permission
-        if access == :read
-          return (permission.access & 1) == 1
-        elsif access == :write
-          return (permission.access & 2) == 2
-        end
-      end
+      return permission.is(access) if permission
       return false
     end
   end
