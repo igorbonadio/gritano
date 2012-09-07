@@ -50,3 +50,12 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+require 'active_record'
+require 'yaml'
+desc "Migrate the database through scripts in db/migrate. Target specific version with VERSION=x"
+task :migrate do
+  ActiveRecord::Base.establish_connection(:adapter  => 'sqlite3', :database => 'development.sqlite3')
+  ActiveRecord::Base.logger = Logger.new(File.open('database.log', 'a'))
+  ActiveRecord::Migrator.migrate('db/migrate', ENV["VERSION"] ? ENV["VERSION"].to_i : nil )
+end
