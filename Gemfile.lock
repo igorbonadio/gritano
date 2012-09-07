@@ -19,6 +19,7 @@ GEM
       diff-lcs (>= 1.1.3)
       gherkin (~> 2.11.0)
       json (>= 1.4.6)
+    database_cleaner (0.8.0)
     diff-lcs (1.1.3)
     gherkin (2.11.2)
       json (>= 1.4.6)
@@ -56,6 +57,7 @@ DEPENDENCIES
   activerecord
   bundler
   cucumber
+  database_cleaner
   jeweler
   rdoc
   rspec

@@ -1,6 +1,6 @@
 Given /^the following users exist:$/ do |table|
   table.hashes.each do |user|
-    Gritano::User.new(user)
+    Gritano::User.create(user)
   end
 end
 

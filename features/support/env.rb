@@ -17,3 +17,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__) + '/../../lib')
 require 'gritano'
 
 require 'rspec/expectations'
+
+Before do
+  ActiveRecord::Base.establish_connection(:adapter  => 'sqlite3', :database => 'development.sqlite3')
+end
