@@ -4,15 +4,11 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'gritano'
 
-# commands
+ActiveRecord::Base.establish_connection(YAML::load(File.open('db/database.yml')))
 
-# > gritano user add igorbonadio
-# > gritano user rm igorbonadio
-# > gritano repo add igorbonadio reponame
-# > gritano repo rm igorbonadio reponame
-# > gritano repo +read igorbonadio reponame
-# > gritano repo +write igorbonadio reponame
-# > gritano repo -read igorbonadio reponame
-# > gritano repo -write igorbonadio reponame
-# > gritano repo fork reponame forkedrepo
-# > gritano repo rename reponame newname
+console = Gritano::Console.new
+if console.execute(ARGV)
+  puts "success"
+else
+  puts "error"
+end
