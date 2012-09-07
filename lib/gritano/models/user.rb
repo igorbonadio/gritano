@@ -1,6 +1,6 @@
 module Gritano
   class User < ActiveRecord::Base
-    validates_presence_of :login
+    validates :login, presence: true
     validates_uniqueness_of :login
   end
 end
