@@ -79,15 +79,5 @@ module Gritano
       end
       return false
     end
-    
-    def repo_rename(argv)
-      old_name, new_name = argv
-      repo = Repository.find_by_name(old_name)
-      if repo
-        repo.name = new_name
-        return repo.save
-      end
-      return false
-    end
   end
 end

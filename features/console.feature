@@ -36,7 +36,6 @@ Feature: Console operations
 	    | repo +write jessicaeto tmp/gritano.git      | success |
 	    | repo -read igorbonadio tmp/jeka.git         | success |
 	    | repo -write igorbonadio tmp/gritano.git     | success |
-	    | repo rename tmp/gritano.git tmp/newname.git | success |
 	    | user add igorbonadio                        | error   |
 	    | user rm jose                                | error   |
 	    | repo add tmp/jeka.git                       | error   |
@@ -49,6 +48,4 @@ Feature: Console operations
 	    | repo -read igorbonadio tmp/p-lang.git       | error   |
 	    | repo -write arybonadio tmp/gritano.git      | error   |
 	    | repo -write igorbonadio tmp/p-lang.git      | error   |
-	    | repo rename tmp/p-lang.git tmp/newname.git  | error   |
-	    | repo rename tmp/gritano.git tmp/jeka.git    | error   |
 	    

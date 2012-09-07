@@ -16,7 +16,6 @@ describe Gritano::Console do
   it "should respond to gritano repo add tmp/reponame.git" do
     console = Gritano::Console.new
     console.should_receive(:repo_add)
-    #Grit::Repo.should_receive(:init_bare).with("tmp/reponame.git")
     console.execute("repo add tmp/reponame.git".split(' '))
   end
   
@@ -48,11 +47,5 @@ describe Gritano::Console do
     console = Gritano::Console.new
     console.should_receive(:repo_remove_write)
     console.execute("repo -write igorbonadio tmp/reponame.git".split(' '))
-  end
-  
-  it "should respond to gritano repo rename tmp/reponame.git tmp/newname" do
-    console = Gritano::Console.new
-    console.should_receive(:repo_rename)
-    console.execute("repo rename tmp/reponame.git tmp/newname".split(' '))
   end
 end
