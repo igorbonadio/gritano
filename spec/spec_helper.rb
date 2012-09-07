@@ -17,9 +17,7 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
 RSpec.configure do |config|
   config.before(:suite) do
-    ActiveRecord::Base.establish_connection(
-      :adapter  => 'sqlite3',
-      :database => 'development.sqlite3')
+    ActiveRecord::Base.establish_connection(YAML::load(File.open('db/database.yml')))
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end

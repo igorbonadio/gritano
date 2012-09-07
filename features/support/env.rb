@@ -18,6 +18,8 @@ require 'gritano'
 
 require 'rspec/expectations'
 
+require 'active_record'
+
 Before do
-  ActiveRecord::Base.establish_connection(:adapter  => 'sqlite3', :database => 'development.sqlite3')
+  ActiveRecord::Base.establish_connection(YAML::load(File.open('db/database.yml')))
 end
