@@ -24,9 +24,9 @@ ActiveRecord::Base.establish_connection(YAML::load(File.open('db/database.yml'))
 console = Gritano::Console.new
 begin
   if console.execute(ARGV)
-    puts "success"
+    puts "command executed successfully"
   else
-    puts "error"
+    puts "an error occurred"
   end
 rescue NoMethodError
   puts help
