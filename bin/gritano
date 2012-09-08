@@ -4,11 +4,14 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'gritano'
 
+require 'etc'
+
 def help
   puts "
-  gritano [user|repo] [command] parameters
+  gritano [install|user|repo] [command] parameters
   
   Examples:
+  gritano install
   gritano user add username
   gritano user rm username
   gritano repo add username reponame.git
@@ -19,10 +22,27 @@ def help
   gritano repo -write username reponame.git"
 end
 
-if ARGV.length < 2
+def install
+  Dir.mkdir(File.join(Etc.getpwuid.dir, '.gritano')) unless File.exist?(File.join(Etc.getpwuid.dir, '.gritano'))
+  File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'), "w") do |f|
+    f.write("adapter: sqlite3\ndatabase: #{File.join(Etc.getpwuid.dir, '.gritano', 'database.db')}\n")
+  end
+  FileUtils.rm(File.join(Etc.getpwuid.dir, '.gritano', 'database.db')) if File.exist?(File.join(Etc.getpwuid.dir, '.gritano', 'database.db'))
+  ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
+  ActiveRecord::Migrator.migrate('db/migrate', ENV["VERSION"] ? ENV["VERSION"].to_i : nil )
+end
+
+if ARGV.length == 1
+  case ARGV[0]
+    when 'install' then
+      install
+    else
+      help
+  end
+elsif ARGV.length == 2
   help
 else
-  ActiveRecord::Base.establish_connection(YAML::load(File.open('db/database.yml')))
+  ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
   console = Gritano::Console.new
   begin
     if console.execute(ARGV)
