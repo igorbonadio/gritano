@@ -19,15 +19,18 @@ def help
   gritano repo -write username reponame.git"
 end
 
-ActiveRecord::Base.establish_connection(YAML::load(File.open('db/database.yml')))
-
-console = Gritano::Console.new
-begin
-  if console.execute(ARGV)
-    puts "command executed successfully"
-  else
-    puts "an error occurred"
+if ARGV.length < 2
+  help
+else
+  ActiveRecord::Base.establish_connection(YAML::load(File.open('db/database.yml')))
+  console = Gritano::Console.new
+  begin
+    if console.execute(ARGV)
+      puts "command executed successfully"
+    else
+      puts "an error occurred"
+    end
+  rescue NoMethodError
+    puts help
   end
-rescue NoMethodError
-  puts help
 end
