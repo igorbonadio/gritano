@@ -33,13 +33,12 @@ def install
 end
 
 if ARGV.length == 1
-  case ARGV[0]
-    when 'install' then
-      install
-    else
-      help
+  if ARGV[0] =='install'
+    install
+  else
+    help
   end
-elsif ARGV.length == 2
+elsif ARGV.length == 2 or ARGV.length == 0
   help
 else
   ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
