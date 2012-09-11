@@ -10,7 +10,7 @@ module Gritano
     end
     
     def self.repo(cmd)
-      cmd.gsub(/^git-receive-pack/, '').gsub(/^git-upload-pack/, '').strip
+      cmd.gsub(/^git-receive-pack/, '').gsub(/^git-upload-pack/, '').gsub("'", '').strip
     end
   end
 end
