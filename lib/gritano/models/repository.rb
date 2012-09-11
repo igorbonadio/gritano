@@ -9,7 +9,11 @@ module Gritano
     before_create :create_bare_repo
     
     def create_bare_repo
-      Grit::Repo.init_bare(name)
+      if path
+        Grit::Repo.init_bare(File.join(path, name))
+      else
+        Grit::Repo.init_bare(name)
+      end
     end
     
   end

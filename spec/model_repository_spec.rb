@@ -13,4 +13,10 @@ describe Gritano::Repository do
     repo2 = Gritano::Repository.new(name: 'tmp/name.git')
     repo2.should be_invalid
   end
+  
+  it 'can have a path' do
+    repo = Gritano::Repository.new(name: 'name.git', path: 'tmp')
+    repo.should be_valid
+    repo.save.should be_true
+  end
 end
