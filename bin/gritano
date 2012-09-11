@@ -14,8 +14,8 @@ def help
   gritano install
   gritano user add username
   gritano user rm username
-  gritano repo add username reponame.git
-  gritano repo rm username reponame.git
+  gritano repo add reponame.git
+  gritano repo rm reponame.git
   gritano repo +read username reponame.git
   gritano repo +write username reponame.git
   gritano repo -read username reponame.git
@@ -43,6 +43,7 @@ elsif ARGV.length == 2 or ARGV.length == 0
 else
   ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
   console = Gritano::Console.new
+  console.repo_path = Etc.getpwuid.dir
   begin
     if console.execute(ARGV)
       puts "command executed successfully"

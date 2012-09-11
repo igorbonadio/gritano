@@ -1,5 +1,12 @@
 module Gritano
   class Console
+    
+    attr_accessor :repo_path
+    
+    def initialize
+      @repo_path = nil
+    end
+    
     def execute(argv)
       send(argv[0..1].join('_').gsub('+', 'add_').gsub('-', 'remove_'), argv[2..-1])
     end
@@ -24,7 +31,7 @@ module Gritano
     
     def repo_add(argv)
       name, = argv
-      repo = Repository.new(name: name)
+      repo = Repository.new(name: name, path: @repo_path)
       return true if repo.save
       return false
     end
