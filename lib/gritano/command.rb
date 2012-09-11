@@ -3,9 +3,9 @@ module Gritano
     def self.eval(cmd)
       case cmd
         when /^git-receive-pack/ then
-          return :write, self.repo(cmd)
+          return :write, "git-receive-pack", self.repo(cmd)
         when /^git-upload-pack/ then
-          return :read, self.repo(cmd)
+          return :read, "git-upload-pack", self.repo(cmd)
       end
     end
     

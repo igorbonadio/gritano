@@ -18,5 +18,6 @@ describe Gritano::Repository do
     repo = Gritano::Repository.new(name: 'name.git', path: 'tmp')
     repo.should be_valid
     repo.save.should be_true
+    repo.full_path.should be == 'tmp/name.git'
   end
 end

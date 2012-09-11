@@ -7,11 +7,11 @@ require 'gritano'
 ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
 
 login = ARGV[0]
-access, repo = Gritano::Command.eval(ENV['SSH_ORIGINAL_COMMAND'])
+access, git_command, repo = Gritano::Command.eval(ENV['SSH_ORIGINAL_COMMAND'])
 user = Gritano::User.find_by_login(login)
 repository = Gritano::Repository.find_by_name(repo)
 if user and repository
   if user.check_access(repository, access)
-    exec ENV['SSH_ORIGINAL_COMMAND']
+    exec "#{git_command} #{File.join(repository.full_path)}"
   end
 end
