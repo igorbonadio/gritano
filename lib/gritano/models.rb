@@ -4,3 +4,4 @@ require 'grit'
 require File.join(ROOT_PATH, 'gritano/models/user')
 require File.join(ROOT_PATH, 'gritano/models/repository')
 require File.join(ROOT_PATH, 'gritano/models/permission')
+require File.join(ROOT_PATH, 'gritano/models/key')

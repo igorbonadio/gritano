@@ -5,7 +5,8 @@ module Gritano
     
     has_many :permissions
     has_many :repositories, through: :permissions
-    
+    has_many :keys
+
     def create_repository(repo)
       repository = Repository.create(repo)
       add_access(repository, :read)
