@@ -1,5 +1,7 @@
 module Gritano
   class Key < ActiveRecord::Base
+    validates :name, :key, presence: true
+
     belongs_to :user
 
     def self.authorized_keys
