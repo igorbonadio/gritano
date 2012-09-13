@@ -1,3 +1,9 @@
+Given /^the following keys exist:$/ do |table|
+  table.hashes.each do |key|
+    Gritano::User.find_by_login(key['login']).keys.create(name: key["key"], key: "key")
+  end
+end
+
 Given /^I add "(.*?)" key to "(.*?)"$/ do |key, login|
   ssh_key = File.open(File.join("features/data/keys/", key)).readlines.join
   Gritano::User.find_by_login(login).keys.create({name: key, key: ssh_key})

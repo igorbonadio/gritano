@@ -14,6 +14,8 @@ def help
   gritano install
   gritano user add username
   gritano user rm username
+  gritano user +key username keyname key.pub
+  gritano user -key username keyname
   gritano repo add reponame.git
   gritano repo rm reponame.git
   gritano repo +read username reponame.git

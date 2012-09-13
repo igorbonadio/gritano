@@ -86,5 +86,30 @@ module Gritano
       end
       return false
     end
+    
+    def user_add_key(argv)
+      login, key_name, key_file = argv
+      user = User.find_by_login(login)
+      if File.exist?(key_file)
+        if user
+          key = user.keys.create(name: key_name, key: File.open(key_file).readlines.join)
+          if key
+            return true
+          end
+        end
+      end
+      return false
+    end
+    
+    def user_remove_key(argv)
+      login, key_name = argv
+      key = Key.where(name: key_name).includes(:user).where("users.login" => login).limit(1)[0]
+      if key
+        if key.destroy
+          return true
+        end
+      end
+      return false
+    end
   end
 end
