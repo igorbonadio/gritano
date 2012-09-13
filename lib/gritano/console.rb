@@ -2,9 +2,11 @@ module Gritano
   class Console
     
     attr_accessor :repo_path
+    attr_accessor :ssh_path
     
     def initialize
       @repo_path = nil
+      @ssh_path = nil
     end
     
     def execute(argv)
@@ -94,6 +96,7 @@ module Gritano
         if user
           key = user.keys.create(name: key_name, key: File.open(key_file).readlines.join)
           if key
+            File.open(File.join(@ssh_path, 'authorized_key'), 'w').write(Key.authorized_keys)
             return true
           end
         end
@@ -106,6 +109,7 @@ module Gritano
       key = Key.where(name: key_name).includes(:user).where("users.login" => login).limit(1)[0]
       if key
         if key.destroy
+          File.open(File.join(@ssh_path, 'authorized_key'), 'w').write(Key.authorized_keys)
           return true
         end
       end

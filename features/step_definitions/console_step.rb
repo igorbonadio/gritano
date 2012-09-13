@@ -1,5 +1,6 @@
 Given /^I start the gritano console$/ do
   @console = Gritano::Console.new
+  @console.ssh_path = 'tmp'
 end
 
 When /^I execute "(.*?)"$/ do |command|
