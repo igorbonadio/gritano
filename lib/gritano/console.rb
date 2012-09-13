@@ -96,7 +96,7 @@ module Gritano
         if user
           key = user.keys.create(name: key_name, key: File.open(key_file).readlines.join)
           if key
-            File.open(File.join(@ssh_path, 'authorized_key'), 'w').write(Key.authorized_keys)
+            File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
             return true
           end
         end
@@ -109,7 +109,7 @@ module Gritano
       key = Key.where(name: key_name).includes(:user).where("users.login" => login).limit(1)[0]
       if key
         if key.destroy
-          File.open(File.join(@ssh_path, 'authorized_key'), 'w').write(Key.authorized_keys)
+          File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
           return true
         end
       end
