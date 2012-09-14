@@ -9,8 +9,34 @@ Gritano is the simplest way to configure a git server over ssh. You can create r
 == Install
 
   $ gem install gritano
+  
+== Usage
 
-== Contributing to gritano
+First of all you should create a git user who will be responsible for store and manipulate repositories. Lets suppose we are logged as this user.
+
+All you need to do to set up Gritano is
+
+  $ gritano install
+  
+After that you can 
+
+* Add users
+
+  $ gritano user add igorbonadio
+  
+* Add user's public keys
+
+  $ gritano user +key mykey id_rsa.pub
+  
+* Create bare repositories
+
+  $ gritano repo add proj.git
+  
+* And control access
+
+  $ gritano repo +read igorbonadio proj.git
+
+== Contributing to Gritano
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
