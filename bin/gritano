@@ -35,7 +35,7 @@ def install
 end
 
 def version
-  puts "v0.0.0"
+  puts "v#{File.open(File.join(File.dirname(__FILE__),'../VERSION')).readlines.join}"
 end
 
 if ARGV.length == 1
