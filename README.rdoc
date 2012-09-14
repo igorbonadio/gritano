@@ -22,19 +22,27 @@ After that you can
 
 * Add users
 
-    $ gritano user add igorbonadio
+
+  $ gritano user add igorbonadio
+
   
 * Add user's public keys
 
-    $ gritano user +key mykey id_rsa.pub
+
+  $ gritano user +key mykey id_rsa.pub
+
   
 * Create bare repositories
 
-    $ gritano repo add proj.git
+
+  $ gritano repo add proj.git
+
   
 * And control access
 
-    $ gritano repo +read igorbonadio proj.git
+
+  $ gritano repo +read igorbonadio proj.git
+
 
 == Contributing to Gritano
  
