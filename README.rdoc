@@ -6,6 +6,10 @@ Gritano is the simplest way to configure a git server over ssh. You can create r
 
 * git (http://git-scm.com)
 
+== Install
+
+  $ gem install gritano
+
 == Contributing to gritano
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
