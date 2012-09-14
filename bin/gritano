@@ -34,9 +34,15 @@ def install
   ActiveRecord::Migrator.migrate(File.join(File.dirname(__FILE__),'../db/migrate'), ENV["VERSION"] ? ENV["VERSION"].to_i : nil )
 end
 
+def version
+  puts "v0.0.0"
+end
+
 if ARGV.length == 1
   if ARGV[0] =='install'
     install
+  elsif ARGV[0] =='version'
+    version
   else
     help
   end
