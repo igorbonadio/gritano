@@ -18,3 +18,6 @@ Then /^I should see "(.*?)" authorized_keys$/ do |authorized_keys|
   @authorized_keys.should be == expected_authorized_keys
 end
 
+Then /^I should see that "(.*?)" has only one key$/ do |login|
+  Gritano::User.find_by_login(login).keys.count.should be == 1
+end

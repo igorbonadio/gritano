@@ -1,6 +1,7 @@
 module Gritano
   class Key < ActiveRecord::Base
     validates :name, :key, presence: true
+    validates :name, :uniqueness => { :scope => :user_id, :message => "should happen once per user" }
 
     belongs_to :user
 

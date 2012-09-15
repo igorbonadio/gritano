@@ -95,7 +95,7 @@ module Gritano
       if File.exist?(key_file)
         if user
           key = user.keys.create(name: key_name, key: File.open(key_file).readlines.join)
-          if key
+          if key.valid?
             File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
             return true
           end

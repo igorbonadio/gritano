@@ -23,4 +23,9 @@ Feature: Keys
     And I add "jessicaeto.pub" key to "jessicaeto"
     When I generate the authorized_keys
     Then I should see "full_authorized_keys" authorized_keys
+    
+  Scenario: Duplicated keys
+    Given I add "igorbonadio.pub" key to "igorbonadio"
+    When I add "igorbonadio.pub" key to "igorbonadio"
+    Then I should see that "igorbonadio" has only one key
 
