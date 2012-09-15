@@ -38,6 +38,14 @@ def version
   puts "v#{File.open(File.join(File.dirname(__FILE__),'../VERSION')).readlines.join}"
 end
 
+def check_git
+  if `which git` == ""
+    puts "Error: git must be installed on the local system"
+    exit
+  end
+end
+
+check_git
 if ARGV.length == 1
   if ARGV[0] =='install'
     install
