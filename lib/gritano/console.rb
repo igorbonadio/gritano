@@ -50,7 +50,7 @@ module Gritano
     end
     
     def repo_add_read(argv)
-      login, repo_name = argv
+      repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)
       if repo and user
@@ -60,7 +60,7 @@ module Gritano
     end
     
     def repo_add_write(argv)
-      login, repo_name = argv
+      repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)
       if repo and user
@@ -70,7 +70,7 @@ module Gritano
     end
     
     def repo_remove_read(argv)
-      login, repo_name = argv
+      repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)
       if repo and user
@@ -80,7 +80,7 @@ module Gritano
     end
     
     def repo_remove_write(argv)
-      login, repo_name = argv
+      repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)
       if repo and user

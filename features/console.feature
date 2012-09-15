@@ -39,21 +39,21 @@ Feature: Console operations
 	    | user rm igorbonadio                                             | success |
 	    | repo add tmp/p-lang.git                                         | success |
 	    | repo rm tmp/jeka.git                                            | success |
-	    | repo +read jessicaeto tmp/gritano.git                           | success |
-	    | repo +write jessicaeto tmp/gritano.git                          | success |
-	    | repo -read igorbonadio tmp/jeka.git                             | success |
-	    | repo -write igorbonadio tmp/gritano.git                         | success |
+	    | repo +read tmp/gritano.git jessicaeto                           | success |
+	    | repo +write tmp/gritano.git jessicaeto                          | success |
+	    | repo -read tmp/jeka.git igorbonadio                             | success |
+	    | repo -write tmp/gritano.git igorbonadio                         | success |
 	    | user add igorbonadio                                            | error   |
 	    | user rm jose                                                    | error   |
 	    | user +key igorbonadio marvin features/data/keys/arybonadio.pub  | error   |
 	    | user -key igorbonadio marvino                                   | error   |
 	    | repo add tmp/jeka.git                                           | error   |
 	    | repo rm tmp/p-lang.git                                          | error   |
-	    | repo +read arybonadio tmp/gritano.git                           | error   |
-	    | repo +read jessicaeto tmp/p-lang.git                            | error   |
-	    | repo +write arybonadio tmp/gritano.git                          | error   |
-	    | repo +write jessicaeto tmp/p-lang.git                           | error   |
-	    | repo -read aribonadio tmp/jeka.git                              | error   |
-	    | repo -read igorbonadio tmp/p-lang.git                           | error   |
-	    | repo -write arybonadio tmp/gritano.git                          | error   |
-	    | repo -write igorbonadio tmp/p-lang.git                          | error   |
+	    | repo +read tmp/gritano.git arybonadio                           | error   |
+	    | repo +read tmp/p-lang.git jessicaeto                            | error   |
+	    | repo +write tmp/gritano.git arybonadio                          | error   |
+	    | repo +write tmp/p-lang.git jessicaeto                           | error   |
+	    | repo -read tmp/jeka.git aribonadio                              | error   |
+	    | repo -read tmp/p-lang.git igorbonadio                           | error   |
+	    | repo -write tmp/gritano.git arybonadio                          | error   |
+	    | repo -write tmp/p-lang.git igorbonadio                          | error   |

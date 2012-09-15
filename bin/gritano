@@ -18,10 +18,10 @@ def help
   gritano user -key username keyname
   gritano repo add reponame.git
   gritano repo rm reponame.git
-  gritano repo +read username reponame.git
-  gritano repo +write username reponame.git
-  gritano repo -read username reponame.git
-  gritano repo -write username reponame.git"
+  gritano repo +read reponame.git username
+  gritano repo +write reponame.git username
+  gritano repo -read reponame.git username
+  gritano repo -write reponame.git username"
 end
 
 def install
