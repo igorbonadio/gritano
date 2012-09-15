@@ -19,21 +19,19 @@ All you need to do to set up Gritano is
 
   $ gritano install
   
-After that you can 
-
-- Add users
+After that you can add users:
 
   $ gritano user add igorbonadio
 
-- Add user's public keys
+add user's public keys:
 
   $ gritano user +key mykey id_rsa.pub
 
-- Create bare repositories
+create bare repositories:
 
   $ gritano repo add proj.git
 
-- And control access
+and control access:
 
   $ gritano repo +read proj.git igorbonadio
 
