@@ -26,6 +26,7 @@ end
 
 def install
   Dir.mkdir(File.join(Etc.getpwuid.dir, '.gritano')) unless File.exist?(File.join(Etc.getpwuid.dir, '.gritano'))
+  Dir.mkdir(File.join(Etc.getpwuid.dir, '.ssh')) unless File.exist?(File.join(Etc.getpwuid.dir, '.ssh'))
   File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'), "w") do |f|
     f.write("adapter: sqlite3\ndatabase: #{File.join(Etc.getpwuid.dir, '.gritano', 'database.db')}\n")
   end
