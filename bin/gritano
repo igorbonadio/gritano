@@ -54,7 +54,6 @@ def check_gritano
 end
 
 check_git
-check_gritano
 if ARGV.length == 1
   if ARGV[0] =='install'
     install
@@ -66,6 +65,7 @@ if ARGV.length == 1
 elsif ARGV.length == 2 or ARGV.length == 0
   help
 else
+  check_gritano
   ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
   console = Gritano::Console.new
   console.repo_path = Etc.getpwuid.dir
