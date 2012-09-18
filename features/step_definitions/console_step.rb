@@ -10,5 +10,5 @@ end
 Then /^I should see a (success|error) message$/ do |ret|
   expected_output = true if ret == 'success'
   expected_output = false if ret == 'error'
-  @output.should be == expected_output
+  @output[0].should be == expected_output
 end
