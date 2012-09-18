@@ -46,7 +46,15 @@ def check_git
   end
 end
 
+def check_gritano
+  unless File.exist?(File.join(Etc.getpwuid.dir, '.gritano'))
+    puts "Error: First run 'gritano install'"
+    exit
+  end
+end
+
 check_git
+check_gritano
 if ARGV.length == 1
   if ARGV[0] =='install'
     install
