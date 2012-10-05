@@ -21,7 +21,10 @@ def help
   gritano repo +read reponame.git username
   gritano repo +write reponame.git username
   gritano repo -read reponame.git username
-  gritano repo -write reponame.git username"
+  gritano repo -write reponame.git username
+  
+  --
+  v#{File.open(File.join(File.dirname(__FILE__), '..', 'VERSION')).readlines.join}"
 end
 
 def install
