@@ -13,6 +13,16 @@ module Gritano
       send(argv[0..1].join('_').gsub('+', 'add_').gsub('-', 'remove_'), argv[2..-1])
     end
     
+    def user_list(argv)
+      msg = "Users:\n"
+      users = User.all
+      users.each do |user|
+        msg += "  - #{user.login}\n"
+      end
+      msg = "there is no user registered" if users.count == 0
+      return [true, msg]
+    end
+    
     def user_add(argv)
       login, = argv
       user = User.new(login: login)

@@ -65,7 +65,7 @@ if ARGV.length == 1
   else
     help
   end
-elsif ARGV.length == 2 or ARGV.length == 0
+elsif ARGV.length == 0
   help
 else
   check_gritano
