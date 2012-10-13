@@ -90,6 +90,21 @@ module Gritano
       return [false, "Repository #{name} could not be created."]
     end
     
+    def repo_users(argv)
+      name, = argv
+      repo = Repository.find_by_name(name)
+      if repo
+        users = repo.users
+        msg = "Users:\n"
+        users.each do |user|
+          msg += "  - #{user.login}\n"
+        end
+        msg = "No user have access to this repository" if users.count == 0
+        return [true, msg]
+      end
+      return [false, "Repository #{name} doesn't exist."]
+    end
+    
     def repo_rm(argv)
       name, = argv
       repo = Repository.find_by_name(name)
