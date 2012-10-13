@@ -16,12 +16,17 @@ def help
   gritano user rm username
   gritano user +key username keyname key.pub
   gritano user -key username keyname
+  gritano user list
+  gritano user keys username
+  gritano user repos username
   gritano repo add reponame.git
   gritano repo rm reponame.git
   gritano repo +read reponame.git username
   gritano repo +write reponame.git username
   gritano repo -read reponame.git username
   gritano repo -write reponame.git username
+  gritano repo list
+  gritano repo users reponame.git
   
   --
   v#{File.open(File.join(File.dirname(__FILE__), '..', 'VERSION')).readlines.join}"
