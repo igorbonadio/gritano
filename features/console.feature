@@ -48,8 +48,6 @@ Feature: Console operations
 	    | repo -write tmp/gritano.git igorbonadio                         | success |
 	    | repo list                                                       | success |
 	    | repo users tmp/jeka.git                                         | success |
-	    | repo readers tmp/jeka.git                                       | success |
-	    | repo writers tmp/jeka.git                                       | success |
 	    | user add igorbonadio                                            | error   |
 	    | user rm jose                                                    | error   |
 	    | user +key igorbonadio marvin features/data/keys/arybonadio.pub  | error   |
@@ -67,5 +65,3 @@ Feature: Console operations
 	    | repo -write tmp/gritano.git arybonadio                          | error   |
 	    | repo -write tmp/p-lang.git igorbonadio                          | error   |
 	    | repo users tmp/ruby.git                                         | error   |
-	    | repo readers tmp/ruby.git                                       | error   |
-	    | repo writers tmp/ruby.git                                       | error   |

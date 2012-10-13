@@ -30,7 +30,7 @@ module Gritano
         keys = user.keys
         msg = "User's keys:\n"
         keys.each do |key|
-          "  - #{key.name}\n"
+          msg += "  - #{key.name}\n"
         end
         msg = "there is no key registered" if keys.count == 0
         return [true, msg]
@@ -46,7 +46,7 @@ module Gritano
         repos = user.repositories
         msg = "User's repositories:\n"
         repos.each do |repo|
-          "  - #{repo.name}\n"
+          msg += "  - #{repo.name}\n"
         end
         msg = "there is no repository registered" if repos.count == 0
         return [true, msg]
