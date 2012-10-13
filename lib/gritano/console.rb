@@ -23,6 +23,22 @@ module Gritano
       return [true, msg]
     end
     
+    def user_keys(argv)
+      login, = argv
+      user = User.find_by_login(login)
+      if user
+        keys = user.keys
+        msg = "User's keys:\n"
+        keys.each do |key|
+          "  - #{key.name}\n"
+        end
+        msg = "there is no key registered" if keys.count == 0
+        return [true, msg]
+      else
+        return [false, "User #{login} is not registered"]
+      end
+    end
+    
     def user_add(argv)
       login, = argv
       user = User.new(login: login)
