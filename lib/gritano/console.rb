@@ -39,6 +39,22 @@ module Gritano
       end
     end
     
+    def user_repos(argv)
+      login, = argv
+      user = User.find_by_login(login)
+      if user
+        repos = user.repositories
+        msg = "User's repositories:\n"
+        repos.each do |repo|
+          "  - #{repo.name}\n"
+        end
+        msg = "there is no repository registered" if repos.count == 0
+        return [true, msg]
+      else
+        return [false, "User #{login} is not registered"]
+      end
+    end
+    
     def user_add(argv)
       login, = argv
       user = User.new(login: login)
@@ -55,6 +71,16 @@ module Gritano
         end
       end
       return [false, "User #{login} could not be removed."]
+    end
+    
+    def repo_list(argv)
+      msg = "Repositories:\n"
+      repos = Repository.all
+      repos.each do |repo|
+        msg += "  - #{repo.name}\n"
+      end
+      msg = "there is no repository registered" if repos.count == 0
+      return [true, msg]
     end
     
     def repo_add(argv)
