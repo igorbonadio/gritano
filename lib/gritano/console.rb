@@ -97,7 +97,12 @@ module Gritano
         users = repo.users
         msg = "Users:\n"
         users.each do |user|
-          msg += "  - #{user.login}\n"
+          permissions = ""
+          user.permissions.find_by_repository_id(repo.id) do |p|
+            permissions += "r" if p.is(:read)
+            permissions += "w" if p.is(:write)
+          end
+          msg += "  - #{user.login}\t #{permissions}\n"
         end
         msg = "No user have access to this repository" if users.count == 0
         return [true, msg]
