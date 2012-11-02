@@ -1,4 +1,4 @@
-= Gritano v0.1.6
+= Gritano v0.1.7
 
 Gritano is the simplest way to configure a git server over ssh. You can create repositories and manage user access using this practical tool.
 
@@ -25,7 +25,7 @@ After that you can add users:
 
 add user's public keys:
 
-  $ gritano user +key igorbonadio mykey id_rsa.pub
+  $ gritano user +key igorbonadio mykey < id_rsa.pub
 
 create bare repositories:
 
