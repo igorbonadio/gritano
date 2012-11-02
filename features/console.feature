@@ -50,6 +50,7 @@ Feature: Console operations
 	    | repo users tmp/jeka.git                                         | success |
 	    | user add igorbonadio                                            | error   |
 	    | user rm jose                                                    | error   |
+	    | user +key userrr marvino                                        | error   |
 	    | user -key igorbonadio marvino                                   | error   |
 	    | user keys arybonadio                                            | error   |
 	    | user repos arybonadio                                           | error   |
