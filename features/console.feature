@@ -34,7 +34,7 @@ Feature: Console operations
 	  Examples:
 	    | command                                                         | message |
 	    | user add jose                                                   | success |
-	    | user +key igorbonadio marvin features/data/keys/igorbonadio.pub | success |
+	    | user +key igorbonadio marvin                                    | success |
 	    | user -key igorbonadio eva                                       | success |
 	    | user rm igorbonadio                                             | success |
 	    | user list                                                       | success |
@@ -50,7 +50,6 @@ Feature: Console operations
 	    | repo users tmp/jeka.git                                         | success |
 	    | user add igorbonadio                                            | error   |
 	    | user rm jose                                                    | error   |
-	    | user +key igorbonadio marvin features/data/keys/arybonadio.pub  | error   |
 	    | user -key igorbonadio marvino                                   | error   |
 	    | user keys arybonadio                                            | error   |
 	    | user repos arybonadio                                           | error   |

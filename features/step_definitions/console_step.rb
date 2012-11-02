@@ -1,5 +1,13 @@
+class FakeSTDIN
+  def read
+    "Your SSHKEY here..."
+  end
+end
+
 Given /^I start the gritano console$/ do
-  @console = Gritano::Console.new
+  stdin = double()
+  stdin.stub(:read).and_return("Your SSHKEY here...")
+  @console = Gritano::Console.new(stdin)
   @console.ssh_path = 'tmp'
 end
 

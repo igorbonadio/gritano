@@ -4,9 +4,10 @@ module Gritano
     attr_accessor :repo_path
     attr_accessor :ssh_path
     
-    def initialize
+    def initialize(stdin)
       @repo_path = nil
       @ssh_path = nil
+      @stdin = stdin
     end
     
     def execute(argv)
@@ -164,13 +165,11 @@ module Gritano
     def user_add_key(argv)
       login, key_name, key_file = argv
       user = User.find_by_login(login)
-      if File.exist?(key_file)
-        if user
-          key = user.keys.create(name: key_name, key: File.open(key_file).readlines.join)
-          if key.valid?
-            File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
+      if user
+        key = user.keys.create(name: key_name, key: @stdin.read)
+        if key.valid?
+          File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
             return [true, "Key added successfully."]
-          end
         end
       end
       return [false, "Key could not be added."]
