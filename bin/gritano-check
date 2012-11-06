@@ -8,13 +8,21 @@ ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpw
 
 login = ARGV[0]
 command = Gritano::Command.eval(ENV['SSH_ORIGINAL_COMMAND'])
-user = Gritano::User.find_by_login(login)
 case command[:access]
   when :read, :write then
+    user = Gritano::User.find_by_login(login)
     repository = Gritano::Repository.find_by_name(command[:repo])
     if user and repository
       if user.check_access(repository, command[:access])
         exec "#{command[:command]} #{File.join(repository.full_path)}"
       end
     end
+  when :user_cmd
+    cmd = command[:command]
+    if cmd.start_with? "+key" or cmd.start_with? "-key"
+      tmp = cmd.split(" ")
+      tmp = tmp[0..-2] + [login] + tmp[-1..-1]
+      cmd = tmp.join(" ")
+    end
+    exec "gritano user #{cmd}"
 end
