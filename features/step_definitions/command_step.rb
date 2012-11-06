@@ -1,8 +1,9 @@
 When /^I receive a "(.*?)" command$/ do |cmd|
-  @access, @git_command, @repo = Gritano::Command.eval(cmd)
+  @command = Gritano::Command.eval(cmd)
 end
 
-Then /^I should see that it is a "(.*?)" access to "(.*?)"$/ do |access, repo|
-  @access.to_s.should be == access
-  @repo.to_s.should be == repo
+Then /^I should see that it is a "(.*?)": "(.*?)" "(.*?)"$/ do |access, command, repo|
+  @command[:access].to_s.should be == access
+  @command[:command].to_s.should be == command
+  @command[:repo].to_s.should be == repo if repo
 end

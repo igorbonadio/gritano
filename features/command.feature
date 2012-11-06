@@ -4,9 +4,13 @@ Feature: Command
 	I want to know if a command is a read/write command
 	
 	Scenario Outline: Write command
-	  When I receive a "<command>" command
-	  Then I should see that it is a "<access>" access to "<repo>"
+	  When I receive a "<original_command>" command
+	  Then I should see that it is a "<access>": "<command>" "<repo>"
 	  Examples:
-	    | command                   | access | repo     |
-	    | git-receive-pack proj.git | write  | proj.git |
-	    | git-upload-pack proj.git  | read   | proj.git |
+	    | original_command          | access   | command          | repo     |
+	    | git-receive-pack proj.git | write    | git-receive-pack | proj.git |
+	    | git-upload-pack proj.git  | read     | git-upload-pack  | proj.git |
+	    | repos                     | user_cmd | repos            |          |
+	    | keys                      | user_cmd | keys             |          |
+	    | +key keyname              | user_cmd | +key keyname     |          |
+	    | -key keyname              | user_cmd | -key keyname     |          |
