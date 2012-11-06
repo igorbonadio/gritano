@@ -13,7 +13,7 @@ case command[:access]
   when :read, :write then
     repository = Gritano::Repository.find_by_name(command[:repo])
     if user and repository
-      if user.check_access(repository, access)
+      if user.check_access(repository, command[:access])
         exec "#{command[:command]} #{File.join(repository.full_path)}"
       end
     end
