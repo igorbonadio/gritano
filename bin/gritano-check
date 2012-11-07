@@ -23,6 +23,8 @@ case command[:access]
       tmp = cmd.split(" ")
       tmp = tmp[0..-2] + [login] + tmp[-1..-1]
       cmd = tmp.join(" ")
+    else
+      cmd = cmd + " " + login
     end
     exec "gritano user #{cmd}"
 end
