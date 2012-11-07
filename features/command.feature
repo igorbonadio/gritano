@@ -12,5 +12,5 @@ Feature: Command
 	    | git-upload-pack proj.git  | read     | git-upload-pack  | proj.git |
 	    | repos                     | user_cmd | repos            |          |
 	    | keys                      | user_cmd | keys             |          |
-	    | +key keyname              | user_cmd | +key keyname     |          |
-	    | -key keyname              | user_cmd | -key keyname     |          |
+	    | key add keyname           | user_cmd | +key keyname     |          |
+	    | key rm keyname            | user_cmd | -key keyname     |          |

@@ -27,14 +27,14 @@ describe Gritano::Command do
     command[:command].should be == "keys"
   end
   
-  it 'should interpret +key keyname' do
-    command = Gritano::Command.eval("+key keyname")
+  it 'should interpret key add keyname' do
+    command = Gritano::Command.eval("key add keyname")
     command[:access].to_s.should be == "user_cmd"
     command[:command].should be == "+key keyname"
   end
   
   it 'should interpret -key keyname' do
-    command = Gritano::Command.eval("-key keyname")
+    command = Gritano::Command.eval("key rm keyname")
     command[:access].to_s.should be == "user_cmd"
     command[:command].should be == "-key keyname"
   end

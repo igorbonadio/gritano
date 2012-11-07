@@ -6,8 +6,12 @@ module Gritano
           return {access: :write, command: "git-receive-pack", repo: self.repo(cmd)}
         when /^git-upload-pack/ then
           return {access: :read, command: "git-upload-pack", repo: self.repo(cmd)}
-        when /^repos/, /^keys/, /^\+key/, /^\-key/ then 
+        when /^repos/, /^keys/ then 
           return {access: :user_cmd, command: cmd}
+        when /^key add/ then
+          return {access: :user_cmd, command: '+' + cmd.sub(' add', '')}
+        when /^key rm/ then
+          return {access: :user_cmd, command: '-' + cmd.sub(' rm', '')}
       end
     end
     
