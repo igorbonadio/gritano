@@ -37,7 +37,7 @@ and control access:
   
 == User Access
 
-Gritano 0.2.0 introduced a new feature that enable users to execute some simple commands:
+Gritano 0.2.0 introduced a new feature that enables users to execute some simple commands:
 
   $ ssh git@host.com repos
   
