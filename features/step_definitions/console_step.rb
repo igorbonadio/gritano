@@ -1,9 +1,3 @@
-class FakeSTDIN
-  def read
-    "Your SSHKEY here..."
-  end
-end
-
 Given /^I start the gritano console$/ do
   stdin = double()
   stdin.stub(:read).and_return("Your SSHKEY here...")
