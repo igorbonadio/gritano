@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "gritano"
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Igor Bonadio"]
-  s.date = "2012-11-07"
+  s.date = "2012-11-16"
   s.description = "Gritano is the simplest way to configure your git server over ssh. You can create repositories and manage user access."
   s.email = "igorbonadio@gmail.com"
   s.executables = ["gritano", "gritano-check"]
@@ -76,39 +76,39 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<activerecord>, [">= 0"])
-      s.add_runtime_dependency(%q<sqlite3>, [">= 0"])
-      s.add_runtime_dependency(%q<grit>, [">= 0"])
-      s.add_development_dependency(%q<rspec>, [">= 0"])
-      s.add_development_dependency(%q<rdoc>, [">= 0"])
-      s.add_development_dependency(%q<cucumber>, [">= 0"])
-      s.add_development_dependency(%q<bundler>, [">= 0"])
-      s.add_development_dependency(%q<jeweler>, [">= 0"])
-      s.add_development_dependency(%q<simplecov>, [">= 0"])
-      s.add_development_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_runtime_dependency(%q<activerecord>, [">= 3.2.8"])
+      s.add_runtime_dependency(%q<sqlite3>, [">= 1.3.6"])
+      s.add_runtime_dependency(%q<grit>, [">= 2.5.0"])
+      s.add_development_dependency(%q<rspec>, [">= 2.11.0"])
+      s.add_development_dependency(%q<rdoc>, [">= 3.12"])
+      s.add_development_dependency(%q<cucumber>, [">= 1.2.1"])
+      s.add_development_dependency(%q<bundler>, [">= 1.0"])
+      s.add_development_dependency(%q<jeweler>, [">= 1.8.4"])
+      s.add_development_dependency(%q<simplecov>, [">= 0.6.4"])
+      s.add_development_dependency(%q<database_cleaner>, [">= 0.8.0"])
     else
-      s.add_dependency(%q<activerecord>, [">= 0"])
-      s.add_dependency(%q<sqlite3>, [">= 0"])
-      s.add_dependency(%q<grit>, [">= 0"])
-      s.add_dependency(%q<rspec>, [">= 0"])
-      s.add_dependency(%q<rdoc>, [">= 0"])
-      s.add_dependency(%q<cucumber>, [">= 0"])
-      s.add_dependency(%q<bundler>, [">= 0"])
-      s.add_dependency(%q<jeweler>, [">= 0"])
-      s.add_dependency(%q<simplecov>, [">= 0"])
-      s.add_dependency(%q<database_cleaner>, [">= 0"])
+      s.add_dependency(%q<activerecord>, [">= 3.2.8"])
+      s.add_dependency(%q<sqlite3>, [">= 1.3.6"])
+      s.add_dependency(%q<grit>, [">= 2.5.0"])
+      s.add_dependency(%q<rspec>, [">= 2.11.0"])
+      s.add_dependency(%q<rdoc>, [">= 3.12"])
+      s.add_dependency(%q<cucumber>, [">= 1.2.1"])
+      s.add_dependency(%q<bundler>, [">= 1.0"])
+      s.add_dependency(%q<jeweler>, [">= 1.8.4"])
+      s.add_dependency(%q<simplecov>, [">= 0.6.4"])
+      s.add_dependency(%q<database_cleaner>, [">= 0.8.0"])
     end
   else
-    s.add_dependency(%q<activerecord>, [">= 0"])
-    s.add_dependency(%q<sqlite3>, [">= 0"])
-    s.add_dependency(%q<grit>, [">= 0"])
-    s.add_dependency(%q<rspec>, [">= 0"])
-    s.add_dependency(%q<rdoc>, [">= 0"])
-    s.add_dependency(%q<cucumber>, [">= 0"])
-    s.add_dependency(%q<bundler>, [">= 0"])
-    s.add_dependency(%q<jeweler>, [">= 0"])
-    s.add_dependency(%q<simplecov>, [">= 0"])
-    s.add_dependency(%q<database_cleaner>, [">= 0"])
+    s.add_dependency(%q<activerecord>, [">= 3.2.8"])
+    s.add_dependency(%q<sqlite3>, [">= 1.3.6"])
+    s.add_dependency(%q<grit>, [">= 2.5.0"])
+    s.add_dependency(%q<rspec>, [">= 2.11.0"])
+    s.add_dependency(%q<rdoc>, [">= 3.12"])
+    s.add_dependency(%q<cucumber>, [">= 1.2.1"])
+    s.add_dependency(%q<bundler>, [">= 1.0"])
+    s.add_dependency(%q<jeweler>, [">= 1.8.4"])
+    s.add_dependency(%q<simplecov>, [">= 0.6.4"])
+    s.add_dependency(%q<database_cleaner>, [">= 0.8.0"])
   end
 end
 
