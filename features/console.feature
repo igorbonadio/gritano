@@ -30,9 +30,9 @@ Feature: Console operations
   Scenario Outline: Add user
     Given I start the gritano console
     When I execute "<command>"
-    Then I should see a <message> message
+    Then I should see a <result> message
     Examples:
-      | command                                                         | message |
+      | command                                                         | result |
       | user add jose                                                   | success |
       | user +key igorbonadio marvin                                    | success |
       | user -key igorbonadio eva                                       | success |
