@@ -32,7 +32,7 @@ Feature: Console operations
     When I execute "<command>"
     Then I should see a <result> message
     Examples:
-      | command                                                         | result |
+      | command                                                         | result  |
       | user add jose                                                   | success |
       | user +key igorbonadio marvin                                    | success |
       | user -key igorbonadio eva                                       | success |
