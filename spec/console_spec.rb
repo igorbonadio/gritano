@@ -18,14 +18,14 @@ describe Gritano::Console do
     @console.execute("user rm igorbonadio".split(' '))
   end
   
-  it "should respond to gritano user +key username keyname < key.pub" do
-    @console.should_receive(:user_add_key)
-    @console.execute("user +key igorbonadio keyname".split(' '))
+  it "should respond to gritano user addkey username keyname < key.pub" do
+    @console.should_receive(:user_addkey)
+    @console.execute("user addkey igorbonadio keyname".split(' '))
   end
   
-  it "should respond to gritano user -key username keyname" do
-    @console.should_receive(:user_remove_key)
-    @console.execute("user -key username keyname".split(' '))
+  it "should respond to gritano user rmkey username keyname" do
+    @console.should_receive(:user_rmkey)
+    @console.execute("user rmkey username keyname".split(' '))
   end
   
   it "should respond to gritano user list" do
@@ -53,24 +53,24 @@ describe Gritano::Console do
     @console.execute("repo rm tmp/reponame.git".split(' '))
   end
   
-  it "should respond to gritano repo +read igorbonadio tmp/reponame.git" do
-    @console.should_receive(:repo_add_read)
-    @console.execute("repo +read igorbonadio tmp/reponame.git".split(' '))
+  it "should respond to gritano repo addread igorbonadio tmp/reponame.git" do
+    @console.should_receive(:repo_addread)
+    @console.execute("repo addread igorbonadio tmp/reponame.git".split(' '))
   end
   
-  it "should respond to gritano repo +write igorbonadio tmp/reponame.git" do
-    @console.should_receive(:repo_add_write)
-    @console.execute("repo +write igorbonadio tmp/reponame.git".split(' '))
+  it "should respond to gritano repo addwrite igorbonadio tmp/reponame.git" do
+    @console.should_receive(:repo_addwrite)
+    @console.execute("repo addwrite igorbonadio tmp/reponame.git".split(' '))
   end
   
-  it "should respond to gritano repo -read igorbonadio tmp/reponame.git" do
-    @console.should_receive(:repo_remove_read)
-    @console.execute("repo -read igorbonadio tmp/reponame.git".split(' '))
+  it "should respond to gritano repo rmread igorbonadio tmp/reponame.git" do
+    @console.should_receive(:repo_rmread)
+    @console.execute("repo rmread igorbonadio tmp/reponame.git".split(' '))
   end
   
-  it "should respond to gritano repo -write igorbonadio tmp/reponame.git" do
-    @console.should_receive(:repo_remove_write)
-    @console.execute("repo -write igorbonadio tmp/reponame.git".split(' '))
+  it "should respond to gritano repo rmwrite igorbonadio tmp/reponame.git" do
+    @console.should_receive(:repo_rmwrite)
+    @console.execute("repo rmwrite igorbonadio tmp/reponame.git".split(' '))
   end
   
   it "should respond to gritano repo list" do

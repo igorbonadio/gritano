@@ -11,7 +11,7 @@ module Gritano
     end
     
     def execute(argv)
-      send(argv[0..1].join('_').gsub('+', 'add_').gsub('-', 'remove_'), argv[2..-1])
+      send(argv[0..1].join('_'), argv[2..-1])
     end
     
     def user_list(argv)
@@ -122,7 +122,7 @@ module Gritano
       return [false, "Repository #{name} could not be removed."]
     end
     
-    def repo_add_read(argv)
+    def repo_addread(argv)
       repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)
@@ -132,7 +132,7 @@ module Gritano
       return [false, "An error occurred. Permissions was not modified."]
     end
     
-    def repo_add_write(argv)
+    def repo_addwrite(argv)
       repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)
@@ -142,7 +142,7 @@ module Gritano
       return [false, "An error occurred. Permissions was not modified."]
     end
     
-    def repo_remove_read(argv)
+    def repo_rmread(argv)
       repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)
@@ -152,7 +152,7 @@ module Gritano
       return [false, "An error occurred. Permissions was not modified."]
     end
     
-    def repo_remove_write(argv)
+    def repo_rmwrite(argv)
       repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)
@@ -162,7 +162,7 @@ module Gritano
       return [false, "An error occurred. Permissions was not modified."]
     end
     
-    def user_add_key(argv)
+    def user_addkey(argv)
       login, key_name, key_file = argv
       user = User.find_by_login(login)
       if user
@@ -175,7 +175,7 @@ module Gritano
       return [false, "Key could not be added."]
     end
     
-    def user_remove_key(argv)
+    def user_rmkey(argv)
       login, key_name = argv
       key = Key.where(name: key_name).includes(:user).where("users.login" => login).limit(1)[0]
       if key

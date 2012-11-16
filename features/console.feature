@@ -32,36 +32,36 @@ Feature: Console operations
     When I execute "<command>"
     Then I should see a <result> message
     Examples:
-      | command                                                         | result  |
-      | user add jose                                                   | success |
-      | user +key igorbonadio marvin                                    | success |
-      | user -key igorbonadio eva                                       | success |
-      | user rm igorbonadio                                             | success |
-      | user list                                                       | success |
-      | user keys igorbonadio                                           | success |
-      | user repos igorbonadio                                          | success |
-      | repo add tmp/p-lang.git                                         | success |
-      | repo rm tmp/jeka.git                                            | success |
-      | repo +read tmp/gritano.git jessicaeto                           | success |
-      | repo +write tmp/gritano.git jessicaeto                          | success |
-      | repo -read tmp/jeka.git igorbonadio                             | success |
-      | repo -write tmp/gritano.git igorbonadio                         | success |
-      | repo list                                                       | success |
-      | repo users tmp/jeka.git                                         | success |
-      | user add igorbonadio                                            | error   |
-      | user rm jose                                                    | error   |
-      | user +key userrr marvino                                        | error   |
-      | user -key igorbonadio marvino                                   | error   |
-      | user keys arybonadio                                            | error   |
-      | user repos arybonadio                                           | error   |
-      | repo add tmp/jeka.git                                           | error   |
-      | repo rm tmp/p-lang.git                                          | error   |
-      | repo +read tmp/gritano.git arybonadio                           | error   |
-      | repo +read tmp/p-lang.git jessicaeto                            | error   |
-      | repo +write tmp/gritano.git arybonadio                          | error   |
-      | repo +write tmp/p-lang.git jessicaeto                           | error   |
-      | repo -read tmp/jeka.git aribonadio                              | error   |
-      | repo -read tmp/p-lang.git igorbonadio                           | error   |
-      | repo -write tmp/gritano.git arybonadio                          | error   |
-      | repo -write tmp/p-lang.git igorbonadio                          | error   |
-      | repo users tmp/ruby.git                                         | error   |
+      | command                                  | result  |
+      | user add jose                            | success |
+      | user addkey igorbonadio marvin           | success |
+      | user rmkey igorbonadio eva               | success |
+      | user rm igorbonadio                      | success |
+      | user list                                | success |
+      | user keys igorbonadio                    | success |
+      | user repos igorbonadio                   | success |
+      | repo add tmp/p-lang.git                  | success |
+      | repo rm tmp/jeka.git                     | success |
+      | repo addread tmp/gritano.git jessicaeto  | success |
+      | repo addwrite tmp/gritano.git jessicaeto | success |
+      | repo rmread tmp/jeka.git igorbonadio     | success |
+      | repo rmwrite tmp/gritano.git igorbonadio | success |
+      | repo list                                | success |
+      | repo users tmp/jeka.git                  | success |
+      | user add igorbonadio                     | error   |
+      | user rm jose                             | error   |
+      | user addkey userrr marvino               | error   |
+      | user rmkey igorbonadio marvino           | error   |
+      | user keys arybonadio                     | error   |
+      | user repos arybonadio                    | error   |
+      | repo add tmp/jeka.git                    | error   |
+      | repo rm tmp/p-lang.git                   | error   |
+      | repo addread tmp/gritano.git arybonadio  | error   |
+      | repo addread tmp/p-lang.git jessicaeto   | error   |
+      | repo addwrite tmp/gritano.git arybonadio | error   |
+      | repo addwrite tmp/p-lang.git jessicaeto  | error   |
+      | repo rmread tmp/jeka.git aribonadio      | error   |
+      | repo rmread tmp/p-lang.git igorbonadio   | error   |
+      | repo rmwrite tmp/gritano.git arybonadio  | error   |
+      | repo rmwrite tmp/p-lang.git igorbonadio  | error   |
+      | repo users tmp/ruby.git                  | error   |
