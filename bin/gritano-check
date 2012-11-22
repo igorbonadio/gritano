@@ -11,8 +11,8 @@ def help
   Examples:
   ssh git@host.com repos
   ssh git@host.com keys
-  ssh git@host.com key add keyname < key.pub
-  ssh git@host.com key rm keyname
+  ssh git@host.com addkey keyname < key.pub
+  ssh git@host.com rmkey keyname
   
   --
   v#{File.open(File.join(File.dirname(__FILE__), '..', 'VERSION')).readlines.join}"
@@ -34,7 +34,7 @@ begin
       end
     when :user_cmd
       cmd = command[:command]
-      if cmd.start_with? "+key" or cmd.start_with? "-key"
+      if cmd.start_with? "addkey" or cmd.start_with? "rmkey"
         tmp = cmd.split(" ")
         tmp = tmp[0..-2] + [login] + tmp[-1..-1]
         cmd = tmp.join(" ")
