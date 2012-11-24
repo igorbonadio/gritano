@@ -42,6 +42,14 @@ begin
         cmd = cmd + " " + login
       end
       exec "gritano user #{cmd}"
+    when :admin_cmd
+      cmd = command[:command]
+      user = Gritano::User.find_by_login(login)
+      if user.admin?
+        exec "gritano #{cmd}"
+      else
+        puts "access denied"
+      end
   end
 rescue
   puts help
