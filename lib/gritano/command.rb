@@ -8,6 +8,8 @@ module Gritano
           return {access: :read, command: "git-upload-pack", repo: self.repo(cmd)}
         when /^repos/, /^keys/, /^addkey/, /^rmkey/ then 
           return {access: :user_cmd, command: cmd}
+        when /^user/, /^repo/ then
+          return {access: :admin_cmd, command: cmd}
       end
     end
     
