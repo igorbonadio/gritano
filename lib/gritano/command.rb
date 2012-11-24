@@ -10,6 +10,8 @@ module Gritano
           return {access: :user_cmd, command: cmd}
         when /^user/, /^repo/ then
           return {access: :admin_cmd, command: cmd}
+        when /^admin help/ then
+          return {access: :admin_cmd, command: 'help'}
       end
     end
     

@@ -13,6 +13,7 @@ def help
   ssh git@host.com keys
   ssh git@host.com addkey keyname < key.pub
   ssh git@host.com rmkey keyname
+  ssh git@host.com admin help
   
   --
   v#{File.open(File.join(File.dirname(__FILE__), '..', 'VERSION')).readlines.join}"

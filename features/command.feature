@@ -29,3 +29,4 @@ Feature: Command
 	    | repo rmwrite reponame.git username  | admin_cmd | repo rmwrite reponame.git username  |          |
 	    | repo list                           | admin_cmd | repo list                           |          |
 	    | repo users reponame.git             | admin_cmd | repo users reponame.git             |          |
+	    | admin help                          | admin_cmd | help                                |          |
