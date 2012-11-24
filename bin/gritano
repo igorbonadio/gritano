@@ -17,6 +17,8 @@ def help
   gritano user rm username
   gritano user addkey username keyname < key.pub
   gritano user rmkey username keyname
+  gritano user addadmin username
+  gritano user rmadmin username
   gritano user list
   gritano user keys username
   gritano user repos username
