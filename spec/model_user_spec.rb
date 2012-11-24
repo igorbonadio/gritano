@@ -14,6 +14,16 @@ describe Gritano::User do
     user2.should be_invalid
   end
   
+  it 'can be a administrator' do
+    user = Gritano::User.new(login: 'login', admin: true)
+    user.should be_admin
+  end
+  
+  it 'can not be a administrator' do
+    user = Gritano::User.new(login: 'login', admin: false)
+    user.should_not be_admin
+  end
+  
   it 'should add read access to a repository' do
     user = Gritano::User.create(login: 'test')
     repo = Gritano::Repository.create(name: 'tmp/repo.git')

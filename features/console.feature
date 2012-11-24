@@ -5,9 +5,9 @@ Feature: Console operations
   
   Background:
     Given the following users exist:
-      | login       |
-      | igorbonadio |
-      | jessicaeto  |
+      | login       | admin |
+      | igorbonadio | true  |
+      | jessicaeto  | false |
       
     And the following keys exist:
       | login       | key |
@@ -40,6 +40,8 @@ Feature: Console operations
       | user list                                | success |
       | user keys igorbonadio                    | success |
       | user repos igorbonadio                   | success |
+      | user addadmin igorbonadio                | success |
+      | user rmadmin igorbonadio                 | success |
       | repo add tmp/p-lang.git                  | success |
       | repo rm tmp/jeka.git                     | success |
       | repo addread tmp/gritano.git jessicaeto  | success |
@@ -54,6 +56,8 @@ Feature: Console operations
       | user rmkey igorbonadio marvino           | error   |
       | user keys arybonadio                     | error   |
       | user repos arybonadio                    | error   |
+      | user addadmin arybonadio                 | error   |
+      | user rmadmin arybonadio                  | error   |
       | repo add tmp/jeka.git                    | error   |
       | repo rm tmp/p-lang.git                   | error   |
       | repo addread tmp/gritano.git arybonadio  | error   |

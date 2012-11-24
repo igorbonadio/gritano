@@ -82,4 +82,14 @@ describe Gritano::Console do
     @console.should_receive(:repo_users)
     @console.execute("repo users reponame.git".split(' '))
   end
+  
+  it "should respond to gritano user addadmin igorbonadio" do
+    @console.should_receive(:user_addadmin)
+    @console.execute("user addadmin igorbonadio".split(' '))
+  end
+  
+  it "should respond to gritano user rmadmin igorbonadio" do
+    @console.should_receive(:user_rmadmin)
+    @console.execute("user rmadmin igorbonadio".split(' '))
+  end
 end

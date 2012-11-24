@@ -186,5 +186,29 @@ module Gritano
       end
       return [false, "Key could not be removed."]
     end
+    
+    def user_addadmin(argv)
+      login, = argv
+      user = User.find_by_login(login)
+      if user
+        user.admin = true
+        if user.save
+          return [true, "Now, user #{login} is an administrator"]
+        end
+      end
+      return [false, "User #{login} could not be modified"]
+    end
+    
+    def user_rmadmin(argv)
+      login, = argv
+      user = User.find_by_login(login)
+      if user
+        user.admin = false
+        if user.save
+          return [true, "Now, user #{login} is not an administrator"]
+        end
+      end
+      return [false, "User #{login} could not be modified"]
+    end
   end
 end
