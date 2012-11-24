@@ -32,6 +32,11 @@ def help
   v#{File.open(File.join(File.dirname(__FILE__), '..', 'VERSION')).readlines.join}"
 end
 
+def migrate
+  ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
+  ActiveRecord::Migrator.migrate(File.join(File.dirname(__FILE__),'../db/migrate'), ENV["VERSION"] ? ENV["VERSION"].to_i : nil )
+end
+
 def install
   Dir.mkdir(File.join(Etc.getpwuid.dir, '.gritano')) unless File.exist?(File.join(Etc.getpwuid.dir, '.gritano'))
   Dir.mkdir(File.join(Etc.getpwuid.dir, '.ssh')) unless File.exist?(File.join(Etc.getpwuid.dir, '.ssh'))
@@ -39,8 +44,7 @@ def install
     f.write("adapter: sqlite3\ndatabase: #{File.join(Etc.getpwuid.dir, '.gritano', 'database.db')}\n")
   end
   FileUtils.rm(File.join(Etc.getpwuid.dir, '.gritano', 'database.db')) if File.exist?(File.join(Etc.getpwuid.dir, '.gritano', 'database.db'))
-  ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
-  ActiveRecord::Migrator.migrate(File.join(File.dirname(__FILE__),'../db/migrate'), ENV["VERSION"] ? ENV["VERSION"].to_i : nil )
+  migrate
 end
 
 def version
@@ -65,6 +69,8 @@ check_git
 if ARGV.length == 1
   if ARGV[0] =='install'
     install
+  elsif ARGV[0] =='update'
+    migrate
   elsif ARGV[0] =='version'
     version
   else
