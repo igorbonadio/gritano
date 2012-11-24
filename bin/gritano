@@ -12,6 +12,7 @@ def help
   
   Examples:
   gritano install
+  gritano update
   gritano user add username
   gritano user rm username
   gritano user addkey username keyname < key.pub
