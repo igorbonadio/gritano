@@ -34,9 +34,12 @@ module Gritano
       user = User.find_by_login(login)
       if user
         keys = user.keys
-        msg = "User's keys:\n"
-        keys.each do |key|
-          msg += "  - #{key.name}\n"
+        msg = Terminal::Table.new do |t|
+          t << ['keys']
+          t << :separator
+          keys.each do |key|
+            t.add_row [key.name]
+          end
         end
         msg = "there is no key registered" if keys.count == 0
         return [true, msg]
