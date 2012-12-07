@@ -54,7 +54,7 @@ module Gritano
       if user
         repos = user.repositories
         msg = Terminal::Table.new do |t|
-          t << ['keys']
+          t << ['repositories']
           t << :separator
           repos.each do |repo|
             t.add_row [repo.name]
@@ -86,10 +86,13 @@ module Gritano
     end
     
     def repo_list(argv)
-      msg = "Repositories:\n"
       repos = Repository.all
-      repos.each do |repo|
-        msg += "  - #{repo.name}\n"
+      msg = Terminal::Table.new do |t|
+        t << ['repositories']
+        t << :separator
+        repos.each do |repo|
+          t.add_row [repo.name]
+        end
       end
       msg = "there is no repository registered" if repos.count == 0
       return [true, msg]
