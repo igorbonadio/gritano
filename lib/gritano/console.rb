@@ -53,9 +53,12 @@ module Gritano
       user = User.find_by_login(login)
       if user
         repos = user.repositories
-        msg = "User's repositories:\n"
-        repos.each do |repo|
-          msg += "  - #{repo.name}\n"
+        msg = Terminal::Table.new do |t|
+          t << ['keys']
+          t << :separator
+          repos.each do |repo|
+            t.add_row [repo.name]
+          end
         end
         msg = "there is no repository registered" if repos.count == 0
         return [true, msg]
