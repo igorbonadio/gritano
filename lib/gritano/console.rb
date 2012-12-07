@@ -1,3 +1,5 @@
+require "terminal-table"
+
 module Gritano
   class Console
     
@@ -15,10 +17,13 @@ module Gritano
     end
     
     def user_list(argv)
-      msg = "Users:\n"
       users = User.all
-      users.each do |user|
-        msg += "  - #{user.login}\n"
+      msg = Terminal::Table.new do |t|
+        t << ['user']
+        t << :separator
+        users.each do |user|
+          t.add_row [user.login]
+        end
       end
       msg = "there is no user registered" if users.count == 0
       return [true, msg]

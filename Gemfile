@@ -17,4 +17,5 @@ group :development do
   gem "jeweler", ">= 1.8.4"
   gem "simplecov", ">= 0.6.4"
   gem 'database_cleaner', ">= 0.8.0"
+  gem 'terminal-table', ">= 1.4.5"
 end

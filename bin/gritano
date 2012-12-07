@@ -90,7 +90,7 @@ else
   begin
     cmd_return = console.execute(ARGV)
     if cmd_return[0]
-      puts "success: #{cmd_return[1]}"
+      puts "#{cmd_return[1]}"
     else
       puts "error: #{cmd_return[1]}"
     end
