@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "gritano"
-  s.version = "0.3.1"
+  s.version = "0.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Igor Bonadio"]
@@ -80,6 +80,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<activerecord>, [">= 3.2.8"])
       s.add_runtime_dependency(%q<sqlite3>, [">= 1.3.6"])
       s.add_runtime_dependency(%q<grit>, [">= 2.5.0"])
+      s.add_runtime_dependency(%q<terminal-table>, [">= 1.4.5"])
       s.add_development_dependency(%q<rspec>, [">= 2.11.0"])
       s.add_development_dependency(%q<rdoc>, [">= 3.12"])
       s.add_development_dependency(%q<cucumber>, [">= 1.2.1"])
@@ -87,11 +88,11 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<jeweler>, [">= 1.8.4"])
       s.add_development_dependency(%q<simplecov>, [">= 0.6.4"])
       s.add_development_dependency(%q<database_cleaner>, [">= 0.8.0"])
-      s.add_development_dependency(%q<terminal-table>, [">= 1.4.5"])
     else
       s.add_dependency(%q<activerecord>, [">= 3.2.8"])
       s.add_dependency(%q<sqlite3>, [">= 1.3.6"])
       s.add_dependency(%q<grit>, [">= 2.5.0"])
+      s.add_dependency(%q<terminal-table>, [">= 1.4.5"])
       s.add_dependency(%q<rspec>, [">= 2.11.0"])
       s.add_dependency(%q<rdoc>, [">= 3.12"])
       s.add_dependency(%q<cucumber>, [">= 1.2.1"])
@@ -99,12 +100,12 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<jeweler>, [">= 1.8.4"])
       s.add_dependency(%q<simplecov>, [">= 0.6.4"])
       s.add_dependency(%q<database_cleaner>, [">= 0.8.0"])
-      s.add_dependency(%q<terminal-table>, [">= 1.4.5"])
     end
   else
     s.add_dependency(%q<activerecord>, [">= 3.2.8"])
     s.add_dependency(%q<sqlite3>, [">= 1.3.6"])
     s.add_dependency(%q<grit>, [">= 2.5.0"])
+    s.add_dependency(%q<terminal-table>, [">= 1.4.5"])
     s.add_dependency(%q<rspec>, [">= 2.11.0"])
     s.add_dependency(%q<rdoc>, [">= 3.12"])
     s.add_dependency(%q<cucumber>, [">= 1.2.1"])
@@ -112,7 +113,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<jeweler>, [">= 1.8.4"])
     s.add_dependency(%q<simplecov>, [">= 0.6.4"])
     s.add_dependency(%q<database_cleaner>, [">= 0.8.0"])
-    s.add_dependency(%q<terminal-table>, [">= 1.4.5"])
   end
 end
 
