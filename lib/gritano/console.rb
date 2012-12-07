@@ -110,14 +110,17 @@ module Gritano
       repo = Repository.find_by_name(name)
       if repo
         users = repo.users
-        msg = "Users:\n"
-        users.each do |user|
-          permissions = ""
-          user.permissions.find_by_repository_id(repo.id) do |p|
-            permissions += "r" if p.is(:read)
-            permissions += "w" if p.is(:write)
+        msg = Terminal::Table.new do |t|
+          t << ['user', 'permission']
+          t << :separator
+          users.each do |user|
+            permissions = ""
+            user.permissions.find_by_repository_id(repo.id) do |p|
+              permissions += "r" if p.is(:read)
+              permissions += "w" if p.is(:write)
+            end
+            t.add_row [user.login, permissions]
           end
-          msg += "  - #{user.login}\t #{permissions}\n"
         end
         msg = "No user have access to this repository" if users.count == 0
         return [true, msg]
