@@ -6,6 +6,7 @@ source "http://rubygems.org"
 gem 'activerecord', ">= 3.2.8"
 gem 'sqlite3', ">= 1.3.6"
 gem 'grit', ">= 2.5.0"
+gem 'terminal-table', ">= 1.4.5"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
@@ -17,5 +18,4 @@ group :development do
   gem "jeweler", ">= 1.8.4"
   gem "simplecov", ">= 0.6.4"
   gem 'database_cleaner', ">= 0.8.0"
-  gem 'terminal-table', ">= 1.4.5"
 end
