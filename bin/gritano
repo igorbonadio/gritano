@@ -23,6 +23,7 @@ def help
   gritano user:key:list username
   gritano user:repo:list username
   gritano repo:add reponame.git
+  gritano repo:add reponame.git user1 user2 user3
   gritano repo:rm reponame.git
   gritano repo:read:add reponame.git username
   gritano repo:write:add reponame.git username
