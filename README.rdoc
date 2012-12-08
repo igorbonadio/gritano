@@ -1,4 +1,4 @@
-= Gritano v0.3.1
+= Gritano v0.4.0
 
 Gritano is the simplest way to configure a git server over ssh. You can create repositories and manage user access using this practical tool.
 
@@ -29,23 +29,23 @@ All you need to do to set up Gritano is
   
 After that you can add users:
 
-  $ gritano user add igorbonadio
+  $ gritano user:add igorbonadio
   
 add administrator rights to this user:
 
-  $ gritano user addadmin igorbonadio
+  $ gritano user:admin:add igorbonadio
 
 add user's public keys:
 
-  $ gritano user addkey igorbonadio mykey < id_rsa.pub
+  $ gritano user:key:add igorbonadio mykey < id_rsa.pub
 
 create bare repositories:
 
-  $ gritano repo add proj.git
+  $ gritano repo:add proj.git
 
 and control access:
 
-  $ gritano repo addread proj.git igorbonadio
+  $ gritano repo:read:add proj.git igorbonadio
   
 For more information, execute
 
@@ -55,13 +55,13 @@ For more information, execute
 
 Gritano 0.2.0 introduced a new feature that enables users to execute some simple commands via ssh:
 
-  $ ssh git@host.com repos
+  $ ssh git@host.com repo:list
   
-  $ ssh git@host.com keys
+  $ ssh git@host.com key:list
   
-  $ ssh git@host.com addkey mykey < id_rsa.pub
+  $ ssh git@host.com key:add mykey < id_rsa.pub
   
-  $ ssh git@host.com rmkey mykey
+  $ ssh git@host.com key:add mykey
   
 For more information, execute
 
@@ -71,23 +71,23 @@ For more information, execute
 
 Starting from Gritano 0.3.0, administrators can execute commands via ssh:
 
-  $ ssh git@hot.com user add username
+  $ ssh git@hot.com admin:user:add username
   
-  $ ssh git@hot.com user rm username
+  $ ssh git@hot.com admin:user:rm username
   
-  $ ssh git@hot.com user addkey username keyname < key.pub
+  $ ssh git@hot.com admin:user:key:add username keyname < key.pub
   
-  $ ssh git@hot.com user rmkey username keyname
+  $ ssh git@hot.com admin:user:key:rm username keyname
   
-  $ ssh git@hot.com repo add reponame.git
+  $ ssh git@hot.com admin:repo:add reponame.git
   
-  $ ssh git@hot.com repo rm reponame.git
+  $ ssh git@hot.com admin:repo:rm reponame.git
   
-  $ ssh git@hot.com repo list
+  $ ssh git@hot.com admin:repo:list
   
 For more information, execute
 
-  $ ssh git@host.com admin help
+  $ ssh git@host.com admin:help
 
 == Contributing to Gritano
  
