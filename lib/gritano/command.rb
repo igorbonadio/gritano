@@ -6,12 +6,14 @@ module Gritano
           return {access: :write, command: "git-receive-pack", repo: self.repo(cmd)}
         when /^git-upload-pack/ then
           return {access: :read, command: "git-upload-pack", repo: self.repo(cmd)}
-        when /^repos/, /^keys/, /^addkey/, /^rmkey/ then 
-          return {access: :user_cmd, command: cmd}
-        when /^user/, /^repo/ then
-          return {access: :admin_cmd, command: cmd}
-        when /^admin help/ then
-          return {access: :admin_cmd, command: 'help'}
+        when /^repo:/ then
+          return {access: :user_cmd, command: ("user:#{cmd} [USER]")}
+        when /^key:/ then
+          cmd = cmd.split(" ")
+          cmd = [cmd[0]] + ["[USER]"] + cmd[1..-1]
+          return {access: :user_cmd, command: ("user:" + cmd.join(" "))}
+        when /admin:/ then
+          return {access: :admin_cmd, command: cmd.gsub("admin:", "")}
       end
     end
     

@@ -16,26 +16,26 @@ describe Gritano::Command do
   end
   
   it 'should interpret repos' do
-    command = Gritano::Command.eval("repos")
+    command = Gritano::Command.eval("repo:list")
     command[:access].to_s.should be == "user_cmd"
-    command[:command].should be == "repos"
+    command[:command].should be == "user:repo:list [USER]"
   end
   
   it 'should interpret keys' do
-    command = Gritano::Command.eval("keys")
+    command = Gritano::Command.eval("key:list")
     command[:access].to_s.should be == "user_cmd"
-    command[:command].should be == "keys"
+    command[:command].should be == "user:key:list [USER]"
   end
   
   it 'should interpret addkey keyname' do
-    command = Gritano::Command.eval("addkey keyname")
+    command = Gritano::Command.eval("key:add keyname")
     command[:access].to_s.should be == "user_cmd"
-    command[:command].should be == "addkey keyname"
+    command[:command].should be == "user:key:add [USER] keyname"
   end
   
   it 'should interpret rmkey keyname' do
-    command = Gritano::Command.eval("rmkey keyname")
+    command = Gritano::Command.eval("key:rm keyname")
     command[:access].to_s.should be == "user_cmd"
-    command[:command].should be == "rmkey keyname"
+    command[:command].should be == "user:key:rm [USER] keyname"
   end
 end

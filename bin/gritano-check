@@ -9,11 +9,11 @@ def help
   ssh user@host command
   
   Examples:
-  ssh git@host.com repos
-  ssh git@host.com keys
-  ssh git@host.com addkey keyname < key.pub
-  ssh git@host.com rmkey keyname
-  ssh git@host.com admin help
+  ssh git@host.com repo:list
+  ssh git@host.com key:list
+  ssh git@host.com key:add keyname < key.pub
+  ssh git@host.com key:rm keyname
+  ssh git@host.com admin:help
   
   --
   v#{File.open(File.join(File.dirname(__FILE__), '..', 'VERSION')).readlines.join}"
@@ -30,19 +30,13 @@ begin
       repository = Gritano::Repository.find_by_name(command[:repo])
       if user and repository
         if user.check_access(repository, command[:access])
+          puts "#{command[:command]} #{File.join(repository.full_path)}"
           exec "#{command[:command]} #{File.join(repository.full_path)}"
         end
       end
     when :user_cmd
-      cmd = command[:command]
-      if cmd.start_with? "addkey" or cmd.start_with? "rmkey"
-        tmp = cmd.split(" ")
-        tmp = tmp[0..-2] + [login] + tmp[-1..-1]
-        cmd = tmp.join(" ")
-      else
-        cmd = cmd + " " + login
-      end
-      exec "gritano user #{cmd}"
+      cmd = command[:command].gsub("[USER]", login)
+      exec "gritano #{cmd}"
     when :admin_cmd
       cmd = command[:command]
       user = Gritano::User.find_by_login(login)
