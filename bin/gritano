@@ -8,7 +8,7 @@ require 'etc'
 
 def help
   puts "
-  gritano [install|user|repo] [command] parameters
+  gritano [command] parameters
   
   Examples:
   gritano install
