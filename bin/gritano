@@ -13,23 +13,23 @@ def help
   Examples:
   gritano install
   gritano update
-  gritano user add username
-  gritano user rm username
-  gritano user addkey username keyname < key.pub
-  gritano user rmkey username keyname
-  gritano user addadmin username
-  gritano user rmadmin username
-  gritano user list
-  gritano user keys username
-  gritano user repos username
-  gritano repo add reponame.git
-  gritano repo rm reponame.git
-  gritano repo addread reponame.git username
-  gritano repo addwrite reponame.git username
-  gritano repo rmread reponame.git username
-  gritano repo rmwrite reponame.git username
-  gritano repo list
-  gritano repo users reponame.git
+  gritano user:add username
+  gritano user:rm username
+  gritano user:key:add username keyname < key.pub
+  gritano user:key:rm username keyname
+  gritano user:admin:add username
+  gritano user:admin:rm username
+  gritano user:list
+  gritano user:key:list username
+  gritano user:repo:list username
+  gritano repo:add reponame.git
+  gritano repo:rm reponame.git
+  gritano repo:read:add reponame.git username
+  gritano repo:write:add reponame.git username
+  gritano repo:read:rm reponame.git username
+  gritano repo:write:rm reponame.git username
+  gritano repo:list
+  gritano repo:user:list reponame.git
   
   --
   v#{File.open(File.join(File.dirname(__FILE__), '..', 'VERSION')).readlines.join}"
@@ -69,7 +69,10 @@ def check_gritano
 end
 
 check_git
-if ARGV.length == 1
+if ARGV.length == 0
+  help
+else
+  
   if ARGV[0] =='install'
     install
   elsif ARGV[0] =='update'
@@ -77,24 +80,20 @@ if ARGV.length == 1
   elsif ARGV[0] =='version'
     version
   else
-    help
-  end
-elsif ARGV.length == 0
-  help
-else
-  check_gritano
-  ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
-  console = Gritano::Console.new(STDIN)
-  console.repo_path = Etc.getpwuid.dir
-  console.ssh_path = File.join(Etc.getpwuid.dir, '.ssh')
-  begin
-    cmd_return = console.execute(ARGV)
-    if cmd_return[0]
-      puts "#{cmd_return[1]}"
-    else
-      puts "error: #{cmd_return[1]}"
+    check_gritano
+    ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
+    console = Gritano::Console.new(STDIN)
+    console.repo_path = Etc.getpwuid.dir
+    console.ssh_path = File.join(Etc.getpwuid.dir, '.ssh')
+    begin
+      cmd_return = console.execute(ARGV)
+      if cmd_return[0]
+        puts "#{cmd_return[1]}"
+      else
+        puts "error: #{cmd_return[1]}"
+      end
+    rescue NoMethodError
+      puts help
     end
-  rescue NoMethodError
-    puts help
   end
 end

@@ -13,7 +13,7 @@ module Gritano
     end
     
     def execute(argv)
-      send(argv[0..1].join('_'), argv[2..-1])
+      send(argv[0].gsub(':', '_'), argv[1..-1])
     end
     
     def user_list(argv)
@@ -29,7 +29,7 @@ module Gritano
       return [true, msg]
     end
     
-    def user_keys(argv)
+    def user_key_list(argv)
       login, = argv
       user = User.find_by_login(login)
       if user
@@ -48,7 +48,7 @@ module Gritano
       end
     end
     
-    def user_repos(argv)
+    def user_repo_list(argv)
       login, = argv
       user = User.find_by_login(login)
       if user
@@ -85,6 +85,55 @@ module Gritano
       return [false, "User #{login} could not be removed."]
     end
     
+    def user_key_add(argv)
+      login, key_name, key_file = argv
+      user = User.find_by_login(login)
+      if user
+        key = user.keys.create(name: key_name, key: @stdin.read)
+        if key.valid?
+          File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
+            return [true, "Key added successfully."]
+        end
+      end
+      return [false, "Key could not be added."]
+    end
+    
+    def user_key_rm(argv)
+      login, key_name = argv
+      key = Key.where(name: key_name).includes(:user).where("users.login" => login).limit(1)[0]
+      if key
+        if key.destroy
+          File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
+          return [true, "Key removed successfully."]
+        end
+      end
+      return [false, "Key could not be removed."]
+    end
+    
+    def user_admin_add(argv)
+      login, = argv
+      user = User.find_by_login(login)
+      if user
+        user.admin = true
+        if user.save
+          return [true, "Now, user #{login} is an administrator"]
+        end
+      end
+      return [false, "User #{login} could not be modified"]
+    end
+    
+    def user_admin_rm(argv)
+      login, = argv
+      user = User.find_by_login(login)
+      if user
+        user.admin = false
+        if user.save
+          return [true, "Now, user #{login} is not an administrator"]
+        end
+      end
+      return [false, "User #{login} could not be modified"]
+    end
+    
     def repo_list(argv)
       repos = Repository.all
       msg = Terminal::Table.new do |t|
@@ -105,7 +154,7 @@ module Gritano
       return [false, "Repository #{name} could not be created."]
     end
     
-    def repo_users(argv)
+    def repo_user_list(argv)
       name, = argv
       repo = Repository.find_by_name(name)
       if repo
@@ -139,7 +188,7 @@ module Gritano
       return [false, "Repository #{name} could not be removed."]
     end
     
-    def repo_addread(argv)
+    def repo_read_add(argv)
       repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)
@@ -149,7 +198,7 @@ module Gritano
       return [false, "An error occurred. Permissions was not modified."]
     end
     
-    def repo_addwrite(argv)
+    def repo_write_add(argv)
       repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)
@@ -159,7 +208,7 @@ module Gritano
       return [false, "An error occurred. Permissions was not modified."]
     end
     
-    def repo_rmread(argv)
+    def repo_read_rm(argv)
       repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)
@@ -169,7 +218,7 @@ module Gritano
       return [false, "An error occurred. Permissions was not modified."]
     end
     
-    def repo_rmwrite(argv)
+    def repo_write_rm(argv)
       repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)
@@ -177,55 +226,6 @@ module Gritano
         return [true, "User #{login} has not write access to #{repo_name}."] if user.remove_access(repo, :write)
       end
       return [false, "An error occurred. Permissions was not modified."]
-    end
-    
-    def user_addkey(argv)
-      login, key_name, key_file = argv
-      user = User.find_by_login(login)
-      if user
-        key = user.keys.create(name: key_name, key: @stdin.read)
-        if key.valid?
-          File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
-            return [true, "Key added successfully."]
-        end
-      end
-      return [false, "Key could not be added."]
-    end
-    
-    def user_rmkey(argv)
-      login, key_name = argv
-      key = Key.where(name: key_name).includes(:user).where("users.login" => login).limit(1)[0]
-      if key
-        if key.destroy
-          File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
-          return [true, "Key removed successfully."]
-        end
-      end
-      return [false, "Key could not be removed."]
-    end
-    
-    def user_addadmin(argv)
-      login, = argv
-      user = User.find_by_login(login)
-      if user
-        user.admin = true
-        if user.save
-          return [true, "Now, user #{login} is an administrator"]
-        end
-      end
-      return [false, "User #{login} could not be modified"]
-    end
-    
-    def user_rmadmin(argv)
-      login, = argv
-      user = User.find_by_login(login)
-      if user
-        user.admin = false
-        if user.save
-          return [true, "Now, user #{login} is not an administrator"]
-        end
-      end
-      return [false, "User #{login} could not be modified"]
     end
   end
 end
