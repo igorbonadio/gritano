@@ -43,6 +43,21 @@ describe Gritano::Console do
     @console.execute("user:repo:list username".split(' '))
   end
   
+  it "should respond to gritano repo:user:list reponame.git" do
+    @console.should_receive(:repo_user_list)
+    @console.execute("repo:user:list reponame.git".split(' '))
+  end
+  
+  it "should respond to gritano user:admin:add igorbonadio" do
+    @console.should_receive(:user_admin_add)
+    @console.execute("user:admin:add igorbonadio".split(' '))
+  end
+  
+  it "should respond to gritano user:admin:rm igorbonadio" do
+    @console.should_receive(:user_admin_rm)
+    @console.execute("user:admin:rm igorbonadio".split(' '))
+  end
+  
   it "should respond to gritano repo:add tmp/reponame.git" do
     @console.should_receive(:repo_add)
     @console.execute("repo:add tmp/reponame.git".split(' '))
@@ -76,20 +91,5 @@ describe Gritano::Console do
   it "should respond to gritano repo:list" do
     @console.should_receive(:repo_list)
     @console.execute("repo:list".split(' '))
-  end
-  
-  it "should respond to gritano repo:user:list reponame.git" do
-    @console.should_receive(:repo_user_list)
-    @console.execute("repo:user:list reponame.git".split(' '))
-  end
-  
-  it "should respond to gritano user:admin:add igorbonadio" do
-    @console.should_receive(:user_admin_add)
-    @console.execute("user:admin:add igorbonadio".split(' '))
-  end
-  
-  it "should respond to gritano user:admin:rm igorbonadio" do
-    @console.should_receive(:user_admin_rm)
-    @console.execute("user:admin:rm igorbonadio".split(' '))
   end
 end

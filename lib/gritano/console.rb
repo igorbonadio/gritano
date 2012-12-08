@@ -148,9 +148,20 @@ module Gritano
     end
     
     def repo_add(argv)
-      name, = argv
+      name, user_login = argv
       repo = Repository.new(name: name, path: @repo_path)
-      return [true, "Repository #{name} created successfully."] if repo.save
+      if repo.save
+        if user_login
+          argv[1..-1].each do |login|
+            user = User.find_by_login(login)
+            if user
+              user.add_access(repo, :read)
+              user.add_access(repo, :write)
+            end
+          end
+        end
+        return [true, "Repository #{name} created successfully."]
+      end
       return [false, "Repository #{name} could not be created."]
     end
     
