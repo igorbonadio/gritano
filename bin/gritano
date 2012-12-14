@@ -80,6 +80,8 @@ else
     migrate
   elsif ARGV[0] =='version'
     version
+  elsif ARGV[0] =='help'
+    help
   else
     check_gritano
     ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
