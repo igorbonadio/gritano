@@ -6,6 +6,25 @@ module Gritano
     attr_accessor :repo_path
     attr_accessor :ssh_path
     
+    def self.add_command(command, parameters, &block)
+      define_method(command.gsub(':', '_'), &block)
+      commands[command] = parameters
+    end
+    
+    def self.commands
+      @commands || @commands = Hash.new
+    end
+    
+    def self.help
+      msg = "  gritano [command]\n\n"
+      msg += "  Examples:\n"
+      commands.each do |command, parameters|
+        msg += "  gritano #{command} #{parameters}\n"
+      end
+      msg += "\n  --\n  v#{File.open(File.join(File.dirname(__FILE__), '..', '..', 'VERSION')).readlines.join}"
+      msg
+    end
+    
     def initialize(stdin)
       @repo_path = nil
       @ssh_path = nil
@@ -16,7 +35,11 @@ module Gritano
       send(argv[0].gsub(':', '_'), argv[1..-1])
     end
     
-    def user_list(argv)
+    add_command "help", "" do |argv|
+      [:success, Console.help]
+    end
+    
+    add_command "user:list", "" do |argv|
       users = User.all
       msg = Terminal::Table.new do |t|
         t << ['user']
@@ -29,7 +52,7 @@ module Gritano
       return [true, msg]
     end
     
-    def user_key_list(argv)
+    add_command "user:key:list", "username" do |argv|
       login, = argv
       user = User.find_by_login(login)
       if user
@@ -48,7 +71,7 @@ module Gritano
       end
     end
     
-    def user_repo_list(argv)
+    add_command "user:repo:list", "username" do |argv|
       login, = argv
       user = User.find_by_login(login)
       if user
@@ -67,14 +90,14 @@ module Gritano
       end
     end
     
-    def user_add(argv)
+    add_command "user:add", "username" do |argv|
       login, = argv
       user = User.new(login: login)
       return [true, "User #{login} added."] if user.save
       return [false, "#{user.errors.full_messages.join(", ")}."]
     end
     
-    def user_rm(argv)
+    add_command "user:rm", "username" do |argv|
       login, = argv
       user = User.find_by_login(login)
       if user
@@ -85,7 +108,7 @@ module Gritano
       return [false, "User #{login} could not be removed."]
     end
     
-    def user_key_add(argv)
+    add_command "user:key:add", "username keyname < key.pub" do |argv|
       login, key_name, key_file = argv
       user = User.find_by_login(login)
       if user
@@ -98,7 +121,7 @@ module Gritano
       return [false, "Key could not be added."]
     end
     
-    def user_key_rm(argv)
+    add_command "user:key:rm", "username keyname" do |argv|
       login, key_name = argv
       key = Key.where(name: key_name).includes(:user).where("users.login" => login).limit(1)[0]
       if key
@@ -110,7 +133,7 @@ module Gritano
       return [false, "Key could not be removed."]
     end
     
-    def user_admin_add(argv)
+    add_command "user:admin:add", "username" do |argv|
       login, = argv
       user = User.find_by_login(login)
       if user
@@ -122,7 +145,7 @@ module Gritano
       return [false, "User #{login} could not be modified"]
     end
     
-    def user_admin_rm(argv)
+    add_command "user:admin:rm", "username" do |argv|
       login, = argv
       user = User.find_by_login(login)
       if user
@@ -134,7 +157,7 @@ module Gritano
       return [false, "User #{login} could not be modified"]
     end
     
-    def repo_list(argv)
+    add_command "repo:list", "" do |argv|
       repos = Repository.all
       msg = Terminal::Table.new do |t|
         t << ['repositories']
@@ -147,7 +170,7 @@ module Gritano
       return [true, msg]
     end
     
-    def repo_add(argv)
+    add_command "repo:add", "reponame.git [username1 username2 ...]*" do |argv|
       name, user_login = argv
       repo = Repository.new(name: name, path: @repo_path)
       if repo.save
@@ -165,7 +188,7 @@ module Gritano
       return [false, "Repository #{name} could not be created."]
     end
     
-    def repo_user_list(argv)
+    add_command "repo:user:list", "reponame.git" do |argv|
       name, = argv
       repo = Repository.find_by_name(name)
       if repo
@@ -188,7 +211,7 @@ module Gritano
       return [false, "Repository #{name} doesn't exist."]
     end
     
-    def repo_rm(argv)
+    add_command "repo:rm", "reponame.git" do |argv|
       name, = argv
       repo = Repository.find_by_name(name)
       if repo
@@ -199,7 +222,7 @@ module Gritano
       return [false, "Repository #{name} could not be removed."]
     end
     
-    def repo_read_add(argv)
+    add_command "repo:read:add", "reponame.git username" do |argv|
       repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)
@@ -209,7 +232,7 @@ module Gritano
       return [false, "An error occurred. Permissions was not modified."]
     end
     
-    def repo_write_add(argv)
+    add_command "repo:write:add", "reponame.git username" do |argv|
       repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)
@@ -219,7 +242,7 @@ module Gritano
       return [false, "An error occurred. Permissions was not modified."]
     end
     
-    def repo_read_rm(argv)
+    add_command "repo:read:rm", "reponame.git username" do |argv|
       repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)
@@ -229,7 +252,7 @@ module Gritano
       return [false, "An error occurred. Permissions was not modified."]
     end
     
-    def repo_write_rm(argv)
+    add_command "repo:write:rm", "reponame.git username" do |argv|
       repo_name, login = argv
       user = User.find_by_login(login)
       repo = Repository.find_by_name(repo_name)

@@ -27,6 +27,11 @@ Feature: Console operations
       | jessicaeto  | tmp/jeka.git    | read   |
       | jessicaeto  | tmp/jeka.git    | write  |
       
+  Scenario: Get help
+    Given I start the gritano console
+    When I execute "help"
+    Then I should see the help
+      
   Scenario Outline: Add user
     Given I start the gritano console
     When I execute "<command>"

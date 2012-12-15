@@ -1,0 +1,24 @@
+  gritano [command]
+
+  Examples:
+  gritano help 
+  gritano user:list 
+  gritano user:key:list username
+  gritano user:repo:list username
+  gritano user:add username
+  gritano user:rm username
+  gritano user:key:add username keyname < key.pub
+  gritano user:key:rm username keyname
+  gritano user:admin:add username
+  gritano user:admin:rm username
+  gritano repo:list 
+  gritano repo:add reponame.git [username1 username2 ...]*
+  gritano repo:user:list reponame.git
+  gritano repo:rm reponame.git
+  gritano repo:read:add reponame.git username
+  gritano repo:write:add reponame.git username
+  gritano repo:read:rm reponame.git username
+  gritano repo:write:rm reponame.git username
+
+  --
+  v0.4.1
