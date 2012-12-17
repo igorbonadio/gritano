@@ -15,4 +15,9 @@ describe Gritano::Console::Installer do
     @console.should_receive(:setup_install)
     @console.execute("setup:install".split(' '))
   end
+
+  it "should respond to gritano help" do
+    @console.should_receive(:help)
+    @console.execute("help".split(' '))
+  end
 end

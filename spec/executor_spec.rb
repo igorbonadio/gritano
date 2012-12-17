@@ -92,4 +92,9 @@ describe Gritano::Console::Executor do
     @console.should_receive(:repo_list)
     @console.execute("repo:list".split(' '))
   end
+
+  it "should respond to gritano help" do
+    @console.should_receive(:help)
+    @console.execute("help".split(' '))
+  end
 end
