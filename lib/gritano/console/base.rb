@@ -17,6 +17,10 @@ module Gritano
         @commands || @commands = Hash.new
       end
 
+      def self.commands=(cmds)
+        @commands = cmds
+      end
+
       def self.help
         msg = "  gritano [command]\n\n"
         msg += "  Examples:\n"
@@ -48,6 +52,9 @@ module Gritano
           puts "Error: git must be installed on the local system"
           exit
         end
+      end
+
+      def before_each_command_filter
       end
     end
   end

@@ -6,34 +6,14 @@ require 'gritano'
 
 require 'etc'
 
-def version
-  puts "v#{File.open(File.join(File.dirname(__FILE__),'../VERSION')).readlines.join}"
-end
-
-if ARGV.length == 0
-  puts Gritano::Console::Executor.help
-elsif ARGV[0] =='setup:prepare' or ARGV[0] =='setup:install'
-  console = Gritano::Console::Installer.new
-  cmd_return = console.execute(ARGV)
-  if cmd_return[0]
-    puts "#{cmd_return[1]}"
+console = Gritano::Console::Gritano.new(STDIN)
+begin
+  output = console.execute(ARGV)
+  if output[0]
+    puts output[1]
   else
-    puts "error: #{cmd_return[1]}"
+    puts "error: #{output[1]}"
   end
-elsif ARGV[0] =='version'
-  version
-elsif ARGV[0] =='help'
-  puts Gritano::Console::Executor.help
-else
-  console = Gritano::Console::Executor.new(STDIN)
-  begin
-    cmd_return = console.execute(ARGV)
-    if cmd_return[0]
-      puts "#{cmd_return[1]}"
-    else
-      puts "error: #{cmd_return[1]}"
-    end
-  rescue NoMethodError
-    puts Gritano::Console::Executor.help
-  end
+rescue
+  puts console.execute(["help"])
 end

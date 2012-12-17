@@ -20,7 +20,7 @@ module Gritano
       end
     
       add_command "help" do |argv|
-        [:success, Console::Executor.help]
+        [true, Console::Executor.help]
       end
     
       add_command "user:list" do |argv|
