@@ -6,39 +6,20 @@ require 'gritano'
 
 require 'etc'
 
-def migrate
-  ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
-  ActiveRecord::Migrator.migrate(File.join(File.dirname(__FILE__),'../db/migrate'), ENV["VERSION"] ? ENV["VERSION"].to_i : nil )
-end
-
-def install
-  Dir.mkdir(File.join(Etc.getpwuid.dir, '.gritano')) unless File.exist?(File.join(Etc.getpwuid.dir, '.gritano'))
-  Dir.mkdir(File.join(Etc.getpwuid.dir, '.ssh')) unless File.exist?(File.join(Etc.getpwuid.dir, '.ssh'))
-  File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'), "w") do |f|
-    f.write("adapter: sqlite3\ndatabase: #{File.join(Etc.getpwuid.dir, '.gritano', 'database.db')}\n")
-  end
-  FileUtils.rm(File.join(Etc.getpwuid.dir, '.gritano', 'database.db')) if File.exist?(File.join(Etc.getpwuid.dir, '.gritano', 'database.db'))
-  migrate
-end
-
 def version
   puts "v#{File.open(File.join(File.dirname(__FILE__),'../VERSION')).readlines.join}"
 end
 
-def check_git
-  if `which git` == ""
-    puts "Error: git must be installed on the local system"
-    exit
-  end
-end
-
-check_git
 if ARGV.length == 0
   puts Gritano::Console::Executor.help
-elsif ARGV[0] =='install'
-  install
-elsif ARGV[0] =='update'
-  migrate
+elsif ARGV[0] =='setup:prepare' or ARGV[0] =='setup:install'
+  console = Gritano::Console::Installer.new
+  cmd_return = console.execute(ARGV)
+  if cmd_return[0]
+    puts "#{cmd_return[1]}"
+  else
+    puts "error: #{cmd_return[1]}"
+  end
 elsif ARGV[0] =='version'
   version
 elsif ARGV[0] =='help'
