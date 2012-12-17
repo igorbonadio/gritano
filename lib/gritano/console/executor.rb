@@ -12,14 +12,8 @@ module Gritano
         @stdin = stdin
       end
 
-      def check_gritano
-        unless File.exist?(File.join(Etc.getpwuid.dir, '.gritano'))
-          puts "Error: First run 'gritano install'"
-          exit
-        end
-      end
-
       before_each_command do
+        check_git
         check_gritano
         ActiveRecord::Base.establish_connection(
           YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))

@@ -35,6 +35,20 @@ module Gritano
         send(:before_each_command_filter)
         execute_without_filters(argv)
       end
+
+      def check_gritano
+        unless File.exist?(File.join(Etc.getpwuid.dir, '.gritano'))
+          puts "Error: First run 'gritano install'"
+          exit
+        end
+      end
+
+      def check_git
+        if `which git` == ""
+          puts "Error: git must be installed on the local system"
+          exit
+        end
+      end
     end
   end
 end
