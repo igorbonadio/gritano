@@ -1,12 +1,13 @@
 Given /^I start the gritano console$/ do
   stdin = double()
   stdin.stub(:read).and_return("Your SSHKEY here...")
-  @console = Gritano::Console::Executor.new(stdin)
+  @console = Gritano::Console::Gritano.new(stdin)
   @console.ssh_path = 'tmp'
 end
 
 When /^I execute "(.*?)"$/ do |command|
-  @output = @console.execute_without_filters(command.split(' '))
+  @console.desable_filters
+  @output = @console.execute(command.split(' '))
 end
 
 Then /^I should see a (success|error) message$/ do |result|
@@ -16,6 +17,6 @@ Then /^I should see a (success|error) message$/ do |result|
 end
 
 Then /^I should see the help$/ do
-  help = File.open("features/data/help.txt").readlines.join
+  help = File.open("features/data/help.txt").readlines.join[0..-2]
   @output[1].should be == help
 end

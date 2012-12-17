@@ -42,7 +42,7 @@ module Gritano
 
       def check_gritano
         unless File.exist?(File.join(Etc.getpwuid.dir, '.gritano'))
-          puts "Error: First run 'gritano install'"
+          puts "Error: First run 'gritano setup:prepare && gritano setup:install'"
           exit
         end
       end

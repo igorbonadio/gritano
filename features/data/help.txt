@@ -2,6 +2,9 @@
 
   Examples:
   gritano help 
+  gritano version 
+  gritano setup:prepare 
+  gritano setup:install 
   gritano user:list 
   gritano user:key:list username
   gritano user:repo:list username

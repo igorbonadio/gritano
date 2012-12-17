@@ -31,8 +31,16 @@ module Gritano
           executor = Executor.new(@stdin)
           executor.ssh_path = @ssh_path
           executor.repo_path = @repo_path
-          executor.execute(params)
+          if @desable_filters
+            executor.execute_without_filters(params)
+          else
+            executor.execute(params)
+          end
         end
+      end
+
+      def desable_filters
+        @desable_filters = true
       end
     end
   end
