@@ -23,7 +23,7 @@ module Gritano
         msg
       end
 
-      def execute(argv)
+      def execute_without_filters(argv)
         send(argv[0].gsub(':', '_'), argv[1..-1])
       end
     end

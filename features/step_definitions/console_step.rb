@@ -6,7 +6,7 @@ Given /^I start the gritano console$/ do
 end
 
 When /^I execute "(.*?)"$/ do |command|
-  @output = @console.execute(command.split(' '))
+  @output = @console.execute_without_filters(command.split(' '))
 end
 
 Then /^I should see a (success|error) message$/ do |result|

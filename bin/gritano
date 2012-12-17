@@ -57,7 +57,7 @@ else
   console.repo_path = Etc.getpwuid.dir
   console.ssh_path = File.join(Etc.getpwuid.dir, '.ssh')
   begin
-    cmd_return = console.execute(ARGV)
+    cmd_return = console.execute_without_filters(ARGV)
     if cmd_return[0]
       puts "#{cmd_return[1]}"
     else
