@@ -9,6 +9,10 @@ module Gritano
         commands[command] = parameters
       end
 
+      def self.before_each_command(&block)
+        define_method(:before_each_command_filter, &block);
+      end
+
       def self.commands
         @commands || @commands = Hash.new
       end
@@ -25,6 +29,11 @@ module Gritano
 
       def execute_without_filters(argv)
         send(argv[0].gsub(':', '_'), argv[1..-1])
+      end
+
+      def execute(argv)
+        send(:before_each_command_filter)
+        execute_without_filters(argv)
       end
     end
   end

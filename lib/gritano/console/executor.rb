@@ -7,9 +7,22 @@ module Gritano
       attr_accessor :ssh_path
 
       def initialize(stdin)
-        @repo_path = nil
-        @ssh_path = nil
+        @repo_path = Etc.getpwuid.dir
+        @ssh_path = File.join(Etc.getpwuid.dir, '.ssh')
         @stdin = stdin
+      end
+
+      def check_gritano
+        unless File.exist?(File.join(Etc.getpwuid.dir, '.gritano'))
+          puts "Error: First run 'gritano install'"
+          exit
+        end
+      end
+
+      before_each_command do
+        check_gritano
+        ActiveRecord::Base.establish_connection(
+          YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
       end
     
       add_command "help" do |argv|
