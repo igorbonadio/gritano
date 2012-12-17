@@ -19,10 +19,6 @@ module Gritano
           YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
       end
     
-      add_command "help" do |argv|
-        [true, Console::Executor.help]
-      end
-    
       add_command "user:list" do |argv|
         users = User.all
         msg = Terminal::Table.new do |t|

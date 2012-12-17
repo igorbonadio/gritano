@@ -38,6 +38,7 @@ Feature: Console operations
     Then I should see a <result> message
     Examples:
       | command                                        | result  |
+      | version                                        | success |
       | user:add jose                                  | success |
       | user:key:add igorbonadio marvin                | success |
       | user:key:rm igorbonadio eva                    | success |
