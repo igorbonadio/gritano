@@ -6,7 +6,7 @@ module Gritano
     attr_accessor :repo_path
     attr_accessor :ssh_path
     
-    def self.add_command(command, parameters, &block)
+    def self.add_command(command, parameters = "", &block)
       define_method(command.gsub(':', '_'), &block)
       commands[command] = parameters
     end
@@ -35,11 +35,11 @@ module Gritano
       send(argv[0].gsub(':', '_'), argv[1..-1])
     end
     
-    add_command "help", "" do |argv|
+    add_command "help" do |argv|
       [:success, Console.help]
     end
     
-    add_command "user:list", "" do |argv|
+    add_command "user:list" do |argv|
       users = User.all
       msg = Terminal::Table.new do |t|
         t << ['user']
@@ -157,7 +157,7 @@ module Gritano
       return [false, "User #{login} could not be modified"]
     end
     
-    add_command "repo:list", "" do |argv|
+    add_command "repo:list" do |argv|
       repos = Repository.all
       msg = Terminal::Table.new do |t|
         t << ['repositories']
