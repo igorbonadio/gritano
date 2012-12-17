@@ -1,11 +1,11 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe Gritano::Console do
+describe Gritano::Console::Executor do
   
   before(:each) do
     stdin = double()
     stdin.stub(:read).and_return("Your SSHKEY here...")
-    @console = Gritano::Console.new(stdin)
+    @console = Gritano::Console::Executor.new(stdin)
   end
   
   it "should respond to gritano user:add igorbonadio" do

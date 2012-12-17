@@ -1,7 +1,7 @@
 Given /^I start the gritano console$/ do
   stdin = double()
   stdin.stub(:read).and_return("Your SSHKEY here...")
-  @console = Gritano::Console.new(stdin)
+  @console = Gritano::Console::Executor.new(stdin)
   @console.ssh_path = 'tmp'
 end
 
