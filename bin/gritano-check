@@ -19,19 +19,28 @@ def help
   v#{File.open(File.join(File.dirname(__FILE__), '..', 'VERSION')).readlines.join}"
 end
 
-ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
-
-user = Gritano::User.find_by_login(ARGV[0])
-command = Gritano::Command.eval(ENV['SSH_ORIGINAL_COMMAND'])
-begin
-  case command[:access]
-    when :read, :write then
-      Gritano::CLI::git(command[:command], user, Gritano::Repository.find_by_name(command[:repo]))
-    when :user_cmd
-      Gritano::CLI::execute(command[:command].gsub("[USER]", user.login).split(' '), STDIN)
-    when :admin_cmd
-      Gritano::CLI::execute_admin(command[:command].split(' '), STDIN, user)
-  end
-rescue
-  puts help
+login = ARGV[0]
+console = Gritano::Console::Check.new(STDIN)
+output = console.execute(ENV['SSH_ORIGINAL_COMMAND'].split(' ') + [login])
+if output[0]
+  puts output[1]
+else
+  puts "error: #{output[1]}"
 end
+
+#ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
+#
+#user = Gritano::User.find_by_login(ARGV[0])
+#command = Gritano::Command.eval(ENV['SSH_ORIGINAL_COMMAND'])
+#begin
+#  case command[:access]
+#    when :read, :write then
+#      Gritano::CLI::git(command[:command], user, Gritano::Repository.find_by_name(command[:repo]))
+#    when :user_cmd
+#      Gritano::CLI::execute(command[:command].gsub("[USER]", user.login).split(' '), STDIN)
+#    when :admin_cmd
+#      Gritano::CLI::execute_admin(command[:command].split(' '), STDIN, user)
+#  end
+#rescue
+#  puts help
+#end

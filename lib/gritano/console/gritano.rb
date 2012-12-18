@@ -1,5 +1,3 @@
-require "terminal-table"
-
 module Gritano
   module Console
     class Gritano < Gritano::Console::Base
