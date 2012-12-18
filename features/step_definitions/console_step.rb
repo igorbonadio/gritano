@@ -3,6 +3,7 @@ Given /^I start the gritano console$/ do
   stdin.stub(:read).and_return("Your SSHKEY here...")
   @console = Gritano::Console::Gritano.new(stdin)
   @console.ssh_path = 'tmp'
+  @console.repo_path = 'tmp'
 end
 
 When /^I execute "(.*?)"$/ do |command|
