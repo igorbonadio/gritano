@@ -26,25 +26,11 @@ command = Gritano::Command.eval(ENV['SSH_ORIGINAL_COMMAND'])
 begin
   case command[:access]
     when :read, :write then
-      user = Gritano::User.find_by_login(login)
-      repository = Gritano::Repository.find_by_name(command[:repo])
-      if user and repository
-        if user.check_access(repository, command[:access])
-          puts "#{command[:command]} #{File.join(repository.full_path)}"
-          exec "#{command[:command]} #{File.join(repository.full_path)}"
-        end
-      end
+      Gritano::CLI::git(command[:command], Gritano::User.find_by_login(login), Gritano::Repository.find_by_name(command[:repo]))
     when :user_cmd
-      cmd = command[:command].gsub("[USER]", login)
-      exec "gritano #{cmd}"
+      Gritano::CLI::execute(command[:command].gsub("[USER]", login).split(' '), STDIN)
     when :admin_cmd
-      cmd = command[:command]
-      user = Gritano::User.find_by_login(login)
-      if user.admin?
-        exec "gritano #{cmd}"
-      else
-        puts "access denied"
-      end
+      Gritano::CLI::execute_admin(command[:command].split(' '), STDIN, Gritano::User.find_by_login(login))
   end
 rescue
   puts help
