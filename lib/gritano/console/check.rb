@@ -3,6 +3,7 @@ module Gritano
     class Check < Base
       def initialize(stdin)
         @stdin = stdin
+        @executor = Executor.new(@stdin)
       end
       
       before_each_command do
@@ -18,31 +19,26 @@ module Gritano
       
       add_command "repo:list" do |args|
         login, = args
-        executor = Executor.new(@stdin)
-        executor.execute(["user:repo:list"] + [login])
+        @executor.execute(["user:repo:list"] + [login])
       end
       
       add_command "key:list" do |args|
         login, = args
-        executor = Executor.new(@stdin)
-        executor.execute(["user:key:list"] + [login])
+        @executor.execute(["user:key:list"] + [login])
       end
       
       add_command "key:add", "keyname < key.pub" do |args|
         keyname, login = args
-        executor = Executor.new(@stdin)
-        executor.execute(["user:key:add"] + [login, keyname])
+        @executor.execute(["user:key:add"] + [login, keyname])
       end
       
       add_command "key:rm", "keyname" do |args|
         keyname, login = args
-        executor = Executor.new(@stdin)
-        executor.execute(["user:key:rm"] + [login, keyname])
+        @executor.execute(["user:key:rm"] + [login, keyname])
       end
       
       add_command "admin:help" do |args|
-        executor = Gritano.new(@stdin)
-        executor.execute(["help"])
+        @executor.execute(["help"])
       end
       
       def method_missing(meth, *args, &block)
@@ -51,8 +47,7 @@ module Gritano
           if user.admin?
             meth = meth.to_s.gsub("admin_", "")
             params = args[0][0..-2]
-            executor = Gritano.new(@stdin)
-            executor.execute([meth] + params)
+            @executor.execute([meth] + params)
           else
             [false, "access denied"]
           end
