@@ -21,16 +21,16 @@ end
 
 ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
 
-login = ARGV[0]
+user = Gritano::User.find_by_login(ARGV[0])
 command = Gritano::Command.eval(ENV['SSH_ORIGINAL_COMMAND'])
 begin
   case command[:access]
     when :read, :write then
-      Gritano::CLI::git(command[:command], Gritano::User.find_by_login(login), Gritano::Repository.find_by_name(command[:repo]))
+      Gritano::CLI::git(command[:command], user, Gritano::Repository.find_by_name(command[:repo]))
     when :user_cmd
-      Gritano::CLI::execute(command[:command].gsub("[USER]", login).split(' '), STDIN)
+      Gritano::CLI::execute(command[:command].gsub("[USER]", user.login).split(' '), STDIN)
     when :admin_cmd
-      Gritano::CLI::execute_admin(command[:command].split(' '), STDIN, Gritano::User.find_by_login(login))
+      Gritano::CLI::execute_admin(command[:command].split(' '), STDIN, user)
   end
 rescue
   puts help
