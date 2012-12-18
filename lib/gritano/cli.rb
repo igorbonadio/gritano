@@ -1,0 +1,1 @@
+require File.join(ROOT_PATH, 'gritano/cli/execute')

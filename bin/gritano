@@ -4,16 +4,4 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'gritano'
 
-require 'etc'
-
-console = Gritano::Console::Gritano.new(STDIN)
-begin
-  output = console.execute(ARGV)
-  if output[0]
-    puts output[1]
-  else
-    puts "error: #{output[1]}"
-  end
-rescue
-  puts console.execute(["help"])
-end
+Gritano::CLI::execute(ARGV, STDIN)
