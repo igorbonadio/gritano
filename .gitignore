@@ -50,3 +50,4 @@ pkg
 
 *.sqlite3
 TODO
+tmp

@@ -13,6 +13,11 @@ module Gritano
           YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
       end
       
+      add_command "version" do |argv|
+        version = "v#{File.open(File.join(File.dirname(__FILE__), '..', '..', '..', 'VERSION')).readlines.join}"
+        [true, version]
+      end
+      
       add_command "help" do |args|
         [true, Check.help]
       end
@@ -38,7 +43,8 @@ module Gritano
       end
       
       add_command "admin:help" do |args|
-        @executor.execute(["help"])
+        gritano = Gritano.new(@stdin)
+        gritano.execute(["help"])
       end
       
       def method_missing(meth, *args, &block)
