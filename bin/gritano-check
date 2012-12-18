@@ -1,46 +1,6 @@
 #!/usr/bin/env ruby
-
 $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
 require 'gritano'
 
-def help
-  puts "
-  ssh user@host command
-  
-  Examples:
-  ssh git@host.com repo:list
-  ssh git@host.com key:list
-  ssh git@host.com key:add keyname < key.pub
-  ssh git@host.com key:rm keyname
-  ssh git@host.com admin:help
-  
-  --
-  v#{File.open(File.join(File.dirname(__FILE__), '..', 'VERSION')).readlines.join}"
-end
-
-login = ARGV[0]
-console = Gritano::Console::Check.new(STDIN)
-output = console.execute(ENV['SSH_ORIGINAL_COMMAND'].split(' ') + [login])
-if output[0]
-  puts output[1]
-else
-  puts "error: #{output[1]}"
-end
-
-#ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
-#
-#user = Gritano::User.find_by_login(ARGV[0])
-#command = Gritano::Command.eval(ENV['SSH_ORIGINAL_COMMAND'])
-#begin
-#  case command[:access]
-#    when :read, :write then
-#      Gritano::CLI::git(command[:command], user, Gritano::Repository.find_by_name(command[:repo]))
-#    when :user_cmd
-#      Gritano::CLI::execute(command[:command].gsub("[USER]", user.login).split(' '), STDIN)
-#    when :admin_cmd
-#      Gritano::CLI::execute_admin(command[:command].split(' '), STDIN, user)
-#  end
-#rescue
-#  puts help
-#end
+Gritano::CLI::check(ENV['SSH_ORIGINAL_COMMAND'], ARGV[0], STDIN)

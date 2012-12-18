@@ -57,15 +57,19 @@ module Gritano
             [false, "access denied"]
           end
         elsif meth.to_s =~ /^git-receive-pack/
-          cmd = meth.to_s + ' ' + args[0..-2].join(' ')
-          exec "git-receive-pack #{File.join(repo(cmd).full_path)}"
+          repo, login = args[0]
+          exec "git-receive-pack #{repo(repo).full_path}"
+        elsif meth.to_s =~ /^git-upload-pack/
+          repo, login = args[0]
+          exec "git-upload-pack #{repo(repo).full_path}"
         else
           super
         end
       end
       
-      def repo(cmd)
-        Gritano::Repository.find_by_name(cmd.gsub(/^git-receive-pack/, '').gsub(/^git-upload-pack/, '').gsub("'", '').strip)
+      def repo(repo)
+        repo = repo.gsub("'", '').strip
+        ::Gritano::Repository.find_by_name(repo)
       end
       
     end
