@@ -37,6 +37,11 @@ Feature: SSH operations
     When I try to send data to tmp/gritano.git
     Then I should send it
 
+  Scenario: Error
+    Given I start the gritano-check console with "igorbonadio"
+    When I try to send an invalid command
+    Then I should see an error
+
   Scenario Outline: Admin via ssh
     Given I start the gritano-check console with "igorbonadio"
     When I execute "<command>" via ssh
