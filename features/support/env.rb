@@ -22,5 +22,5 @@ require 'cucumber/rspec/doubles'
 require 'active_record'
 
 Before do
-  ActiveRecord::Base.establish_connection(YAML::load(File.open('db/database.yml')))
+  ActiveRecord::Base.establish_connection(YAML::load(File.open('.gritano/database.yml')))
 end

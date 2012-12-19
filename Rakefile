@@ -56,7 +56,7 @@ require 'yaml'
 namespace :db do
   desc "Migrate the database through scripts in db/migrate. Target specific version with VERSION=x"
   task :migrate do
-    ActiveRecord::Base.establish_connection(YAML::load(File.open('db/database.yml')))
+    ActiveRecord::Base.establish_connection(YAML::load(File.open('.gritano/database.yml')))
     ActiveRecord::Migrator.migrate('db/migrate', ENV["VERSION"] ? ENV["VERSION"].to_i : nil )
   end
 end
