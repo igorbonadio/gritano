@@ -29,38 +29,22 @@ module Gritano
       
       add_command "repo:list" do |args|
         login, = args
-        if @desable_filters
-          @executor.execute_without_filters(["user:repo:list"] + [login])
-        else
-          @executor.execute(["user:repo:list"] + [login])
-        end
+        @executor.execute(["user:repo:list"] + [login])
       end
       
       add_command "key:list" do |args|
         login, = args
-        if @desable_filters
-          @executor.execute_without_filters(["user:key:list"] + [login])
-        else
-          @executor.execute(["user:key:list"] + [login])
-        end
+        @executor.execute(["user:key:list"] + [login])
       end
       
       add_command "key:add", "keyname < key.pub" do |args|
         keyname, login = args
-        if @desable_filters
-          @executor.execute_without_filters(["user:key:add"] + [login, keyname])
-        else
-          @executor.execute(["user:key:add"] + [login, keyname])
-        end
+        @executor.execute(["user:key:add"] + [login, keyname])
       end
       
       add_command "key:rm", "keyname" do |args|
         keyname, login = args
-        if @desable_filters
-          @executor.execute_without_filters(["user:key:rm"] + [login, keyname])
-        else
-          @executor.execute(["user:key:rm"] + [login, keyname])
-        end
+        @executor.execute(["user:key:rm"] + [login, keyname])
       end
       
       add_command "admin:help" do |args|
@@ -74,11 +58,7 @@ module Gritano
           if user.admin?
             meth = meth.to_s[6..-1]
             params = args[0][0..-2]
-            if @desable_filters
-              @executor.execute_without_filters([meth] + params)
-            else
-              @executor.execute([meth] + params)
-            end
+            @executor.execute([meth] + params)
           else
             [false, "access denied"]
           end
@@ -96,10 +76,6 @@ module Gritano
       def repo(repo)
         repo = repo.gsub("'", '').strip
         ::Gritano::Repository.find_by_name(repo)
-      end
-
-      def desable_filters
-        @desable_filters = true
       end
       
     end

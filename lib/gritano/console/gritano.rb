@@ -27,16 +27,8 @@ module Gritano
           installer.execute(params)
         rescue
           executor = Executor.new(@stdin, @home_dir, @repo_path)
-          if @desable_filters
-            executor.execute_without_filters(params)
-          else
-            executor.execute(params)
-          end
+          executor.execute(params)
         end
-      end
-
-      def desable_filters
-        @desable_filters = true
       end
     end
   end

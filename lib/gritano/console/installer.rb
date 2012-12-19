@@ -11,10 +11,6 @@ module Gritano
       before_each_command do
         check_git
       end
-    
-      add_command "help" do |argv|
-        [true, Console::Installer.help]
-      end
 
       add_command "setup:prepare" do |argv|
         Dir.mkdir(File.join(@home_dir, '.gritano')) unless File.exist?(File.join(@home_dir, '.gritano'))
