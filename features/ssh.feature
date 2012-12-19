@@ -40,7 +40,7 @@ Feature: SSH operations
   Scenario: Error
     Given I start the gritano-check console with "igorbonadio"
     When I try to send an invalid command
-    Then I should see an error
+    Then I should see an exception
 
   Scenario Outline: Admin via ssh
     Given I start the gritano-check console with "igorbonadio"

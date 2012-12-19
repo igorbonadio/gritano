@@ -25,3 +25,11 @@ end
 Then /^I should send it$/ do
 end
 
+When /^I try to send an invalid command$/ do
+  @command = ['invalid:command']
+end
+
+Then /^I should see an exception$/ do
+  lambda {@console.execute(@command + [@login])}.should raise_error NoMethodError
+end
+
