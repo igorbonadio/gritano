@@ -4,8 +4,9 @@ module Gritano
   module Console
     class Base
 
-      def initialize(home_dir = Etc.getpwuid.dir)
+      def initialize(stdin = STDIN, home_dir = Etc.getpwuid.dir)
         @home_dir = home_dir
+        @stdin = stdin
       end
 
       def self.add_command(command, parameters = "", &block)

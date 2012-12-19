@@ -2,11 +2,11 @@ module Gritano
   module Console
     class Check < Base
 
-      def initialize(stdin, home_dir = Etc.getpwuid.dir)
+      def initialize(stdin = STDIN, home_dir = Etc.getpwuid.dir)
         @stdin = stdin
         @executor = Executor.new(@stdin)
         @home_dir = home_dir
-        super(@home_dir)
+        super(@stdin, @home_dir)
       end
       
       before_each_command do

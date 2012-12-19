@@ -2,9 +2,10 @@ module Gritano
   module Console
     class Installer < Gritano::Console::Base
 
-      def initialize(home_dir = Etc.getpwuid.dir)
+      def initialize(stdin = STDIN, home_dir = Etc.getpwuid.dir)
         @home_dir = home_dir
-        super(@home_dir)
+        @stdin = stdin
+        super(@stdin, @home_dir)
       end
 
       before_each_command do
