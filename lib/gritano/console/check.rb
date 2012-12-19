@@ -24,22 +24,38 @@ module Gritano
       
       add_command "repo:list" do |args|
         login, = args
-        @executor.execute(["user:repo:list"] + [login])
+        if @desable_filters
+          @executor.execute_without_filters(["user:repo:list"] + [login])
+        else
+          @executor.execute(["user:repo:list"] + [login])
+        end
       end
       
       add_command "key:list" do |args|
         login, = args
-        @executor.execute(["user:key:list"] + [login])
+        if @desable_filters
+          @executor.execute_without_filters(["user:key:list"] + [login])
+        else
+          @executor.execute(["user:key:list"] + [login])
+        end
       end
       
       add_command "key:add", "keyname < key.pub" do |args|
         keyname, login = args
-        @executor.execute(["user:key:add"] + [login, keyname])
+        if @desable_filters
+          @executor.execute_without_filters(["user:key:add"] + [login, keyname])
+        else
+          @executor.execute(["user:key:add"] + [login, keyname])
+        end
       end
       
       add_command "key:rm", "keyname" do |args|
         keyname, login = args
-        @executor.execute(["user:key:rm"] + [login, keyname])
+        if @desable_filters
+          @executor.execute_without_filters(["user:key:rm"] + [login, keyname])
+        else
+          @executor.execute(["user:key:rm"] + [login, keyname])
+        end
       end
       
       add_command "admin:help" do |args|
@@ -51,9 +67,13 @@ module Gritano
         if meth.to_s =~ /^admin/
           user = ::Gritano::User.find_by_login(args[0][-1])
           if user.admin?
-            meth = meth.to_s.gsub("admin_", "")
+            meth = meth.to_s[6..-1]
             params = args[0][0..-2]
-            @executor.execute([meth] + params)
+            if @desable_filters
+              @executor.execute_without_filters([meth] + params)
+            else
+              @executor.execute([meth] + params)
+            end
           else
             [false, "access denied"]
           end
@@ -71,6 +91,10 @@ module Gritano
       def repo(repo)
         repo = repo.gsub("'", '').strip
         ::Gritano::Repository.find_by_name(repo)
+      end
+
+      def desable_filters
+        @desable_filters = true
       end
       
     end
