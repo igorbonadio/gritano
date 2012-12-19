@@ -1,11 +1,10 @@
 Given /^I start the gritano console$/ do
   stdin = double()
   stdin.stub(:read).and_return("Your SSHKEY here...")
-  @console = Gritano::Console::Gritano.new(stdin, 'tmp', 'tmp')
+  @console = Gritano::Console::Gritano.new(stdin, '.', 'tmp')
 end
 
 When /^I execute "(.*?)"$/ do |command|
-  @console.desable_filters
   @output = @console.execute(command.split(' '))
 end
 
