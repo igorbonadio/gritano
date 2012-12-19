@@ -3,14 +3,12 @@ require "terminal-table"
 module Gritano
   module Console
     class Executor < Gritano::Console::Base
-      attr_accessor :repo_path
-      attr_accessor :ssh_path
 
-      def initialize(stdin = STDIN, home_dir = Etc.getpwuid.dir)
-        @home_dir = home_dir
-        @repo_path = @home_dir
-        @ssh_path = File.join(@home_dir, '.ssh')
+      def initialize(stdin = STDIN, home_dir = Etc.getpwuid.dir, repo_path = Etc.getpwuid.dir)
         @stdin = stdin
+        @home_dir = home_dir
+        @repo_path = repo_path
+        @ssh_path = File.join(@home_dir, '.ssh')
         super(@stdin, @home_dir)
       end
 

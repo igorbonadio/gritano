@@ -1,14 +1,12 @@
 module Gritano
   module Console
     class Gritano < Gritano::Console::Base
-      attr_accessor :repo_path
-      attr_accessor :ssh_path
 
-      def initialize(stdin = STDIN, home_dir = Etc.getpwuid.dir)
-        @home_dir = home_dir
-        @repo_path = @home_dir
-        @ssh_path = File.join(@home_dir, '.ssh')
+      def initialize(stdin = STDIN, home_dir = Etc.getpwuid.dir, repo_path = Etc.getpwuid.dir)
         @stdin = stdin
+        @home_dir = home_dir
+        @repo_path = repo_path
+        @ssh_path = File.join(@home_dir, '.ssh')
         super(@stdin, @home_dir)
       end
 
@@ -28,9 +26,7 @@ module Gritano
           installer = Installer.new
           installer.execute(params)
         rescue
-          executor = Executor.new(@stdin)
-          executor.ssh_path = @ssh_path
-          executor.repo_path = @repo_path
+          executor = Executor.new(@stdin, @home_dir, @repo_path)
           if @desable_filters
             executor.execute_without_filters(params)
           else
