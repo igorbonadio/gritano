@@ -33,3 +33,9 @@ end
 Then /^I should see an error$/ do
   lambda {@console.execute(@command)}.should raise_error SystemExit
 end
+
+When /^I install it$/ do
+  @console.execute(['setup:prepare'])
+  @output = @console.execute(['setup:install'])
+end
+
