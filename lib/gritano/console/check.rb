@@ -64,10 +64,10 @@ module Gritano
           end
         elsif meth.to_s =~ /^git-receive-pack/
           repo, login = args[0]
-          exec "git-receive-pack #{repo(repo).full_path}"
+          Kernel.exec "git-receive-pack #{repo(repo).full_path}"
         elsif meth.to_s =~ /^git-upload-pack/
           repo, login = args[0]
-          exec "git-upload-pack #{repo(repo).full_path}"
+          Kernel.exec "git-upload-pack #{repo(repo).full_path}"
         else
           super
         end

@@ -27,6 +27,16 @@ Feature: SSH operations
       | jessicaeto  | tmp/jeka.git    | read   |
       | jessicaeto  | tmp/jeka.git    | write  |
 
+  Scenario: Git read access
+    Given I start the gritano-check console with "igorbonadio"
+    When I try to get tmp/gritano.git
+    Then I should get it
+
+  Scenario: Git read access
+    Given I start the gritano-check console with "igorbonadio"
+    When I try to send data to tmp/gritano.git
+    Then I should send it
+
   Scenario Outline: Admin via ssh
     Given I start the gritano-check console with "igorbonadio"
     When I execute "<command>" via ssh
