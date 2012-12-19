@@ -4,6 +4,10 @@ module Gritano
   module Console
     class Base
 
+      def initialize(home_dir = Etc.getpwuid.dir)
+        @home_dir = home_dir
+      end
+
       def self.add_command(command, parameters = "", &block)
         define_method(command.gsub(':', '_'), &block)
         commands[command] = parameters
@@ -41,7 +45,7 @@ module Gritano
       end
 
       def check_gritano
-        unless File.exist?(File.join(Etc.getpwuid.dir, '.gritano'))
+        unless File.exist?(File.join(@home_dir, '.gritano'))
           puts "Error: First run 'gritano setup:prepare && gritano setup:install'"
           exit
         end

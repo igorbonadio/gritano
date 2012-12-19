@@ -2,6 +2,11 @@ module Gritano
   module Console
     class Installer < Gritano::Console::Base
 
+      def initialize(home_dir = Etc.getpwuid.dir)
+        @home_dir = home_dir
+        super(@home_dir)
+      end
+
       before_each_command do
         check_git
       end
@@ -11,20 +16,20 @@ module Gritano
       end
 
       add_command "setup:prepare" do |argv|
-        Dir.mkdir(File.join(Etc.getpwuid.dir, '.gritano')) unless File.exist?(File.join(Etc.getpwuid.dir, '.gritano'))
-        Dir.mkdir(File.join(Etc.getpwuid.dir, '.ssh')) unless File.exist?(File.join(Etc.getpwuid.dir, '.ssh'))
-        File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'), "w") do |f|
+        Dir.mkdir(File.join(@home_dir, '.gritano')) unless File.exist?(File.join(@home_dir, '.gritano'))
+        Dir.mkdir(File.join(@home_dir, '.ssh')) unless File.exist?(File.join(@home_dir, '.ssh'))
+        File.open(File.join(@home_dir, '.gritano', 'database.yml'), "w") do |f|
           f.write("adapter: sqlite3\ndatabase: #{File.join(Etc.getpwuid.dir, '.gritano', 'database.db')}\n")
         end
-        if File.exist?(File.join(Etc.getpwuid.dir, '.gritano', 'database.db'))
-          FileUtils.rm(File.join(Etc.getpwuid.dir, '.gritano', 'database.db'))
+        if File.exist?(File.join(@home_dir, '.gritano', 'database.db'))
+          FileUtils.rm(File.join(@home_dir, '.gritano', 'database.db'))
         end
         return [true, "configuration has been generated"]
       end
 
       add_command "setup:install" do |argv|
         ActiveRecord::Base.establish_connection(
-          YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
+          YAML::load(File.open(File.join(@home_dir, '.gritano', 'database.yml'))))
         ActiveRecord::Migrator.migrate(
           File.join(File.dirname(__FILE__),'..', '..', '..', 'db/migrate'), 
           ENV["VERSION"] ? ENV["VERSION"].to_i : nil )

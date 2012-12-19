@@ -1,16 +1,19 @@
 module Gritano
   module Console
     class Check < Base
-      def initialize(stdin)
+
+      def initialize(stdin, home_dir = Etc.getpwuid.dir)
         @stdin = stdin
         @executor = Executor.new(@stdin)
+        @home_dir = home_dir
+        super(@home_dir)
       end
       
       before_each_command do
         check_git
         check_gritano
         ActiveRecord::Base.establish_connection(
-          YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
+          YAML::load(File.open(File.join(@home_dir, '.gritano', 'database.yml'))))
       end
       
       add_command "version" do |argv|

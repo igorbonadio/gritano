@@ -4,10 +4,12 @@ module Gritano
       attr_accessor :repo_path
       attr_accessor :ssh_path
 
-      def initialize(stdin)
-        @repo_path = Etc.getpwuid.dir
-        @ssh_path = File.join(Etc.getpwuid.dir, '.ssh')
+      def initialize(stdin, home_dir = Etc.getpwuid.dir)
+        @home_dir = home_dir
+        @repo_path = @home_dir
+        @ssh_path = File.join(@home_dir, '.ssh')
         @stdin = stdin
+        super(@home_dir)
       end
 
       add_command "help" do |argv|

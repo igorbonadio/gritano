@@ -6,17 +6,19 @@ module Gritano
       attr_accessor :repo_path
       attr_accessor :ssh_path
 
-      def initialize(stdin)
-        @repo_path = Etc.getpwuid.dir
-        @ssh_path = File.join(Etc.getpwuid.dir, '.ssh')
+      def initialize(stdin, home_dir = Etc.getpwuid.dir)
+        @home_dir = home_dir
+        @repo_path = @home_dir
+        @ssh_path = File.join(@home_dir, '.ssh')
         @stdin = stdin
+        super(@home_dir)
       end
 
       before_each_command do
         check_git
         check_gritano
         ActiveRecord::Base.establish_connection(
-          YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano', 'database.yml'))))
+          YAML::load(File.open(File.join(@home_dir, '.gritano', 'database.yml'))))
       end
     
       add_command "user:list" do |argv|
