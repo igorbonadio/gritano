@@ -6,5 +6,5 @@ Given /^I start the gritano\-check console with "(.*?)"$/ do |login|
 end
 
 When /^I execute "(.*?)" via ssh$/ do |command|
-  @output = @console.execute_without_filters(command.split(' ') + [@login])
+  @output = @console.execute(command.split(' ') + [@login])
 end

@@ -31,6 +31,11 @@ Feature: Console operations
     Given I start the gritano console
     When I execute "help"
     Then I should see the help
+
+  Scenario: Check git
+    Given I start the gritano console but gritano is not installed
+    When I execute a command
+    Then I should see an error
       
   Scenario Outline: Add user
     Given I start the gritano console
