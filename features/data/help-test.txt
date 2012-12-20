@@ -1,0 +1,27 @@
+  test [command]
+
+  Examples:
+  test help 
+  test version 
+  test setup:prepare 
+  test setup:install 
+  test user:list 
+  test user:key:list username
+  test user:repo:list username
+  test user:add username
+  test user:rm username
+  test user:key:add username keyname < key.pub
+  test user:key:rm username keyname
+  test user:admin:add username
+  test user:admin:rm username
+  test repo:list 
+  test repo:add reponame.git [username1 username2 ...]*
+  test repo:user:list reponame.git
+  test repo:rm reponame.git
+  test repo:read:add reponame.git username
+  test repo:write:add reponame.git username
+  test repo:read:rm reponame.git username
+  test repo:write:rm reponame.git username
+
+  --
+  v0.4.1
