@@ -1,30 +1,30 @@
 module Gritano
   module CLI
-    def CLI.execute(cmd, stdin)
-      console = Gritano::Console::Gritano.new(stdin)
+    def CLI.execute(cmd, stdin = STDIN, home_dir = Etc.getpwuid.dir, repo_dir = Etc.getpwuid.dir)
+      console = Gritano::Console::Gritano.new(stdin, home_dir, repo_dir)
       begin
         output = console.execute(cmd)
         if output[0]
-          puts output[1]
+          output[1]
         else
-          puts "error: #{output[1]}"
+          "error: #{output[1]}"
         end
       rescue
-        puts console.execute(["help"])[1]
+        console.execute(["help"])[1]
       end
     end
     
-    def CLI.check(cmd, login, stdin)
+    def CLI.check(cmd, login, stdin = STDIN, home_dir = Etc.getpwuid.dir, repo_dir = Etc.getpwuid.dir)
+      console = Gritano::Console::Check.new(stdin, home_dir, repo_dir)
       begin
-        console = Gritano::Console::Check.new(stdin)
-        output = console.execute(cmd.split(' ') + [login])
+        output = console.execute(cmd + [login])
         if output[0]
-          puts output[1]
+          output[1]
         else
-          puts "error: #{output[1]}"
+          "error: #{output[1]}"
         end
       rescue
-        puts console.execute(["help"])[1]
+        console.execute(["help"])[1]
       end
     end
   end

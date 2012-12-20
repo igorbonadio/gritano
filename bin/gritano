@@ -4,4 +4,4 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'gritano'
 
-Gritano::CLI::execute(ARGV, STDIN)
+puts Gritano::CLI::execute(ARGV)

@@ -3,4 +3,4 @@ $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
 require 'gritano'
 
-Gritano::CLI::check(ENV['SSH_ORIGINAL_COMMAND'], ARGV[0], STDIN)
+puts Gritano::CLI::check(ENV['SSH_ORIGINAL_COMMAND'].split(' '), ARGV[0])

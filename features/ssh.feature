@@ -32,7 +32,7 @@ Feature: SSH operations
     When I try to get tmp/gritano.git
     Then I should get it
 
-  Scenario: Git read access
+  Scenario: Git write access
     Given I start the gritano-check console with "igorbonadio"
     When I try to send data to tmp/gritano.git
     Then I should send it

@@ -1,0 +1,13 @@
+  gritano [command]
+
+  Examples:
+  gritano version 
+  gritano help 
+  gritano repo:list 
+  gritano key:list 
+  gritano key:add keyname < key.pub
+  gritano key:rm keyname
+  gritano admin:help 
+
+  --
+  v0.4.1
