@@ -1,13 +1,13 @@
-  gritano [command]
+  ssh git@host.com [command]
 
   Examples:
-  gritano version 
-  gritano help 
-  gritano repo:list 
-  gritano key:list 
-  gritano key:add keyname < key.pub
-  gritano key:rm keyname
-  gritano admin:help 
+  ssh git@host.com version 
+  ssh git@host.com help 
+  ssh git@host.com repo:list 
+  ssh git@host.com key:list 
+  ssh git@host.com key:add keyname < key.pub
+  ssh git@host.com key:rm keyname
+  ssh git@host.com admin:help 
 
   --
   v0.4.1

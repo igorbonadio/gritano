@@ -27,7 +27,7 @@ module Gritano
       end
 
       def self.bin_name
-        @bin_name || "gritano"
+        @bin_name || "gritano "
       end
 
       def self.bin_name=(name)
@@ -35,10 +35,10 @@ module Gritano
       end
 
       def self.help
-        msg = "  #{self.bin_name} [command]\n\n"
+        msg = "  #{self.bin_name}[command]\n\n"
         msg += "  Examples:\n"
         commands.each do |command, parameters|
-          msg += "  #{self.bin_name} #{command} #{parameters}\n"
+          msg += "  #{self.bin_name}#{command} #{parameters}\n"
         end
         msg += "\n  --\n  v#{File.open(File.join(File.dirname(__FILE__), '..', '..', '..', 'VERSION')).readlines.join}"
         msg

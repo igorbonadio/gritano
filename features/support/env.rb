@@ -24,4 +24,5 @@ require 'active_record'
 
 Before do
   ActiveRecord::Base.establish_connection(YAML::load(File.open('.gritano/database.yml')))
+  Gritano::Console.remote_console(false)
 end
