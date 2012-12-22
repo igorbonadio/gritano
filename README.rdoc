@@ -1,4 +1,4 @@
-= Gritano v0.4.1
+= Gritano v0.5.0
 
 Gritano is the simplest way to configure a git server over ssh. You can create repositories and manage user access using this practical tool.
 
@@ -17,7 +17,7 @@ If you are using a previous version, you should update your instalation:
   
   $ gem install gritano
   
-  $ gritano update
+  $ gritano setup:install
   
 == Usage
 
@@ -25,7 +25,7 @@ First of all you should create a git user who will be responsible for store and 
 
 All you need to do to set up Gritano is
 
-  $ gritano install
+  $ gritano setup:prepare && gritano setup:install
   
 After that you can add users:
 
