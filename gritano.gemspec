@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "gritano"
-  s.version = "0.4.1"
+  s.version = "0.5.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Igor Bonadio"]
-  s.date = "2012-12-14"
+  s.date = "2012-12-22"
   s.description = "Gritano is the simplest way to configure your git server over ssh. You can create repositories and manage user access."
   s.email = "igorbonadio@gmail.com"
   s.executables = ["gritano", "gritano-check"]
@@ -20,7 +20,9 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".document",
+    ".gritano/database.yml",
     ".rspec",
+    ".ssh/.gitignore",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
@@ -29,43 +31,54 @@ Gem::Specification.new do |s|
     "VERSION",
     "bin/gritano",
     "bin/gritano-check",
-    "db/database.yml",
     "db/migrate/001_create_users.rb",
     "db/migrate/002_create_repositories.rb",
     "db/migrate/003_create_permissions.rb",
     "db/migrate/004_create_keys.rb",
     "db/migrate/005_add_admin_to_users.rb",
-    "features/command.feature",
+    "features/cli.feature",
     "features/console.feature",
+    "features/data/help-check.txt",
+    "features/data/help-test.txt",
+    "features/data/help.txt",
     "features/data/keys/full_authorized_keys",
     "features/data/keys/igorbonadio.pub",
     "features/data/keys/igorbonadio_authorized_keys",
     "features/data/keys/jessicaeto.pub",
     "features/data/keys/jessicaeto_authorized_keys",
+    "features/help.feature",
     "features/keys.feature",
     "features/polices.feature",
-    "features/step_definitions/command_step.rb",
+    "features/ssh.feature",
+    "features/step_definitions/cli_steps.rb",
     "features/step_definitions/console_step.rb",
+    "features/step_definitions/help.rb",
     "features/step_definitions/keys_steps.rb",
     "features/step_definitions/polices_steps.rb",
+    "features/step_definitions/ssh_steps.rb",
     "features/support/database_cleaner.rb",
     "features/support/env.rb",
     "gritano.gemspec",
     "lib/gritano.rb",
-    "lib/gritano/command.rb",
+    "lib/gritano/cli.rb",
     "lib/gritano/console.rb",
+    "lib/gritano/console/base.rb",
+    "lib/gritano/console/check.rb",
+    "lib/gritano/console/executor.rb",
+    "lib/gritano/console/gritano.rb",
+    "lib/gritano/console/installer.rb",
     "lib/gritano/models.rb",
     "lib/gritano/models/key.rb",
     "lib/gritano/models/permission.rb",
     "lib/gritano/models/repository.rb",
     "lib/gritano/models/user.rb",
-    "spec/command_spec.rb",
-    "spec/console_spec.rb",
+    "spec/executor_spec.rb",
+    "spec/gritano_spec.rb",
+    "spec/installer_spec.rb",
     "spec/model_key_spec.rb",
     "spec/model_repository_spec.rb",
     "spec/model_user_spec.rb",
-    "spec/spec_helper.rb",
-    "tmp/.gitignore"
+    "spec/spec_helper.rb"
   ]
   s.homepage = "http://github.com/igorbonadio/gritano"
   s.licenses = ["MIT"]
