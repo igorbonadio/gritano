@@ -19,7 +19,6 @@ module Gritano
       Gritano::Console.remote_console(true)
       console = Gritano::Console::Check.new(stdin, home_dir, repo_dir)
       begin
-        p cmd
         output = console.execute(cmd + [login])
         if output[0]
           output[1]
