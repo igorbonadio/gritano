@@ -1,5 +1,5 @@
 When /^I set bin_name to test$/ do
-  Gritano::Console::Gritano.bin_name = "test"
+  Gritano::Console::bin_name("test")
 end
 
 Then /^gritano should show help\-test$/ do
