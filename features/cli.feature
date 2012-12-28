@@ -58,7 +58,7 @@ Feature: Console operations
     Then CLI should return "<result>"
     Examples:
       | command                                        | result                                                    |
-      | version                                        | v0.4.1                                                    |
+      | version                                        | v0.5.0                                                    |
       | user:add jose                                  | User jose added.                                          |
       | user:key:add igorbonadio marvin                | Key added successfully.                                   |
       | user:key:rm igorbonadio eva                    | Key removed successfully.                                 |
@@ -99,7 +99,7 @@ Feature: Console operations
     Then CLI should return "<result>"
     Examples:
       | command                                              | result  |
-      | version                                              | v0.4.1                                                    |
+      | version                                              | v0.5.0                                                    |
       | key:add keyname                                      | Key added successfully.                                   |
       | key:rm eva                                           | Key removed successfully.                                 |
       | key:rm keyname                                       | error: Key could not be removed.                          |
@@ -143,7 +143,7 @@ Feature: Console operations
     Then CLI should return "<result>"
     Examples:
       | command                                              | result  |
-      | version                                              | v0.4.1                                                    |
+      | version                                              | v0.5.0                                                    |
       | key:add keyname                                      | Key added successfully.                                   |
       | key:rm hal                                           | Key removed successfully.                                 |
       | key:rm keyname                                       | error: Key could not be removed.                          |
