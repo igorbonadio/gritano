@@ -1,4 +1,4 @@
-= Gritano v0.5.0
+= Gritano v0.5.1
 
 Gritano is the simplest way to configure a git server over ssh. You can create repositories and manage user access using this practical tool.
 
@@ -85,9 +85,9 @@ Starting from Gritano 0.3.0, administrators can execute commands via ssh:
   
   $ ssh git@hot.com admin:repo:list
   
-For more information, execute
+== For more Information
 
-  $ ssh git@host.com admin:help
+http://igorbonadio.com.br/gritano/
 
 == Contributing to Gritano
  
