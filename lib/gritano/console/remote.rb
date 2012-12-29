@@ -1,6 +1,6 @@
 module Gritano
   module Console
-    class Check < Base
+    class Remote < Base
 
       def initialize(stdin = STDIN, home_dir = Etc.getpwuid.dir, repo_path = Etc.getpwuid.dir)
         @stdin = stdin
@@ -24,7 +24,7 @@ module Gritano
       end
       
       add_command "help" do |args|
-        [true, Check.help]
+        [true, Remote.help]
       end
       
       add_command "repo:list" do |args|

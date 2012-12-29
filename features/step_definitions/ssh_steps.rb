@@ -1,7 +1,7 @@
 Given /^I start the gritano\-check console with "(.*?)"$/ do |login|
   stdin = double()
   stdin.stub(:read).and_return("Your SSHKEY here...")
-  @console = Gritano::Console::Check.new(stdin, '.', 'tmp')
+  @console = Gritano::Console::Remote.new(stdin, '.', 'tmp')
   @login = login
 end
 
