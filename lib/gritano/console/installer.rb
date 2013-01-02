@@ -5,6 +5,7 @@ module Gritano
       def initialize(stdin = STDIN, home_dir = Etc.getpwuid.dir)
         @home_dir = home_dir
         @stdin = stdin
+        @ssh_path = File.join(@home_dir, '.ssh')
         super(@stdin, @home_dir)
       end
 
@@ -30,7 +31,8 @@ module Gritano
         ActiveRecord::Migrator.migrate(
           File.join(File.dirname(__FILE__),'..', '..', '..', 'db/migrate'), 
           ENV["VERSION"] ? ENV["VERSION"].to_i : nil )
-         [true, "gritano has been installed"]
+        File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
+        [true, "gritano has been installed"]
       end
     end
   end

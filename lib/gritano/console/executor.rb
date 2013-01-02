@@ -95,7 +95,7 @@ module Gritano
           key = user.keys.create(name: key_name, key: @stdin.read)
           if key.valid?
             File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
-              return [true, "Key added successfully."]
+            return [true, "Key added successfully."]
           end
         end
         return [false, "Key could not be added."]
