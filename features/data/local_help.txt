@@ -24,3 +24,4 @@
   gritano repo:write:rm reponame.git username
 
   --
+  v{{VERSION}}

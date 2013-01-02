@@ -5,7 +5,7 @@ module Gritano
       begin
         output = console.execute(cmd)
         if output[0]
-          output[1]
+          output[1].to_s
         else
           "error: #{output[1]}"
         end

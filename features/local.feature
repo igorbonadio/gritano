@@ -35,46 +35,46 @@ Feature: Local access
   Scenario Outline: Execute command
       Given I start the gritano console
       When I execute "<command>"
-      Then I should see a "<result>" message
+      Then I should see a message
       Examples:
-        | command                                        | result  |
-        | version                                        | success |
-        | user:add jose                                  | success |
-        | user:key:add igorbonadio marvin                | success |
-        | user:key:rm igorbonadio eva                    | success |
-        | user:rm igorbonadio                            | success |
-        | user:list                                      | success |
-        | user:key:list igorbonadio                      | success |
-        | user:repo:list igorbonadio                     | success |
-        | user:admin:add igorbonadio                     | success |
-        | user:admin:rm igorbonadio                      | success |
-        | repo:add tmp/p-lang.git                        | success |
-        | repo:add tmp/p-lang.git igorbonadio            | success |
-        | repo:add tmp/p-lang.git igorbonadio jessicaeto | success |
-        | repo:rm tmp/jeka.git                           | success |
-        | repo:read:add tmp/gritano.git jessicaeto       | success |
-        | repo:write:add tmp/gritano.git jessicaeto      | success |
-        | repo:read:rm tmp/jeka.git igorbonadio          | success |
-        | repo:write:rm tmp/gritano.git igorbonadio      | success |
-        | repo:list                                      | success |
-        | repo:user:list tmp/jeka.git                    | success |
-        | user:add igorbonadio                           | error   |
-        | user:rm jose                                   | error   |
-        | user:key:add userrr marvino                    | error   |
-        | user:key:rm igorbonadio marvino                | error   |
-        | user:key:list arybonadio                       | error   |
-        | user:repo:list arybonadio                      | error   |
-        | user:admin:add arybonadio                      | error   |
-        | user:admin:rm arybonadio                       | error   |
-        | repo:add tmp/jeka.git                          | error   |
-        | repo:rm tmp/p-lang.git                         | error   |
-        | repo:read:add tmp/gritano.git arybonadio       | error   |
-        | repo:read:add tmp/p-lang.git jessicaeto        | error   |
-        | repo:write:add tmp/gritano.git arybonadio      | error   |
-        | repo:write:add tmp/p-lang.git jessicaeto       | error   |
-        | repo:read:rm tmp/jeka.git aribonadio           | error   |
-        | repo:read:rm tmp/p-lang.git igorbonadio        | error   |
-        | repo:write:rm tmp/gritano.git arybonadio       | error   |
-        | repo:write:rm tmp/p-lang.git igorbonadio       | error   |
-        | repo:user:list tmp/ruby.git                    | error   |
+        | command                                        |
+        | version                                        |
+        | user:add jose                                  |
+        | user:key:add igorbonadio marvin                |
+        | user:key:rm igorbonadio eva                    |
+        | user:rm igorbonadio                            |
+        | user:list                                      |
+        | user:key:list igorbonadio                      |
+        | user:repo:list igorbonadio                     |
+        | user:admin:add igorbonadio                     |
+        | user:admin:rm igorbonadio                      |
+        | repo:add tmp/p-lang.git                        |
+        | repo:add tmp/p-lang.git igorbonadio            |
+        | repo:add tmp/p-lang.git igorbonadio jessicaeto |
+        | repo:rm tmp/jeka.git                           |
+        | repo:read:add tmp/gritano.git jessicaeto       |
+        | repo:write:add tmp/gritano.git jessicaeto      |
+        | repo:read:rm tmp/jeka.git igorbonadio          |
+        | repo:write:rm tmp/gritano.git igorbonadio      |
+        | repo:list                                      |
+        | repo:user:list tmp/jeka.git                    |
+        | user:add igorbonadio                           |
+        | user:rm jose                                   |
+        | user:key:add userrr marvino                    |
+        | user:key:rm igorbonadio marvino                |
+        | user:key:list arybonadio                       |
+        | user:repo:list arybonadio                      |
+        | user:admin:add arybonadio                      |
+        | user:admin:rm arybonadio                       |
+        | repo:add tmp/jeka.git                          |
+        | repo:rm tmp/p-lang.git                         |
+        | repo:read:add tmp/gritano.git arybonadio       |
+        | repo:read:add tmp/p-lang.git jessicaeto        |
+        | repo:write:add tmp/gritano.git arybonadio      |
+        | repo:write:add tmp/p-lang.git jessicaeto       |
+        | repo:read:rm tmp/jeka.git aribonadio           |
+        | repo:read:rm tmp/p-lang.git igorbonadio        |
+        | repo:write:rm tmp/gritano.git arybonadio       |
+        | repo:write:rm tmp/p-lang.git igorbonadio       |
+        | repo:user:list tmp/ruby.git                    |
         
