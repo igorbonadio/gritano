@@ -2,11 +2,6 @@ Feature: Setup
   In order to set up a git server
   As a git user
   I want to install gritano
-  
-  Scenario: Git is not installed
-    Given I start the gritano console but gritano is not installed
-    When I execute any command
-    Then I should see the error: "Error: git must be installed on the local system"
 
   Scenario: Gritano is not installed
     Given I start the gritano console but gritano is not installed
