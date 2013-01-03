@@ -43,6 +43,7 @@ Feature: Remote access
       Then I should see a message via ssh
       Examples:
         | command                                              |
+        | invalid:command                                      |
         | version                                              |
         | help                                                 |
         | repo:list                                            |
@@ -96,6 +97,7 @@ Feature: Remote access
       Then I should see a message via ssh
       Examples:
         | command                                              |
+        | invalid:command                                      |
         | version                                              |
         | help                                                 |
         | repo:list                                            |

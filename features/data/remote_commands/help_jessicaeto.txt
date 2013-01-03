@@ -10,4 +10,4 @@
   ssh git@host.com admin:help 
 
   --
-  v0.5.1
+  v{{VERSION}}
