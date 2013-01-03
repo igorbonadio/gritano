@@ -64,10 +64,16 @@ module Gritano
           end
         elsif meth.to_s =~ /^git-receive-pack/
           repo, login = args[0]
-          Kernel.exec "git-receive-pack #{repo(repo).full_path}"
+          user = ::Gritano::User.find_by_login(login)
+          if user
+            Kernel.exec "git-receive-pack #{repo(repo).full_path}" if user.check_access(repo(repo), :read)
+          end
         elsif meth.to_s =~ /^git-upload-pack/
           repo, login = args[0]
-          Kernel.exec "git-upload-pack #{repo(repo).full_path}"
+          user = ::Gritano::User.find_by_login(login)
+          if user
+            Kernel.exec "git-upload-pack #{repo(repo).full_path}" if user.check_access(repo(repo), :write)
+          end
         else
           super
         end
