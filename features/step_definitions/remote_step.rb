@@ -21,17 +21,29 @@ Then /^I should see a message via ssh$/ do
 end
 
 When /^I try to get "(.*?)"$/ do |repo|
-  Kernel.should_receive(:exec)
-  @console.check(['git-receive-pack', repo], @login, @stdin, @home_dir, @repo_dir)
+  @command = ['git-receive-pack', repo]
 end
 
 Then /^I should get it$/ do
+  Kernel.should_receive(:exec)
+  @console.check(@command, @login, @stdin, @home_dir, @repo_dir)
+end
+
+Then /^I should not get it$/ do
+  Kernel.should_not_receive(:exec)
+  @console.check(@command, @login, @stdin, @home_dir, @repo_dir)
 end
 
 When /^I try to send data to "(.*?)"$/ do |repo|
-  Kernel.should_receive(:exec)
-  @console.check(['git-upload-pack', repo], @login, @stdin, @home_dir, @repo_dir)
+  @command = ['git-upload-pack', repo]
 end
 
 Then /^I should send it$/ do
+  Kernel.should_receive(:exec)
+  @console.check(@command, @login, @stdin, @home_dir, @repo_dir)
+end
+
+Then /^I should not send it$/ do
+  Kernel.should_not_receive(:exec)
+  @console.check(@command, @login, @stdin, @home_dir, @repo_dir)
 end

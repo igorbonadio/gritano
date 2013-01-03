@@ -37,6 +37,16 @@ Feature: Remote access
     When I try to send data to "tmp/gritano.git"
     Then I should send it
     
+  Scenario: Git read access denied
+    Given I start the remote console with "jessicaeto"
+    When I try to get "tmp/gritano.git"
+    Then I should not get it
+  
+  Scenario: Git write access denied
+    Given I start the remote console with "jessicaeto"
+    When I try to send data to "tmp/gritano.git"
+    Then I should not send it
+    
   Scenario Outline: Normal user execute command
       Given I start the remote console with "jessicaeto"
       When I execute "<command>" via ssh

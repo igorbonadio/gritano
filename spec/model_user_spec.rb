@@ -36,20 +36,6 @@ describe Gritano::User do
     user.add_access(repo, :read).should be_true
   end
   
-  it 'should remove read access to a repository' do
-    user = Gritano::User.create(login: 'test')
-    user.create_repository(name: 'tmp/repo.git')
-    user.remove_access(Gritano::Repository.find_by_name('tmp/repo.git'), :read).should be_true
-    user.check_access(Gritano::Repository.find_by_name('tmp/repo.git'), :read).should be_false
-  end
-  
-  it 'should remove write access to a repository' do
-    user = Gritano::User.create(login: 'test')
-    user.create_repository(name: 'tmp/repo.git')
-    user.remove_access(Gritano::Repository.find_by_name('tmp/repo.git'), :write).should be_true
-    user.check_access(Gritano::Repository.find_by_name('tmp/repo.git'), :write).should be_false
-  end
-  
   it 'should not add an wrong type access to a repository' do
     user = Gritano::User.create(login: 'test')
     repo = Gritano::Repository.create(name: 'tmp/repo.git')
@@ -60,18 +46,6 @@ describe Gritano::User do
     user = Gritano::User.create(login: 'test')
     repo = Gritano::Repository.create(name: 'tmp/repo.git')
     user.remove_access(repo, :wrong).should be_false
-  end
-  
-  it 'should have read access to a repository' do
-    user = Gritano::User.create(login: 'test')
-    user.create_repository(name: 'tmp/gritano.git')
-    user.check_access(Gritano::Repository.find_by_name('tmp/gritano.git'), :read).should be_true
-  end
-  
-  it 'should have write access to a repository' do
-    user = Gritano::User.create(login: 'test')
-    user.create_repository(name: 'tmp/gritano.git')
-    user.check_access(Gritano::Repository.find_by_name('tmp/gritano.git'), :write).should be_true
   end
   
   it 'should not have read access to a repository' do
