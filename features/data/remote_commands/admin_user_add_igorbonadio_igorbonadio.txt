@@ -1,0 +1,1 @@
+error: Login has already been taken.

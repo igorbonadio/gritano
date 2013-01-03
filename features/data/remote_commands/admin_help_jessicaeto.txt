@@ -1,0 +1,27 @@
+  ssh git@host.com admin:[command]
+
+  Examples:
+  ssh git@host.com admin:help 
+  ssh git@host.com admin:version 
+  ssh git@host.com admin:setup:prepare 
+  ssh git@host.com admin:setup:install 
+  ssh git@host.com admin:user:list 
+  ssh git@host.com admin:user:key:list username
+  ssh git@host.com admin:user:repo:list username
+  ssh git@host.com admin:user:add username
+  ssh git@host.com admin:user:rm username
+  ssh git@host.com admin:user:key:add username keyname < key.pub
+  ssh git@host.com admin:user:key:rm username keyname
+  ssh git@host.com admin:user:admin:add username
+  ssh git@host.com admin:user:admin:rm username
+  ssh git@host.com admin:repo:list 
+  ssh git@host.com admin:repo:add reponame.git [username1 username2 ...]*
+  ssh git@host.com admin:repo:user:list reponame.git
+  ssh git@host.com admin:repo:rm reponame.git
+  ssh git@host.com admin:repo:read:add reponame.git username
+  ssh git@host.com admin:repo:write:add reponame.git username
+  ssh git@host.com admin:repo:read:rm reponame.git username
+  ssh git@host.com admin:repo:write:rm reponame.git username
+
+  --
+  v{{VERSION}}
