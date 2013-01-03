@@ -27,6 +27,16 @@ Feature: Remote access
       | jessicaeto  | tmp/jeka.git    | read   |
       | jessicaeto  | tmp/jeka.git    | write  |
       
+  Scenario: Git read access
+    Given I start the remote console with "igorbonadio"
+    When I try to get "tmp/gritano.git"
+    Then I should get it
+  
+  Scenario: Git write access
+    Given I start the remote console with "igorbonadio"
+    When I try to send data to "tmp/gritano.git"
+    Then I should send it
+    
   Scenario Outline: Normal user execute command
       Given I start the remote console with "jessicaeto"
       When I execute "<command>" via ssh

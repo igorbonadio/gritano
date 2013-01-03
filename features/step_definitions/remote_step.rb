@@ -19,3 +19,19 @@ Then /^I should see a message via ssh$/ do
           gsub('{{VERSION}}', File.open("VERSION").readlines.join)
   @output.should be == msg
 end
+
+When /^I try to get "(.*?)"$/ do |repo|
+  Kernel.should_receive(:exec)
+  @console.check(['git-receive-pack', repo], @login, @stdin, @home_dir, @repo_dir)
+end
+
+Then /^I should get it$/ do
+end
+
+When /^I try to send data to "(.*?)"$/ do |repo|
+  Kernel.should_receive(:exec)
+  @console.check(['git-upload-pack', repo], @login, @stdin, @home_dir, @repo_dir)
+end
+
+Then /^I should send it$/ do
+end
