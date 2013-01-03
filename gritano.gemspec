@@ -5,14 +5,14 @@
 
 Gem::Specification.new do |s|
   s.name = "gritano"
-  s.version = "0.5.1"
+  s.version = "0.5.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Igor Bonadio"]
-  s.date = "2012-12-29"
+  s.date = "2013-01-03"
   s.description = "Gritano is the simplest way to configure your git server over ssh. You can create repositories and manage user access."
   s.email = "igorbonadio@gmail.com"
-  s.executables = ["gritano", "gritano-check"]
+  s.executables = ["gritano", "gritano-remote"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc",
@@ -30,32 +30,12 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "bin/gritano",
-    "bin/gritano-check",
+    "bin/gritano-remote",
     "db/migrate/001_create_users.rb",
     "db/migrate/002_create_repositories.rb",
     "db/migrate/003_create_permissions.rb",
     "db/migrate/004_create_keys.rb",
     "db/migrate/005_add_admin_to_users.rb",
-    "features/cli.feature",
-    "features/console.feature",
-    "features/data/help-check.txt",
-    "features/data/help-test.txt",
-    "features/data/help.txt",
-    "features/data/keys/full_authorized_keys",
-    "features/data/keys/igorbonadio.pub",
-    "features/data/keys/igorbonadio_authorized_keys",
-    "features/data/keys/jessicaeto.pub",
-    "features/data/keys/jessicaeto_authorized_keys",
-    "features/help.feature",
-    "features/keys.feature",
-    "features/polices.feature",
-    "features/ssh.feature",
-    "features/step_definitions/cli_steps.rb",
-    "features/step_definitions/console_step.rb",
-    "features/step_definitions/help.rb",
-    "features/step_definitions/keys_steps.rb",
-    "features/step_definitions/polices_steps.rb",
-    "features/step_definitions/ssh_steps.rb",
     "features/support/database_cleaner.rb",
     "features/support/env.rb",
     "gritano.gemspec",
