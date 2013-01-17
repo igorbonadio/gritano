@@ -54,5 +54,19 @@ module Gritano
       permission.is(:write).should be_false
       permission.is(:read).should be_false
     end
+    
+    it "should not add wrong access" do
+      permission = create_permission([:read, :write])
+      permission.add_access(:wrong).should be_false
+      permission.is(:write).should be_true
+      permission.is(:read).should be_true
+    end
+    
+    it "should not remove wrong access" do
+      permission = create_permission([:read, :write])
+      permission.remove_access(:wrong).should be_false
+      permission.is(:write).should be_true
+      permission.is(:read).should be_true
+    end
   end
 end
