@@ -31,6 +31,24 @@ module Gritano
         lambda { base.check_gritano }.should_not raise_error SystemExit
       end
       
+      it "should check if git is not installed" do
+        base = create_base('.')
+        base.stub(:unknown_command).and_return(true)
+        lambda { base.check_git }.should raise_error SystemExit
+      end
+      
+      it "should check if git is installed" do
+        base = create_base('.')
+        base.stub(:unknown_command).and_return(false)
+        lambda { base.check_git }.should_not raise_error SystemExit
+      end
+      
+      it "should check if a command exists" do
+        base = create_base('.')
+        base.unknown_command('ls').should be_false
+        base.unknown_command('qwertyuioplkjhgfdsa').should be_true
+      end
+      
     end
   end
 end

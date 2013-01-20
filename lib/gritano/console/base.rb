@@ -61,10 +61,14 @@ module Gritano
       end
 
       def check_git
-        if `which git` == ""
+        if unknown_command('git')
           puts "Error: git must be installed on the local system"
           exit
         end
+      end
+      
+      def unknown_command(command)
+        `which #{command}` == ""
       end
 
       def before_each_command_filter
