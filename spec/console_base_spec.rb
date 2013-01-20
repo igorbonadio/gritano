@@ -14,6 +14,13 @@ module Gritano
         Base.add_command "command:name", "parameters" do end
       end
       
+      it "should execute commands" do
+        Base.add_command "command:name", "parameters" do end
+        base = create_base('.')
+        base.should_receive('command_name')
+        base.execute(['command:name'])
+      end
+      
       it "should show a help message" do
         Base.add_command "command:name", "parameters" do end
         Base.help.should == File.open("spec/data/help_command_name.txt").readlines.join.
