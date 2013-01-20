@@ -13,9 +13,13 @@ module Gritano
         check_git
       end
 
-      add_command "setup:prepare" do |argv|
+      def create_gritano_dirs
         Dir.mkdir(File.join(@home_dir, '.gritano')) unless File.exist?(File.join(@home_dir, '.gritano'))
         Dir.mkdir(File.join(@home_dir, '.ssh')) unless File.exist?(File.join(@home_dir, '.ssh'))
+      end
+      
+      add_command "setup:prepare" do |argv|
+        create_gritano_dirs
         File.open(File.join(@home_dir, '.gritano', 'database.yml'), "w") do |f|
           f.write("adapter: sqlite3\ndatabase: #{File.join(Etc.getpwuid.dir, '.gritano', 'database.db')}\n")
         end
