@@ -1,0 +1,7 @@
+  gritano [command]
+
+  Examples:
+  gritano command:name parameters
+
+  --
+  v{{VERSION}}
