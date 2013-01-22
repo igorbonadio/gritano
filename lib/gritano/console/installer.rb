@@ -33,13 +33,21 @@ module Gritano
         return [true, "configuration has been generated"]
       end
 
-      add_command "setup:install" do |argv|
+      def create_database
         ActiveRecord::Base.establish_connection(
           YAML::load(File.open(File.join(@home_dir, '.gritano', 'database.yml'))))
         ActiveRecord::Migrator.migrate(
           File.join(File.dirname(__FILE__),'..', '..', '..', 'db/migrate'), 
           ENV["VERSION"] ? ENV["VERSION"].to_i : nil )
+      end
+      
+      def create_authorization_keys
         File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
+      end
+      
+      add_command "setup:install" do |argv|
+        create_database
+        create_authorization_keys
         [true, "gritano has been installed"]
       end
     end
