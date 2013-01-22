@@ -6,7 +6,7 @@ module Gritano
       def create_executor(home, repo_dir)
         stdin = double()
         stdin.stub(:read).and_return("Your SSHKEY here...")
-        base = Executor.new(stdin, home, repo_dir)
+        Executor.new(stdin, home, repo_dir)
       end
       
       it "should list users" do

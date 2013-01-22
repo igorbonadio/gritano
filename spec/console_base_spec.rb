@@ -6,7 +6,7 @@ module Gritano
       def create_base(home)
         stdin = double()
         stdin.stub(:read).and_return("Your SSHKEY here...")
-        base = Base.new(stdin, home)
+        Base.new(stdin, home)
       end
       
       it "should define commands" do
