@@ -52,28 +52,38 @@ module Gritano
         gritano.execute(["help"])
       end
       
+      def admin_command(meth, params)
+        @executor.execute([meth] + params)
+      end
+      
+      def git_receive_pack(repo, login)
+        user = ::Gritano::User.find_by_login(login)
+        if user
+          Kernel.exec "git-receive-pack #{repo(repo).full_path}" if user.check_access(repo(repo), :read)
+        end
+      end
+      
+      def git_upload_pack(repo, login)
+        user = ::Gritano::User.find_by_login(login)
+        if user
+          Kernel.exec "git-upload-pack #{repo(repo).full_path}" if user.check_access(repo(repo), :write)
+        end
+      end
+      
       def method_missing(meth, *args, &block)
         if meth.to_s =~ /^admin/
           user = ::Gritano::User.find_by_login(args[0][-1])
           if user.admin?
-            meth = meth.to_s[6..-1]
-            params = args[0][0..-2]
-            @executor.execute([meth] + params)
+            admin_command(meth.to_s[6..-1], args[0][0..-2])
           else
             [false, "access denied"]
           end
         elsif meth.to_s =~ /^git-receive-pack/
           repo, login = args[0]
-          user = ::Gritano::User.find_by_login(login)
-          if user
-            Kernel.exec "git-receive-pack #{repo(repo).full_path}" if user.check_access(repo(repo), :read)
-          end
+          git_receive_pack(repo, login)
         elsif meth.to_s =~ /^git-upload-pack/
           repo, login = args[0]
-          user = ::Gritano::User.find_by_login(login)
-          if user
-            Kernel.exec "git-upload-pack #{repo(repo).full_path}" if user.check_access(repo(repo), :write)
-          end
+          git_upload_pack(repo, login)
         else
           super
         end
