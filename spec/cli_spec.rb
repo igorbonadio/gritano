@@ -2,11 +2,6 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 module Gritano
   describe CLI do
-    
-    def test_console(console_class)
-      
-    end
-    
     it "should execute local commands" do
       console = double()
       console.should_receive(:execute).and_return([true, "ok"])
