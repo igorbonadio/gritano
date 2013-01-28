@@ -30,12 +30,12 @@ module Gritano
       add_command "setup:prepare" do |argv|
         create_gritano_dirs
         create_sqlite_config
-        return [true, "configuration has been generated"]
+        return [true, "Gritano's configuration has been generated.\nIf you want to customize it, check your '#{File.join(@home_dir, '.gritano')}' directory."]
       end
 
       def create_database
-        ActiveRecord::Base.establish_connection(
-          YAML::load(File.open(File.join(@home_dir, '.gritano', 'database.yml'))))
+        db_config = YAML::load(File.open(File.join(@home_dir, '.gritano', 'database.yml')))
+        ActiveRecord::Base.establish_connection(db_config)
         ActiveRecord::Migrator.migrate(
           File.join(File.dirname(__FILE__),'..', '..', '..', 'db/migrate'), 
           ENV["VERSION"] ? ENV["VERSION"].to_i : nil )
