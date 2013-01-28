@@ -23,7 +23,7 @@ module Gritano
       def method_missing(meth, *args, &block)
         params = [meth.to_s.gsub("_", ":")] + args[0]
         begin
-          installer = Installer.new
+          installer = Installer.new(@stdin, @home_dir)
           installer.execute(params)
         rescue
           executor = Executor.new(@stdin, @home_dir, @repo_path)

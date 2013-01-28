@@ -21,7 +21,7 @@ When /^I install it$/ do
 end
 
 Then /^I should see that gritano was successful (installed|updated)$/ do |opt|
-  @prepare_output.should be == 'configuration has been generated' if opt == 'installed'
+  @prepare_output.should be == "Gritano's configuration has been generated.\nIf you want to customize it, check your '#{File.join(@home_dir, '.gritano')}' directory." if opt == 'installed'
   @install_output.should be == 'gritano has been installed'
 end
 
