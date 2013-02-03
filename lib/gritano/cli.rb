@@ -23,5 +23,14 @@ module Gritano
       Gritano::Console.remote_console(true)
       _execute(cmd + [login], Gritano::Console::Remote.new(stdin, home_dir, repo_dir))
     end
+    
+    def CLI.check_pub_key(key)
+      k = Key.find_by_key(key)
+      if k
+        return "command=\"gritano-remote #{k.user.login}\" #{k.key}"
+      else
+        return "invalid"
+      end
+    end
   end
 end

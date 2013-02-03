@@ -6,7 +6,7 @@ end
 
 Given /^the following keys exist:$/ do |table|
   table.hashes.each do |key|
-    Gritano::User.find_by_login(key['login']).keys.create(name: key["key"], key: "key")
+    Gritano::User.find_by_login(key['login']).keys.create(name: key["key"], key: key["key"])
   end
 end
 
