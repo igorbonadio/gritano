@@ -17,5 +17,10 @@ module Gritano
       Gritano::Console::Remote.should_receive(:new).and_return(console)
       CLI.check(["repo:list"], "login")
     end
+    
+    it "should check public keys" do
+      Key.should_receive(:find_by_key).and_return(nil)
+      CLI.check_pub_key("key", ".")
+    end
   end
 end
