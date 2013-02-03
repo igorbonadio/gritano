@@ -24,7 +24,8 @@ module Gritano
       _execute(cmd + [login], Gritano::Console::Remote.new(stdin, home_dir, repo_dir))
     end
     
-    def CLI.check_pub_key(key)
+    def CLI.check_pub_key(key, home_dir = Etc.getpwuid.dir)
+      ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(home_dir, '.gritano', 'database.yml'))))
       k = Key.find_by_key(key)
       if k
         return "command=\"gritano-remote #{k.user.login}\" #{k.key}"
