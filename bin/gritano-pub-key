@@ -3,4 +3,13 @@ $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
 require 'gritano'
 
-puts Gritano::CLI::check_pub_key(STDIN.gets)
+key = nil
+STDIN.readlines.each do |line|
+  if line =~ /^ssh-(?:dss|rsa) [A-Za-z0-9+\/]+$/
+    key = line
+  end
+end
+
+if key
+  STDOUT.print Gritano::CLI::check_pub_key(key)
+end
