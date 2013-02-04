@@ -3,7 +3,7 @@ Given /^I start the public key checker$/ do
 end
 
 When /^I receive "(.*?)" public key$/ do |key|
-  @output = @console.check_pub_key(key)
+  @output = @console.check_pub_key(key, '.')
 end
 
 Then /^I should see an invalid pubkey$/ do
