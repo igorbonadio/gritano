@@ -272,6 +272,18 @@ module Gritano
         FileUtils.rm_rf(File.join(@home_dir, '.gritano', 'ssh')) if File.exist?(File.join(@home_dir, '.gritano', 'ssh'))
         [true, 'done!']
       end
+      
+      add_command "addon:ssh:config" do |argv|
+        [true, 'done!']
+      end
+      
+      add_command "addon:ssh:start" do |argv|
+        [true, 'done!']
+      end
+      
+      add_command "addon:ssh:stop" do |argv|
+        [true, 'done!']
+      end
     end
   end
 end
