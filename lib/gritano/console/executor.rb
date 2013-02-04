@@ -279,10 +279,13 @@ module Gritano
       end
       
       add_command "addon:ssh:start" do |argv|
+        exec "#{File.join(@home_dir, '.gritano', 'ssh', 'sbin', 'sshd')}"
         [true, 'done!']
       end
       
       add_command "addon:ssh:stop" do |argv|
+        pid = `ps aux | grep -e #{File.join(@home_dir, '.gritano', 'ssh', 'sbin', 'sshd')} | grep -v grep | tr -s \" \" | cut -d \" \" -f2`
+        exec "kill -9 #{pid}"
         [true, 'done!']
       end
     end
