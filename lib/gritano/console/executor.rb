@@ -274,6 +274,7 @@ module Gritano
       end
       
       add_command "addon:ssh:config" do |argv|
+        exec "vim #{File.join(@home_dir, '.gritano', 'ssh', 'etc', 'sshd_config')}"
         [true, 'done!']
       end
       
