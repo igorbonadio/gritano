@@ -22,6 +22,7 @@
   ssh git@host.com admin:repo:write:add reponame.git username
   ssh git@host.com admin:repo:read:rm reponame.git username
   ssh git@host.com admin:repo:write:rm reponame.git username
+  ssh git@host.com admin:addon:list 
 
   --
   v{{VERSION}}

@@ -241,6 +241,15 @@ module Gritano
         end
         return [false, "An error occurred. Permissions was not modified."]
       end
+      
+      add_command "addon:list" do |argv|
+        msg = Terminal::Table.new do |t|
+          t << ['add-ons']
+          t << :separator
+          t.add_row ['ssh']
+        end
+        return [true, msg]
+      end
     end
   end
 end
