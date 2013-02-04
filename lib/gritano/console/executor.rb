@@ -250,6 +250,21 @@ module Gritano
         end
         return [true, msg]
       end
+      
+      add_command "addon:ssh:install" do |argv|
+        source_dir = File.join(@home_dir, '.gritano', 'src')
+        Dir.mkdir(source_dir) unless File.exist?(source_dir)
+        #FileUtils.rm_rf(File.join(source_dir, 'gritano-openssh')) if File.exist?(File.join(source_dir, 'gritano-openssh'))
+        #puts "[git] Cloning..."
+        #`git clone git://github.com/igorbonadio/gritano-openssh.git #{File.join(source_dir, 'gritano-openssh')}`
+        puts "[build] Configuring..."
+        `cd #{File.join(source_dir, 'gritano-openssh')} && ./configure --prefix=#{File.join(@home_dir, '.gritano', 'ssh')}`
+        puts "[build] Compiling..."
+        `cd #{File.join(source_dir, 'gritano-openssh')} && make`
+        puts "[build] Installing..."
+        `cd #{File.join(source_dir, 'gritano-openssh')} && make install`
+        [true, 'done!']
+      end
     end
   end
 end
