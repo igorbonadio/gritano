@@ -13,7 +13,7 @@ module Gritano
         unless k.key[-1] == "\n"
           user_key = user_key + "\n"
         end
-        authorized_keys += "command=\"gritano-remote #{k.user.login}\" #{user_key}"
+        authorized_keys += "command=\"gritano-remote #{k.user.login}\" #{user_key}\n"
       end
       return authorized_keys
     end

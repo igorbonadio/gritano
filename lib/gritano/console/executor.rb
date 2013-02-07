@@ -92,7 +92,12 @@ module Gritano
         login, key_name, key_file = argv
         user = User.find_by_login(login)
         if user
-          key = user.keys.create(name: key_name, key: @stdin.read)
+          begin
+            key_str = "#{@stdin.read.scan(/^ssh-(?:dss|rsa) [A-Za-z0-9+\/]+/)[0]}"
+          rescue
+            return [false, "Key could not be added."]
+          end
+          key = user.keys.create(name: key_name, key: key_str)
           if key.valid?
             File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
             return [true, "Key added successfully."]
@@ -263,6 +268,14 @@ module Gritano
         `cd #{File.join(source_dir, 'gritano-openssh')} && make`
         puts "[build] Installing..."
         `cd #{File.join(source_dir, 'gritano-openssh')} && make install`
+        begin
+          File.open(File.join(@home_dir, '.gritano', 'ssh', 'etc', 'sshd_config'), "a") do |f|
+            f.write("\n")
+            f.write("AuthorizedKeysFile gritano-pub-key")
+          end
+        rescue Exception => e
+          puts e
+        end
         [true, 'done!']
       end
       
