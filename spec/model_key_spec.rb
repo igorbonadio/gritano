@@ -32,7 +32,7 @@ module Gritano
     
     it "should generate the authorized_keys files" do
       create_new_user_and_key
-      Key.authorized_keys.should == "command=\"gritano-remote igor\" sshkey\n"
+      Key.authorized_keys.should == "command=\"gritano-remote igor\" sshkey\n\n"
     end
   end
 end
