@@ -30,9 +30,15 @@ module Gritano
       key.user.should == user
     end
     
-    it "should generate the authorized_keys files" do
+    it "should generate the authorized_keys files if ssh's configurations is false" do
       create_new_user_and_key
       Key.authorized_keys.should == "command=\"gritano-remote igor\" sshkey\n\n"
+    end
+    
+    it "should not generate the authorized_keys files if ssh's configurations is true" do
+      user, key = create_new_user_and_key
+      Key.config = YAML::load(File.open(File.join('features', 'data', 'config_true.yml')))
+      Key.authorized_keys.should == ""
     end
   end
 end
