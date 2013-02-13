@@ -268,14 +268,11 @@ module Gritano
         `cd #{File.join(source_dir, 'gritano-openssh')} && make`
         puts "[build] Installing..."
         `cd #{File.join(source_dir, 'gritano-openssh')} && make install`
-        begin
-          File.open(File.join(@home_dir, '.gritano', 'ssh', 'etc', 'sshd_config'), "a") do |f|
-            f.write("\n\n# Gritano\n")
-            f.write("AuthorizedKeysScript #{`which gritano-pub-key`}")
-          end
-        rescue Exception => e
-          puts e
+        File.open(File.join(@home_dir, '.gritano', 'ssh', 'etc', 'sshd_config'), "a") do |f|
+          f.write("\n\n# Gritano\n")
+          f.write("AuthorizedKeysScript #{`which gritano-pub-key`}")
         end
+        File.open(File.join(@home_dir, '.gritano', 'config.yml'), "w").write({'ssh' => true}.to_yaml)
         [true, 'done!']
       end
       
