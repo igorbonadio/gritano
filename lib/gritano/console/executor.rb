@@ -267,6 +267,7 @@ module Gritano
         puts "[build] Compiling..."
         `cd #{File.join(source_dir, 'gritano-openssh')} && make`
         puts "[build] Installing..."
+        # sudo
         `cd #{File.join(source_dir, 'gritano-openssh')} && make install`
         File.open(File.join(@home_dir, '.gritano', 'ssh', 'etc', 'sshd_config'), "a") do |f|
           f.write("\n\n# Gritano\n")
@@ -280,6 +281,7 @@ module Gritano
         source_dir = File.join(@home_dir, '.gritano', 'src')
         FileUtils.rm_rf(File.join(source_dir, 'gritano-openssh')) if File.exist?(File.join(source_dir, 'gritano-openssh'))
         FileUtils.rm_rf(File.join(@home_dir, '.gritano', 'ssh')) if File.exist?(File.join(@home_dir, '.gritano', 'ssh'))
+        File.open(File.join(@home_dir, '.gritano', 'config.yml'), "w").write({'ssh' => false}.to_yaml)
         [true, 'done!']
       end
       
