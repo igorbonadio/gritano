@@ -9,10 +9,10 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Igor Bonadio"]
-  s.date = "2013-01-28"
+  s.date = "2013-02-14"
   s.description = "Gritano is the simplest way to configure your git server over ssh. You can create repositories and manage user access."
   s.email = "igorbonadio@gmail.com"
-  s.executables = ["gritano", "gritano-remote"]
+  s.executables = ["gritano", "gritano-pub-key", "gritano-remote"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc",
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".document",
+    ".gritano/config.yml",
     ".gritano/database.yml",
     ".rspec",
     ".ssh/.gitignore",
@@ -30,12 +31,16 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "bin/gritano",
+    "bin/gritano-pub-key",
     "bin/gritano-remote",
     "db/migrate/001_create_users.rb",
     "db/migrate/002_create_repositories.rb",
     "db/migrate/003_create_permissions.rb",
     "db/migrate/004_create_keys.rb",
     "db/migrate/005_add_admin_to_users.rb",
+    "features/data/config_true.yml",
+    "features/data/local_commands/addon_list.txt",
+    "features/data/local_commands/addon_ssh_install.txt",
     "features/data/local_commands/repo_add_tmp_jeka_git.txt",
     "features/data/local_commands/repo_add_tmp_p_lang_git.txt",
     "features/data/local_commands/repo_add_tmp_p_lang_git_igorbonadio.txt",
@@ -76,6 +81,8 @@ Gem::Specification.new do |s|
     "features/data/local_commands/user_rm_jose.txt",
     "features/data/local_commands/version.txt",
     "features/data/local_help.txt",
+    "features/data/remote_commands/admin_addon_list_igorbonadio.txt",
+    "features/data/remote_commands/admin_addon_list_jessicaeto.txt",
     "features/data/remote_commands/admin_help_igorbonadio.txt",
     "features/data/remote_commands/admin_help_jessicaeto.txt",
     "features/data/remote_commands/admin_repo_add_tmp_jeka_git_igorbonadio.txt",
@@ -173,10 +180,12 @@ Gem::Specification.new do |s|
     "features/data/remote_help.txt",
     "features/install.feature",
     "features/local.feature",
+    "features/pub_key.feature",
     "features/remote.feature",
     "features/step_definitions/background_step.rb",
     "features/step_definitions/install_step.rb",
     "features/step_definitions/local_step.rb",
+    "features/step_definitions/pub_key_step.rb",
     "features/step_definitions/remote_step.rb",
     "features/support/database_cleaner.rb",
     "features/support/env.rb",
@@ -202,6 +211,7 @@ Gem::Specification.new do |s|
     "spec/console_remote_spec.rb",
     "spec/console_spec.rb",
     "spec/data/help_command_name.txt",
+    "spec/model_config_spec.rb",
     "spec/model_key_spec.rb",
     "spec/model_permission_spec.rb",
     "spec/model_repository_spec.rb",
@@ -211,7 +221,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://igorbonadio.com.br/gritano"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.24"
+  s.rubygems_version = "1.8.25"
   s.summary = "Gritano is a tool to configure your git server over ssh"
 
   if s.respond_to? :specification_version then
