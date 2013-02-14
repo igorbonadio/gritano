@@ -257,47 +257,12 @@ module Gritano
       end
       
       add_command "addon:ssh:install" do |argv|
-        source_dir = File.join(@home_dir, '.gritano', 'src')
-        Dir.mkdir(source_dir) unless File.exist?(source_dir)
-        FileUtils.rm_rf(File.join(source_dir, 'gritano-openssh')) if File.exist?(File.join(source_dir, 'gritano-openssh'))
-        puts "[git] Cloning..."
-        `git clone git://github.com/igorbonadio/gritano-openssh.git #{File.join(source_dir, 'gritano-openssh')}`
-        puts "[build] Configuring..."
-        `cd #{File.join(source_dir, 'gritano-openssh')} && ./configure --prefix=#{File.join(@home_dir, '.gritano', 'ssh')}`
-        puts "[build] Compiling..."
-        `cd #{File.join(source_dir, 'gritano-openssh')} && make`
-        puts "[build] Installing..."
-        # sudo
-        `cd #{File.join(source_dir, 'gritano-openssh')} && make install`
-        File.open(File.join(@home_dir, '.gritano', 'ssh', 'etc', 'sshd_config'), "a") do |f|
-          f.write("\n\n# Gritano\n")
-          f.write("AuthorizedKeysScript #{`which gritano-pub-key`}")
-        end
         File.open(File.join(@home_dir, '.gritano', 'config.yml'), "w").write({'ssh' => true}.to_yaml)
         [true, 'done!']
       end
       
       add_command "addon:ssh:uninstall" do |argv|
-        source_dir = File.join(@home_dir, '.gritano', 'src')
-        FileUtils.rm_rf(File.join(source_dir, 'gritano-openssh')) if File.exist?(File.join(source_dir, 'gritano-openssh'))
-        FileUtils.rm_rf(File.join(@home_dir, '.gritano', 'ssh')) if File.exist?(File.join(@home_dir, '.gritano', 'ssh'))
         File.open(File.join(@home_dir, '.gritano', 'config.yml'), "w").write({'ssh' => false}.to_yaml)
-        [true, 'done!']
-      end
-      
-      add_command "addon:ssh:config" do |argv|
-        exec "vim #{File.join(@home_dir, '.gritano', 'ssh', 'etc', 'sshd_config')}"
-        [true, 'done!']
-      end
-      
-      add_command "addon:ssh:start" do |argv|
-        exec "#{File.join(@home_dir, '.gritano', 'ssh', 'sbin', 'sshd')}"
-        [true, 'done!']
-      end
-      
-      add_command "addon:ssh:stop" do |argv|
-        pid = `ps aux | grep -e #{File.join(@home_dir, '.gritano', 'ssh', 'sbin', 'sshd')} | grep -v grep | tr -s \" \" | cut -d \" \" -f2`
-        exec "kill -9 #{pid}"
         [true, 'done!']
       end
     end

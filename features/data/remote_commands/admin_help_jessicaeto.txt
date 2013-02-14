@@ -25,9 +25,6 @@
   ssh git@host.com admin:addon:list 
   ssh git@host.com admin:addon:ssh:install 
   ssh git@host.com admin:addon:ssh:uninstall 
-  ssh git@host.com admin:addon:ssh:config 
-  ssh git@host.com admin:addon:ssh:start 
-  ssh git@host.com admin:addon:ssh:stop 
 
   --
   v{{VERSION}}
