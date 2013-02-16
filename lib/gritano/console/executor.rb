@@ -259,7 +259,9 @@ module Gritano
       add_command "addon:ssh:install" do |argv|
         File.open(File.join(@home_dir, '.gritano', 'config.yml'), "w").write({'ssh' => true}.to_yaml)
         File.open(File.join(@ssh_path, 'authorized_keys'), "w").write('')
-        [true, File.open('lib/gritano/console/ssh_install.txt').readlines.join.gsub('{{GRITANO_PUB_KEY}}', `which gritano-pub-key`)]
+        gritano_pub_key_path = `which gritano-pub-key`[0..-2]
+        `ln -s #{gritano_pub_key_path} #{File.join(@home_dir, '.gritano', 'gritano-pub-key')}`
+        [true, File.open(File.join(File.dirname(__FILE__), 'ssh_install.txt')).readlines.join.gsub('{{GRITANO_PUB_KEY}}', File.join(@home_dir, '.gritano', 'gritano-pub-key'))]
       end
       
       add_command "addon:ssh:uninstall" do |argv|
