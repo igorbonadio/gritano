@@ -11,5 +11,5 @@ STDIN.readlines.each do |line|
 end
 
 if key
-  STDOUT.print Gritano::CLI::check_pub_key(key)
+  STDOUT.print Gritano::CLI::check_pub_key(key, File.dirname(File.dirname(ARGV[0])))
 end
