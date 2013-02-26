@@ -4,7 +4,7 @@ Gritano is the simplest way to configure a git server over ssh. You can create r
 
 == Requirements
 
-* ruby 1.9 (http://www.ruby-lang.org)
+* ruby 1.9 or 2.0 (http://www.ruby-lang.org)
 * git (http://git-scm.com)
 
 == Install
