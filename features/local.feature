@@ -77,4 +77,5 @@ Feature: Local access
         | repo:write:rm tmp/gritano.git arybonadio       |
         | repo:write:rm tmp/p-lang.git igorbonadio       |
         | repo:user:list tmp/ruby.git                    |
+        | plugin:list                                    |
         

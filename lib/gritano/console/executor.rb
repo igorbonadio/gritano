@@ -247,6 +247,17 @@ module Gritano
         return [false, "An error occurred. Permissions was not modified."]
       end
       
+      add_command "plugin:list" do |argv|
+        msg = Terminal::Table.new do |t|
+          t << ['plugin', 'installed']
+          t << :separator
+          Plugin.list.each do |plugin, installed|
+            t.add_row [plugin.name, installed]
+          end
+        end
+        return [true, msg]
+      end
+      
     end
   end
 end

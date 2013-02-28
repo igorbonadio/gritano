@@ -22,6 +22,10 @@ module Gritano
       send(method, params)
     end
     
+    def self.name
+      self.to_s.downcase.split('::')[-1]
+    end
+    
     def self.info
       raise NotImplementedError
     end
@@ -48,11 +52,10 @@ module Gritano
     end
     
     def self.help
-      plugin_name = self.to_s.downcase.split('::')[-1]
-      msg = "  gritano plugin:exec #{plugin_name} [command]\n\n"
+      msg = "  gritano plugin:exec #{self.name} [command]\n\n"
       msg += "  Examples:\n"
       commands.each do |command, parameters|
-        msg += "  gritano plugin:exec #{plugin_name} #{command} #{parameters}\n"
+        msg += "  gritano plugin:exec #{self.name} #{command} #{parameters}\n"
       end
       msg += "\n  --\n  v#{File.open(File.join(File.dirname(__FILE__), '..', '..', 'VERSION')).readlines.join}"
       msg
