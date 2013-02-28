@@ -22,5 +22,14 @@ module Gritano
       lambda { Plugin.new.on_remove }.should raise_error NotImplementedError
     end
     
+    it "should exec commands" do
+      plugin = Plugin.new
+      plugin.should_receive(:config_port).with(["2222"])
+      plugin.exec("config:port 2222".split(" "))
+      
+      plugin.should_receive(:start).with([])
+      plugin.exec("start".split(" "))
+    end
+    
   end
 end
