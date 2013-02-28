@@ -4,6 +4,16 @@ module Gritano
       "Install a patched OpenSSH version used by Gritano that enables SSH lookup for public keys in a database"
     end
     
+    def on_add
+      File.open(File.join(@home_dir, '.gritano', 'config.yml'), "w").write({'ssh' => true}.to_yaml)
+      File.open(File.join(@ssh_path, 'authorized_keys'), "w").write('')
+    end
+    
+    def on_remove
+      File.open(File.join(@home_dir, '.gritano', 'config.yml'), "w").write({'ssh' => false}.to_yaml)
+      File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
+    end
+    
     add_command "install" do |params|
     end
     

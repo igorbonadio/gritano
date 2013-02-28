@@ -1,5 +1,13 @@
 module Gritano
   class Plugin
+    
+    def initialize(stdin = STDIN, home_dir = Etc.getpwuid.dir, repo_path = Etc.getpwuid.dir)
+      @stdin = stdin
+      @home_dir = home_dir
+      @repo_path = repo_path
+      @ssh_path = File.join(@home_dir, '.ssh')
+    end
+    
     def on_add
       raise NotImplementedError
     end
