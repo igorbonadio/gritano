@@ -28,7 +28,7 @@ module Gritano
       end
       
       it "should check if gritano is not installed" do
-        FileUtils.rm_rf('tmp\.gritano')
+        FileUtils.rm_rf(File.join("tmp", ".gritano"))
         base = create_base('tmp')
         lambda { base.check_gritano }.should raise_error SystemExit
       end
