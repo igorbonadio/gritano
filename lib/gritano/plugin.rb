@@ -34,7 +34,7 @@ module Gritano
       if @subclass
         @subclass << subclass
       else
-        @subclass = [subclass]
+        @subclass = {subclass => false}
       end
     end
     

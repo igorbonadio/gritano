@@ -40,7 +40,7 @@ module Gritano
     end
     
     it "should have a ssh pluging" do
-      Plugin.list.should be == [Ssh]
+      Plugin.list.should be == {Ssh => false}
     end
     
   end
