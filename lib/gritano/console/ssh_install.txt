@@ -1,7 +1,0 @@
-Now Gritano is configured to use a custom ssh that can authenticate users that are registered in Gritano's database.
-
-Don't forget to add the following line to your sshd_config:
-
-AuthorizedKeysScript {{GRITANO_PUB_KEY}}
-
-For more information: https://github.com/igorbonadio/gritano-openssh.

@@ -8,14 +8,14 @@ module Gritano
       raise NotImplementedError
     end
     
-    def info
-      raise NotImplementedError
-    end
-    
     def exec(cmd)
       method = cmd[0].split(':').join('_')
       params = cmd[1..-1]
       send(method, params)
+    end
+    
+    def self.info
+      raise NotImplementedError
     end
     
     def self.list

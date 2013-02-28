@@ -15,7 +15,7 @@ module Gritano
     end
     
     it "should have an info method" do
-      Plugin.new.should respond_to :info
+      Plugin.should respond_to :info
     end
     
     it "should raise an NotImplementedError if on_add is not overrided" do
@@ -27,7 +27,7 @@ module Gritano
     end
     
     it "should raise an NotImplementedError if info is not overrided" do
-      lambda { Plugin.new.info }.should raise_error NotImplementedError
+      lambda { Plugin.info }.should raise_error NotImplementedError
     end
     
     it "should exec commands" do
