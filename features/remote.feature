@@ -101,6 +101,7 @@ Feature: Remote access
         | admin:repo:write:rm tmp/p-lang.git igorbonadio       |
         | admin:repo:user:list tmp/ruby.git                    |
         | admin:plugin:list                                    |
+        | admin:plugin:info ssh                                |
 
   Scenario Outline: Admin user execute command
       Given I start the remote console with "igorbonadio"
@@ -156,3 +157,4 @@ Feature: Remote access
         | admin:repo:write:rm tmp/p-lang.git igorbonadio       |
         | admin:repo:user:list tmp/ruby.git                    |
         | admin:plugin:list                                    |
+        | admin:plugin:info ssh                                |

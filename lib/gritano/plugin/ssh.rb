@@ -1,7 +1,7 @@
 module Gritano
   class Ssh < Plugin
     def self.info
-      "Install a patched OpenSSH version used by Gritano that enables SSH lookup for public keys in a database"
+      "It installs a patched OpenSSH version used by Gritano that enables SSH lookup for public keys in a database"
     end
     
     def on_add

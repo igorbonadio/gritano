@@ -38,7 +38,7 @@ module Gritano
       if @subclass
         @subclass << subclass
       else
-        @subclass = {subclass => false}
+        @subclass = {subclass.name => {klass: subclass, installed: false}}
       end
     end
     

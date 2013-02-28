@@ -251,11 +251,20 @@ module Gritano
         msg = Terminal::Table.new do |t|
           t << ['plugin', 'installed']
           t << :separator
-          Plugin.list.each do |plugin, installed|
-            t.add_row [plugin.name, installed]
+          Plugin.list.each do |plugin, params|
+            t.add_row [plugin, params[:installed]]
           end
         end
         return [true, msg]
+      end
+      
+      add_command "plugin:info", "plugin_name" do |argv|
+        name, = argv
+        begin
+          return [true, Plugin.list[name][:klass].info]
+        rescue
+          return [false, "There isn't a plugin called #{name}"]
+        end
       end
       
     end

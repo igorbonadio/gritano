@@ -78,4 +78,5 @@ Feature: Local access
         | repo:write:rm tmp/p-lang.git igorbonadio       |
         | repo:user:list tmp/ruby.git                    |
         | plugin:list                                    |
+        | plugin:info ssh                                |
         

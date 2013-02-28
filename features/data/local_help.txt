@@ -23,6 +23,7 @@
   gritano repo:read:rm reponame.git username
   gritano repo:write:rm reponame.git username
   gritano plugin:list 
+  gritano plugin:info plugin_name
 
   --
   v{{VERSION}}

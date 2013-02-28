@@ -23,6 +23,7 @@
   ssh git@host.com admin:repo:read:rm reponame.git username
   ssh git@host.com admin:repo:write:rm reponame.git username
   ssh git@host.com admin:plugin:list 
+  ssh git@host.com admin:plugin:info plugin_name
 
   --
   v{{VERSION}}
