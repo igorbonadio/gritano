@@ -14,12 +14,20 @@ module Gritano
       Plugin.new.should respond_to :exec
     end
     
+    it "should have an info method" do
+      Plugin.new.should respond_to :info
+    end
+    
     it "should raise an NotImplementedError if on_add is not overrided" do
       lambda { Plugin.new.on_add }.should raise_error NotImplementedError
     end
     
     it "should raise an NotImplementedError if on_remove is not overrided" do
       lambda { Plugin.new.on_remove }.should raise_error NotImplementedError
+    end
+    
+    it "should raise an NotImplementedError if info is not overrided" do
+      lambda { Plugin.new.info }.should raise_error NotImplementedError
     end
     
     it "should exec commands" do
