@@ -1,0 +1,10 @@
+  gritano plugin:exec ssh [command]
+
+  Examples:
+  gritano plugin:exec ssh install 
+  gritano plugin:exec ssh uninstall 
+  gritano plugin:exec ssh start 
+  gritano plugin:exec ssh stop 
+
+  --
+  v0.6.0
