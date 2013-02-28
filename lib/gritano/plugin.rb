@@ -13,5 +13,20 @@ module Gritano
       params = cmd[1..-1]
       send(method, params)
     end
+    
+    def self.list
+      @subclass
+    end
+    
+    def self.inherited(subclass)
+      if @subclass
+        @subclass << subclass
+      else
+        @subclass = [subclass]
+      end
+    end
+    
   end
 end
+
+require File.join(ROOT_PATH, 'gritano/plugin/ssh')

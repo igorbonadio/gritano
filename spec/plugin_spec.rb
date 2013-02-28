@@ -31,5 +31,9 @@ module Gritano
       plugin.exec("start".split(" "))
     end
     
+    it "should have a ssh pluging" do
+      Plugin.list.should be == [Ssh]
+    end
+    
   end
 end
