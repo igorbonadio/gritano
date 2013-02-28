@@ -247,29 +247,6 @@ module Gritano
         return [false, "An error occurred. Permissions was not modified."]
       end
       
-      add_command "addon:list" do |argv|
-        msg = Terminal::Table.new do |t|
-          t << ['add-ons']
-          t << :separator
-          t.add_row ['ssh']
-        end
-        return [true, msg]
-      end
-      
-      add_command "addon:ssh:install" do |argv|
-        File.open(File.join(@home_dir, '.gritano', 'config.yml'), "w").write({'ssh' => true}.to_yaml)
-        File.open(File.join(@ssh_path, 'authorized_keys'), "w").write('')
-        gritano_pub_key_path = `which gritano-pub-key`[0..-2]
-        `ln -s #{gritano_pub_key_path} #{File.join(@home_dir, '.gritano', 'gritano-pub-key')}`
-        [true, File.open(File.join(File.dirname(__FILE__), 'ssh_install.txt')).readlines.join.gsub('{{GRITANO_PUB_KEY}}', File.join(@home_dir, '.gritano', 'gritano-pub-key'))]
-      end
-      
-      add_command "addon:ssh:uninstall" do |argv|
-        File.open(File.join(@home_dir, '.gritano', 'config.yml'), "w").write({'ssh' => false}.to_yaml)
-        File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
-        FileUtils.rm(File.join(@home_dir, '.gritano', 'gritano-pub-key')) if File.exist?(File.join(@home_dir, '.gritano', 'gritano-pub-key'))
-        [true, 'Now Gritano is configured to use the authorized_keys file to authenticate users.']
-      end
     end
   end
 end

@@ -100,7 +100,6 @@ Feature: Remote access
         | admin:repo:write:rm tmp/gritano.git arybonadio       |
         | admin:repo:write:rm tmp/p-lang.git igorbonadio       |
         | admin:repo:user:list tmp/ruby.git                    |
-        | admin:addon:list                                     |
 
   Scenario Outline: Admin user execute command
       Given I start the remote console with "igorbonadio"
@@ -155,4 +154,3 @@ Feature: Remote access
         | admin:repo:write:rm tmp/gritano.git arybonadio       |
         | admin:repo:write:rm tmp/p-lang.git igorbonadio       |
         | admin:repo:user:list tmp/ruby.git                    |
-        | admin:addon:list                                     |

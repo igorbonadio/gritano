@@ -85,14 +85,6 @@ Starting from Gritano 0.3.0, administrators can execute commands via ssh:
   
   $ ssh git@host.com admin:repo:list
   
-= Custom SSH
-
-Gritano 0.6.0 introduces Gritano-SSH (https://github.com/igorbonadio/gritano-openssh), a custom SSH that you can use to improve user authentication. It look up for users' keys in the gritano's database.
-  
-To enable this feature, you need to install Gritano-SSH and execute:
-
-  $ gritano addon:ssh:install
-  
 == For more Information
 
 http://igorbonadio.com.br/gritano/

@@ -22,9 +22,6 @@
   gritano repo:write:add reponame.git username
   gritano repo:read:rm reponame.git username
   gritano repo:write:rm reponame.git username
-  gritano addon:list 
-  gritano addon:ssh:install 
-  gritano addon:ssh:uninstall 
 
   --
   v{{VERSION}}
