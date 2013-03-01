@@ -8,6 +8,14 @@ module Gritano
       @ssh_path = File.join(@home_dir, '.ssh')
     end
     
+    def add
+      on_add
+    end
+    
+    def remove
+      on_remove
+    end
+    
     def on_add
       raise NotImplementedError
     end

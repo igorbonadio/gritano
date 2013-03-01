@@ -267,6 +267,16 @@ module Gritano
         end
       end
       
+      add_command "plugin:add", "plugin_name" do |argv|
+        name, = argv
+        begin
+          Plugin.list[name][:klass].new.add
+          return [true, "plugin #{name} was added"]
+        rescue Exception => e
+          return [false, "There isn't a plugin called #{name}"]
+        end
+      end
+      
     end
   end
 end
