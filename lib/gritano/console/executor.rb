@@ -271,8 +271,18 @@ module Gritano
         name, = argv
         begin
           Plugin.list[name][:klass].new.add
-          return [true, "plugin #{name} was added"]
-        rescue Exception => e
+          return [true, "Plugin #{name} was added"]
+        rescue
+          return [false, "There isn't a plugin called #{name}"]
+        end
+      end
+      
+      add_command "plugin:rm", "plugin_name" do |argv|
+        name, = argv
+        begin
+          Plugin.list[name][:klass].new.remove
+          return [true, "Plugin #{name} was removed"]
+        rescue
           return [false, "There isn't a plugin called #{name}"]
         end
       end
