@@ -22,9 +22,15 @@ module Gritano
     end
     
     add_command "install" do |params|
-    end
-    
-    add_command "uninstall" do |params|
+      FileUtils.rm_rf(File.join('/tmp', 'gritano-openssh')) if Dir.exist?(File.join('/tmp', 'gritano-openssh'))
+      puts "[git] Cloning"
+      `git clone git://github.com/igorbonadio/gritano-openssh.git /tmp/gritano-openssh`
+      puts "[build] Configuring"
+      `cd /tmp/gritano-openssh/src && ./configure`
+      puts "[build] Compiling"
+      `cd /tmp/gritano-openssh/src && make`
+      puts "[build] Installing"
+      `cd /tmp/gritano-openssh/src && make install`
     end
     
     add_command "start" do |params|
