@@ -31,12 +31,16 @@ module Gritano
       `cd /tmp/gritano-openssh/src && make`
       puts "[build] Installing"
       `cd /tmp/gritano-openssh/src && make install`
+      return "Installed"
     end
     
     add_command "start" do |params|
+      `/usr/local/sbin/sshd`
     end
     
     add_command "stop" do |params|
+      pid = `ps aux | grep -e /usr/local/sbin/sshd | grep -v grep | tr -s \" \" | cut -d \" \" -f2`
+      exec "kill -9 #{pid}"
     end
     
   end
