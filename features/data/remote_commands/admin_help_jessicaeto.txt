@@ -26,6 +26,7 @@
   ssh git@host.com admin:plugin:info plugin_name
   ssh git@host.com admin:plugin:add plugin_name
   ssh git@host.com admin:plugin:rm plugin_name
+  ssh git@host.com admin:plugin:exec plugin_name command
 
   --
   v{{VERSION}}

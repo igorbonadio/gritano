@@ -17,6 +17,10 @@ module Gritano
       FileUtils.rm(File.join(@home_dir, '.gritano', 'gritano-pub-key')) if File.exist?(File.join(@home_dir, '.gritano', 'gritano-pub-key'))
     end
     
+    add_command "help" do |params|
+      Ssh.help
+    end
+    
     add_command "install" do |params|
     end
     
