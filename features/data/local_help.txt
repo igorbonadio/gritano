@@ -3,6 +3,11 @@
   Examples:
   gritano help 
   gritano version 
+  gritano plugin:list 
+  gritano plugin:info plugin_name
+  gritano plugin:add plugin_name
+  gritano plugin:rm plugin_name
+  gritano plugin:exec plugin_name command
   gritano setup:prepare 
   gritano setup:install 
   gritano user:list 
@@ -22,11 +27,6 @@
   gritano repo:write:add reponame.git username
   gritano repo:read:rm reponame.git username
   gritano repo:write:rm reponame.git username
-  gritano plugin:list 
-  gritano plugin:info plugin_name
-  gritano plugin:add plugin_name
-  gritano plugin:rm plugin_name
-  gritano plugin:exec plugin_name command
 
   --
   v{{VERSION}}

@@ -7,7 +7,7 @@ module Gritano
         @home_dir = home_dir
         @repo_path = repo_path
         @ssh_path = File.join(@home_dir, '.ssh')
-        @executor = Executor.new(@stdin, @home_dir, @repo_path)
+        @executor = Gritano.new(@stdin, @home_dir, @repo_path)
         super(@stdin, @home_dir)
       end
       
