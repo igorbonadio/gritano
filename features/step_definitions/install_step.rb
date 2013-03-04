@@ -1,7 +1,7 @@
 Given /^I start the gritano console but gritano is not installed$/ do
   stdin = double()
   stdin.stub(:read).and_return("Your SSHKEY here...")
-  FileUtils.rm_rf('tmp/.gritano')
+  FileUtils.rm_rf(File.join("tmp", ".gritano"))
   @home_dir = 'tmp'
   @repo_dir = 'tmp'
   @console = Gritano::CLI
