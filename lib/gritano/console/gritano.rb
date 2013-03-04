@@ -19,6 +19,57 @@ module Gritano
         version = "v#{File.open(File.join(File.dirname(__FILE__), '..', '..', '..', 'VERSION')).readlines.join}"
         [true, version]
       end
+      
+      add_command "plugin:list" do |argv|
+        msg = Terminal::Table.new do |t|
+          t << ['plugin', 'installed']
+          t << :separator
+          Plugin.list.each do |plugin, params|
+            t.add_row [plugin, params[:installed]]
+          end
+        end
+        return [true, msg]
+      end
+      
+      add_command "plugin:info", "plugin_name" do |argv|
+        name, = argv
+        begin
+          return [true, Plugin.list[name][:klass].info]
+        rescue
+          return [false, "There isn't a plugin called #{name}"]
+        end
+      end
+      
+      add_command "plugin:add", "plugin_name" do |argv|
+        name, = argv
+        begin
+          Plugin.list[name][:klass].new.add
+          return [true, "Plugin #{name} was added"]
+        rescue
+          return [false, "There isn't a plugin called #{name}"]
+        end
+      end
+      
+      add_command "plugin:rm", "plugin_name" do |argv|
+        name, = argv
+        begin
+          Plugin.list[name][:klass].new.remove
+          return [true, "Plugin #{name} was removed"]
+        rescue
+          return [false, "There isn't a plugin called #{name}"]
+        end
+      end
+      
+      add_command "plugin:exec", "plugin_name command" do |argv|
+        name = argv[0]
+        params = argv[1..-1]
+        begin
+          return [true, Plugin.list[name][:klass].new.exec(params)]
+        rescue Exception => e
+          puts e
+          return [false, "There isn't a plugin called #{name}"]
+        end
+      end
 
       def method_missing(meth, *args, &block)
         params = [meth.to_s.gsub("_", ":")] + args[0]
