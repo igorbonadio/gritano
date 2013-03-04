@@ -90,6 +90,11 @@ module Gritano
 
       add_command "user:key:add", "username keyname < key.pub" do |argv|
         login, key_name, key_file = argv
+        
+        if File.exist?(File.join(@home_dir, '.gritano', 'config.yml'))
+          Key.config = YAML::load(File.open(File.join(@home_dir, '.gritano', 'config.yml')))
+        end
+        
         user = User.find_by_login(login)
         if user
           begin
