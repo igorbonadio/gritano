@@ -21,14 +21,18 @@ module Gritano
       end
       
       add_command "plugin:list" do |argv|
-        msg = Terminal::Table.new do |t|
-          t << ['plugin', 'installed']
-          t << :separator
-          Plugin.list.each do |plugin, params|
-            t.add_row [plugin, params[:installed].call]
+        begin
+          msg = Terminal::Table.new do |t|
+            t << ['plugin', 'installed']
+            t << :separator
+            Plugin.list.each do |plugin, params|
+              t.add_row [plugin, params[:installed].call]
+            end
           end
+          return [true, msg]
+        rescue Exception => e
+          puts e
         end
-        return [true, msg]
       end
       
       add_command "plugin:info", "plugin_name" do |argv|

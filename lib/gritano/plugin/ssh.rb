@@ -19,8 +19,9 @@ module Gritano
     end
     
     def self.check_install
-      if File.exist?(File.join(Etc.getpwuid.dir, '.gritano', 'config.yml'))
-        config = YAML::load(File.open(File.join(@home_dir, '.gritano', 'config.yml')))
+      home = Etc.getpwuid.dir
+      if File.exist?(File.join(home, '.gritano', 'config.yml'))
+        config = YAML::load(File.open(File.join(home, '.gritano', 'config.yml')))
         return config['ssh']
       else
         return false
@@ -50,7 +51,7 @@ module Gritano
     
     add_command "stop" do |params|
       pid = `ps aux | grep -e /usr/local/sbin/sshd | grep -v grep | tr -s \" \" | cut -d \" \" -f2`
-      exec "kill -9 #{pid}"
+      `kill -9 #{pid}`
     end
     
   end
