@@ -1,5 +1,6 @@
 module Gritano
   class Ssh < Plugin
+    
     def self.info
       "It installs a patched OpenSSH version used by Gritano that enables SSH lookup for public keys in a database"
     end
@@ -15,6 +16,15 @@ module Gritano
       File.open(File.join(@home_dir, '.gritano', 'config.yml'), "w").write({'ssh' => false}.to_yaml)
       File.open(File.join(@ssh_path, 'authorized_keys'), 'w').write(Key.authorized_keys)
       FileUtils.rm(File.join(@home_dir, '.gritano', 'gritano-pub-key')) if File.exist?(File.join(@home_dir, '.gritano', 'gritano-pub-key'))
+    end
+    
+    def self.check_install
+      if File.exist?(File.join(Etc.getpwuid.dir, '.gritano', 'config.yml'))
+        config = YAML::load(File.open(File.join(@home_dir, '.gritano', 'config.yml')))
+        return config['ssh']
+      else
+        return false
+      end
     end
     
     add_command "help" do |params|

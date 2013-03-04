@@ -38,6 +38,10 @@ module Gritano
       raise NotImplementedError
     end
     
+    def self.check_install
+      false
+    end
+    
     def self.list
       @subclass
     end
@@ -46,7 +50,7 @@ module Gritano
       if @subclass
         @subclass << subclass
       else
-        @subclass = {subclass.name => {klass: subclass, installed: false}}
+        @subclass = {subclass.name => {klass: subclass, installed: lambda { subclass.check_install }}}
       end
     end
     

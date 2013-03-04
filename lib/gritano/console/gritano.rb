@@ -25,7 +25,7 @@ module Gritano
           t << ['plugin', 'installed']
           t << :separator
           Plugin.list.each do |plugin, params|
-            t.add_row [plugin, params[:installed]]
+            t.add_row [plugin, params[:installed].call]
           end
         end
         return [true, msg]
