@@ -32,7 +32,8 @@ module Gritano
       Ssh.help
     end
     
-    add_command "install" do |params|
+    add_command "install", "gritano_path" do |params|
+      gritano_dir, = params
       FileUtils.rm_rf(File.join('/tmp', 'gritano-openssh')) if Dir.exist?(File.join('/tmp', 'gritano-openssh'))
       puts "[git] Cloning"
       `git clone git://github.com/igorbonadio/gritano-openssh.git /tmp/gritano-openssh`
@@ -42,6 +43,10 @@ module Gritano
       `cd /tmp/gritano-openssh/src && make`
       puts "[build] Installing"
       `cd /tmp/gritano-openssh/src && make install`
+      gritano_pub_key = File.join(gritano_dir, 'gritano-pub-key')
+      File.open(File.join("/usr", "local", "etc", "sshd_config"), "a") do |f|
+        f.write("\n\nAuthorizedKeysScript #{gritano_pub_key}\n\n")
+      end
       return "Installed"
     end
     
