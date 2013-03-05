@@ -72,10 +72,10 @@ module Gritano
     end
     
     def self.help
-      msg = "  #{self.bin_name}plugin:exec #{self.name} [command]\n\n"
+      msg = "  #{Plugin.bin_name}plugin:exec #{self.name} [command]\n\n"
       msg += "  Examples:\n"
       commands.each do |command, parameters|
-        msg += "  #{self.bin_name}plugin:exec #{self.name} #{command} #{parameters}\n"
+        msg += "  #{Plugin.bin_name}plugin:exec #{self.name} #{command} #{parameters}\n"
       end
       msg += "\n  --\n  v#{File.open(File.join(File.dirname(__FILE__), '..', '..', 'VERSION')).readlines.join}"
       msg

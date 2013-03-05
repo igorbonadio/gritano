@@ -102,6 +102,7 @@ Feature: Remote access
         | admin:repo:user:list tmp/ruby.git                    |
         | admin:plugin:list                                    |
         | admin:plugin:info ssh                                |
+        | admin:plugin:exec ssh help                           |
 
   Scenario Outline: Admin user execute command
       Given I start the remote console with "igorbonadio"
@@ -158,3 +159,4 @@ Feature: Remote access
         | admin:repo:user:list tmp/ruby.git                    |
         | admin:plugin:list                                    |
         | admin:plugin:info ssh                                |
+        | admin:plugin:exec ssh help                           |

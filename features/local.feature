@@ -79,4 +79,5 @@ Feature: Local access
         | repo:user:list tmp/ruby.git                    |
         | plugin:list                                    |
         | plugin:info ssh                                |
+        | plugin:exec ssh help                           |
         

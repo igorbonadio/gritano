@@ -1,0 +1,10 @@
+  ssh git@host.com admin:plugin:exec ssh [command]
+
+  Examples:
+  ssh git@host.com admin:plugin:exec ssh help 
+  ssh git@host.com admin:plugin:exec ssh install gritano_path
+  ssh git@host.com admin:plugin:exec ssh start 
+  ssh git@host.com admin:plugin:exec ssh stop 
+
+  --
+  v{{VERSION}}

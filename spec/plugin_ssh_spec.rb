@@ -7,6 +7,7 @@ module Gritano
     end
     
     it "should show the help" do
+      Console.remote_console(false)
       Ssh.help.should be == File.open("features/data/ssh_help.txt").readlines.join.
                                       gsub('{{VERSION}}', File.open("VERSION").readlines.join)
     end
