@@ -67,9 +67,13 @@ module Gritano
       add_command "plugin:exec", "plugin_name command" do |argv|
         name = argv[0]
         params = argv[1..-1]
-        begin
-          return [true, Plugin.list[name][:klass].new.exec(params)]
-        rescue Exception => e
+        if Plugin.list[name]
+          begin
+            return [true, Plugin.list[name][:klass].new.exec(params)]
+          rescue Exception => e
+            return [false, Plugin.list[name][:klass].help]
+          end
+        else
           return [false, "There isn't a plugin called #{name}"]
         end
       end
