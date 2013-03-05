@@ -7,4 +7,4 @@
   gritano plugin:exec ssh stop 
 
   --
-  v0.6.0
+  v{{VERSION}}

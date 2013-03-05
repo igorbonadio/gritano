@@ -63,11 +63,19 @@ module Gritano
       @commands || @commands = Hash.new
     end
     
+    def self.bin_name=(name)
+      @bin_name = name
+    end
+    
+    def self.bin_name
+      @bin_name || "gritano "
+    end
+    
     def self.help
-      msg = "  gritano plugin:exec #{self.name} [command]\n\n"
+      msg = "  #{self.bin_name}plugin:exec #{self.name} [command]\n\n"
       msg += "  Examples:\n"
       commands.each do |command, parameters|
-        msg += "  gritano plugin:exec #{self.name} #{command} #{parameters}\n"
+        msg += "  #{self.bin_name}plugin:exec #{self.name} #{command} #{parameters}\n"
       end
       msg += "\n  --\n  v#{File.open(File.join(File.dirname(__FILE__), '..', '..', 'VERSION')).readlines.join}"
       msg
