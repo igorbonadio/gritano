@@ -93,7 +93,7 @@ Starting from Gritano 0.7.0, Gritano can be extended by plugins:
   
 == For more Information
 
-http://igorbonadio.com.br/gritano/
+http://igorbonadio.com.br/gritano
 
 == Contributing to Gritano
  
