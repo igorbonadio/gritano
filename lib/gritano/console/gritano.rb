@@ -70,7 +70,6 @@ module Gritano
         begin
           return [true, Plugin.list[name][:klass].new.exec(params)]
         rescue Exception => e
-          puts e
           return [false, "There isn't a plugin called #{name}"]
         end
       end
