@@ -55,7 +55,10 @@ module Gritano
       plugin.should_receive(:on_add)
       plugin.add
     end
-    
+   
+   it "should not be installed" do
+     Plugin.check_install.should be_false
+   end
     
   end
 end
