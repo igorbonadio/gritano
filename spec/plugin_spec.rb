@@ -44,5 +44,18 @@ module Gritano
       Plugin.list['ssh'][:installed].call.should be == false
     end
     
+    it "should call on_remove when it receives remove" do
+      plugin = Plugin.new
+      plugin.should_receive(:on_remove)
+      plugin.remove
+    end
+    
+    it "should call on_add when it receives add" do
+      plugin = Plugin.new
+      plugin.should_receive(:on_add)
+      plugin.add
+    end
+    
+    
   end
 end
