@@ -47,11 +47,7 @@ module Gritano
     end
     
     def self.inherited(subclass)
-      if @subclass
-        @subclass << subclass
-      else
-        @subclass = {subclass.name => {klass: subclass, installed: lambda { subclass.check_install }}}
-      end
+      @subclass = {subclass.name => {klass: subclass, installed: lambda { subclass.check_install }}}
     end
     
     def self.add_command(command, parameters = "", &block)
