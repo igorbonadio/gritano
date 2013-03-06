@@ -81,5 +81,6 @@ Feature: Local access
         | plugin:info ssh                                |
         | plugin:info sshs                               |
         | plugin:exec ssh help                           |
+        | plugin:exec ssh helps                          |
         | plugin:exec sshs help                          |
         
