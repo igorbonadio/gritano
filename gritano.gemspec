@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "gritano"
-  s.version = "0.7.0"
+  s.version = "0.7.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Igor Bonadio"]
-  s.date = "2013-03-05"
+  s.date = "2013-03-07"
   s.description = "Gritano is the simplest way to configure your git server over ssh. You can create repositories and manage user access."
   s.email = "igorbonadio@gmail.com"
   s.executables = ["gritano", "gritano-pub-key", "gritano-remote"]
@@ -41,7 +41,11 @@ Gem::Specification.new do |s|
     "features/data/config_true.yml",
     "features/data/local_commands/addon_list.txt",
     "features/data/local_commands/addon_ssh_install.txt",
+    "features/data/local_commands/plugin_exec_ssh_help.txt",
+    "features/data/local_commands/plugin_exec_ssh_helps.txt",
+    "features/data/local_commands/plugin_exec_sshs_help.txt",
     "features/data/local_commands/plugin_info_ssh.txt",
+    "features/data/local_commands/plugin_info_sshs.txt",
     "features/data/local_commands/plugin_list.txt",
     "features/data/local_commands/repo_add_tmp_jeka_git.txt",
     "features/data/local_commands/repo_add_tmp_p_lang_git.txt",
@@ -87,8 +91,16 @@ Gem::Specification.new do |s|
     "features/data/remote_commands/admin_addon_list_jessicaeto.txt",
     "features/data/remote_commands/admin_help_igorbonadio.txt",
     "features/data/remote_commands/admin_help_jessicaeto.txt",
+    "features/data/remote_commands/admin_plugin_exec_ssh_help_igorbonadio.txt",
+    "features/data/remote_commands/admin_plugin_exec_ssh_help_jessicaeto.txt",
+    "features/data/remote_commands/admin_plugin_exec_ssh_helps_igorbonadio.txt",
+    "features/data/remote_commands/admin_plugin_exec_ssh_helps_jessicaeto.txt",
+    "features/data/remote_commands/admin_plugin_exec_sshs_help_igorbonadio.txt",
+    "features/data/remote_commands/admin_plugin_exec_sshs_help_jessicaeto.txt",
     "features/data/remote_commands/admin_plugin_info_ssh_igorbonadio.txt",
     "features/data/remote_commands/admin_plugin_info_ssh_jessicaeto.txt",
+    "features/data/remote_commands/admin_plugin_info_sshs_igorbonadio.txt",
+    "features/data/remote_commands/admin_plugin_info_sshs_jessicaeto.txt",
     "features/data/remote_commands/admin_plugin_list_igorbonadio.txt",
     "features/data/remote_commands/admin_plugin_list_jessicaeto.txt",
     "features/data/remote_commands/admin_repo_add_tmp_jeka_git_igorbonadio.txt",
