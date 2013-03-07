@@ -1,4 +1,4 @@
-= Gritano v0.7.0
+= Gritano v0.7.1
 
 Gritano is the simplest way to configure a git server over ssh. You can create repositories and manage user access using this practical tool.
 
