@@ -35,19 +35,30 @@ module Gritano
     add_command "install", "gritano_path" do |params|
       gritano_dir, = params
       FileUtils.rm_rf(File.join('/tmp', 'gritano-openssh')) if Dir.exist?(File.join('/tmp', 'gritano-openssh'))
+      
       puts "[git] Cloning"
-      system "git clone git://github.com/igorbonadio/gritano-openssh.git /tmp/gritano-openssh"
-      puts "[build] Configuring"
-      system "cd /tmp/gritano-openssh/src && ./configure"
-      puts "[build] Compiling"
-      system "cd /tmp/gritano-openssh/src && make"
-      puts "[build] Installing"
-      system "cd /tmp/gritano-openssh/src && make install"
-      gritano_pub_key = File.join(gritano_dir, 'gritano-pub-key')
-      File.open(File.join("/usr", "local", "etc", "sshd_config"), "a") do |f|
-        f.write("\n\nAuthorizedKeysScript #{gritano_pub_key}\n\n")
+      ok = system "git clone git://github.com/igorbonadio/gritano-openssh.git /tmp/gritano-openssh"
+      if ok
+        puts "[build] Configuring"
+        ok = system "cd /tmp/gritano-openssh/src && ./configure"
+        if ok
+          puts "[build] Compiling"
+          ok = system "cd /tmp/gritano-openssh/src && make"
+          if ok
+            puts "[build] Installing"
+            ok = system "cd /tmp/gritano-openssh/src && make install"
+            if ok
+              gritano_pub_key = File.join(gritano_dir, 'gritano-pub-key')
+              File.open(File.join("/usr", "local", "etc", "sshd_config"), "a") do |f|
+                f.write("\n\nAuthorizedKeysScript #{gritano_pub_key}\n\n")
+              end
+              return "Installed"
+            end
+          end
+        end
       end
-      return "Installed"
+      
+      return "error"
     end
     
     add_command "start" do |params|
