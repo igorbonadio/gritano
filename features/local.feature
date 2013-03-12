@@ -84,4 +84,5 @@ Feature: Local access
         | plugin:exec ssh help                           |
         | plugin:exec ssh helps                          |
         | plugin:exec sshs help                          |
+        | plugin:add sshs                                |
         
