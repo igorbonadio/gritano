@@ -86,4 +86,5 @@ Feature: Local access
         | plugin:exec ssh helps                          |
         | plugin:exec sshs help                          |
         | plugin:add sshs                                |
+        | plugin:rm sshs                                 |
         
