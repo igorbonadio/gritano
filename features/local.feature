@@ -80,6 +80,7 @@ Feature: Local access
         | plugin:list                                    |
         | plugin:info ssh                                |
         | plugin:add ssh                                 |
+        | plugin:rm ssh                                  |
         | plugin:info sshs                               |
         | plugin:exec ssh help                           |
         | plugin:exec ssh helps                          |

@@ -5,6 +5,7 @@ Given /^I start the gritano console$/ do
   @repo_dir = 'tmp'
   @console = Gritano::CLI
   Gritano::Ssh.any_instance.stub(:add)
+  Gritano::Ssh.any_instance.stub(:rm)
 end
 
 When /^I execute "(.*?)"$/ do |command|
