@@ -81,7 +81,13 @@ module Gritano
           rescue Exception => e
             return "invalid property"
           end
+        when /^set_/ then
+          sshd_config = SshdConfig::SshdConfig.read(File.join("/usr", "local", "etc", "sshd_config"))
+          sshd_config.send("#{name.to_s.gsub(/^set_/, '')}=", args[0])
+          sshd_config.save
+          return "property #{name.to_s.gsub(/^set_/, '')} updated"
       end
+      raise NoMethodError
     end
     
   end
