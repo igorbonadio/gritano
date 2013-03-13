@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "gritano"
-  s.version = "0.7.2"
+  s.version = "0.8.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Igor Bonadio"]
-  s.date = "2013-03-12"
+  s.date = "2013-03-13"
   s.description = "Gritano is the simplest way to configure your git server over ssh. You can create repositories and manage user access."
   s.email = "igorbonadio@gmail.com"
   s.executables = ["gritano", "gritano-pub-key", "gritano-remote"]
@@ -259,6 +259,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<sqlite3>, [">= 1.3.6"])
       s.add_runtime_dependency(%q<grit>, [">= 2.5.0"])
       s.add_runtime_dependency(%q<terminal-table>, [">= 1.4.5"])
+      s.add_runtime_dependency(%q<sshd_config>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 2.11.0"])
       s.add_development_dependency(%q<rdoc>, [">= 3.12"])
       s.add_development_dependency(%q<cucumber>, [">= 1.2.1"])
@@ -271,6 +272,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<sqlite3>, [">= 1.3.6"])
       s.add_dependency(%q<grit>, [">= 2.5.0"])
       s.add_dependency(%q<terminal-table>, [">= 1.4.5"])
+      s.add_dependency(%q<sshd_config>, [">= 0"])
       s.add_dependency(%q<rspec>, [">= 2.11.0"])
       s.add_dependency(%q<rdoc>, [">= 3.12"])
       s.add_dependency(%q<cucumber>, [">= 1.2.1"])
@@ -284,6 +286,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<sqlite3>, [">= 1.3.6"])
     s.add_dependency(%q<grit>, [">= 2.5.0"])
     s.add_dependency(%q<terminal-table>, [">= 1.4.5"])
+    s.add_dependency(%q<sshd_config>, [">= 0"])
     s.add_dependency(%q<rspec>, [">= 2.11.0"])
     s.add_dependency(%q<rdoc>, [">= 3.12"])
     s.add_dependency(%q<cucumber>, [">= 1.2.1"])
