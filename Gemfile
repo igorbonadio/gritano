@@ -7,6 +7,7 @@ gem 'activerecord', ">= 3.2.8"
 gem 'sqlite3', ">= 1.3.6"
 gem 'grit', ">= 2.5.0"
 gem 'terminal-table', ">= 1.4.5"
+gem "sshd_config"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.

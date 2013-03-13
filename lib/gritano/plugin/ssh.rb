@@ -1,3 +1,5 @@
+require "sshd_config"
+
 module Gritano
   class Ssh < Plugin
     
@@ -68,6 +70,18 @@ module Gritano
     add_command "stop" do |params|
       pid = `ps aux | grep -e /usr/local/sbin/sshd | grep -v grep | tr -s \" \" | cut -d \" \" -f2`
       `kill -9 #{pid}`
+    end
+    
+    def method_missing(name, *args, &body)
+      case name.to_s
+        when /^get_/ then
+          begin
+            sshd_config = SshdConfig::SshdConfig.read(File.join("/usr", "local", "etc", "sshd_config"))
+            return sshd_config.send(name.to_s.gsub(/^get_/, ''))
+          rescue Exception => e
+            return "invalid property"
+          end
+      end
     end
     
   end
