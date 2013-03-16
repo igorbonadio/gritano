@@ -50,10 +50,9 @@ module Gritano
             puts "[build] Installing"
             ok = system "cd /tmp/gritano-openssh/src && make install"
             if ok
-              gritano_pub_key = File.join(gritano_dir, 'gritano-pub-key')
-              File.open(File.join("/usr", "local", "etc", "sshd_config"), "a") do |f|
-                f.write("\n\nAuthorizedKeysScript #{gritano_pub_key}\n\n")
-              end
+              sshd_config = SshdConfig::SshdConfig.read(File.join("/usr", "local", "etc", "sshd_config"))
+              sshd_config.AuthorizedKeysScript = File.join(gritano_dir, 'gritano-pub-key')
+              sshd_config.save
               return "Installed"
             end
           end
