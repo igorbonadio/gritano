@@ -46,6 +46,7 @@ Feature: Local access
         | user:email:add igorbonadio igor@bonadio.com    |
         | user:email:add wrong igor@bonadio.com          |
         | user:email igorbonadio                         |
+        | user:email jessicaeto                          |
         | user:email wrong                               |
         | user:list                                      |
         | user:key:list igorbonadio                      |

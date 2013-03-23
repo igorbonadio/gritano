@@ -2,6 +2,9 @@ Given /^the following users exist:$/ do |table|
   table.hashes.each do |user|
     Gritano::User.create(user)
   end
+  jessica = Gritano::User.find_by_login("jessicaeto")
+  jessica.email = "jessica@eto.com"
+  jessica.save
 end
 
 Given /^the following keys exist:$/ do |table|
