@@ -67,6 +67,8 @@ Feature: Remote access
         | admin:user:key:rm igorbonadio eva                    |
         | admin:user:email:add igorbonadio igor@bonadio.com    |
         | admin:user:email:add wrong igor@bonadio.com          |
+        | admin:user:email igorbonadio                         |
+        | admin:user:email wrong                               |
         | admin:user:rm igorbonadio                            |
         | admin:user:list                                      |
         | admin:user:key:list igorbonadio                      |
@@ -127,6 +129,8 @@ Feature: Remote access
         | admin:user:add jose                                  |
         | admin:user:email:add igorbonadio igor@bonadio.com    |
         | admin:user:email:add wrong igor@bonadio.com          |
+        | admin:user:email igorbonadio                         |
+        | admin:user:email wrong                               |
         | admin:user:key:add igorbonadio marvin                |
         | admin:user:key:rm igorbonadio eva                    |
         | admin:user:rm igorbonadio                            |
