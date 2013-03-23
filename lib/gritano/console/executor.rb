@@ -22,10 +22,12 @@ module Gritano
       add_command "user:list" do |argv|
         users = User.all
         msg = Terminal::Table.new do |t|
-          t << ['user']
+          t << ['user', 'email']
           t << :separator
           users.each do |user|
-            t.add_row [user.login]
+            email = "-"
+            email = user.email if user.email
+            t.add_row [user.login, email]
           end
         end
         msg = "there is no user registered" if users.count == 0
