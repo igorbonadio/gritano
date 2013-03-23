@@ -16,6 +16,7 @@
   gritano user:add username
   gritano user:rm username
   gritano user:email:add username email@server.com
+  gritano user:email username
   gritano user:key:add username keyname < key.pub
   gritano user:key:rm username keyname
   gritano user:admin:add username
