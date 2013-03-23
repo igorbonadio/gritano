@@ -87,6 +87,18 @@ module Gritano
         end
         return [false, "User #{login} could not be removed."]
       end
+      
+      add_command "user:email:add", "username email@server.com" do |argv|
+        login, email = argv
+        user = User.find_by_login(login)
+        if user
+          user.email = email
+          if user.save
+            return [true, "Email added."]
+          end
+        end
+        return [false, "Email could not be added."]
+      end
 
       add_command "user:key:add", "username keyname < key.pub" do |argv|
         login, key_name, key_file = argv
