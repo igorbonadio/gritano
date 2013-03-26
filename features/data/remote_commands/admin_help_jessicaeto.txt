@@ -13,7 +13,7 @@
   ssh git@host.com admin:user:list 
   ssh git@host.com admin:user:key:list username
   ssh git@host.com admin:user:repo:list username
-  ssh git@host.com admin:user:add username
+  ssh git@host.com admin:user:add username [email admin]
   ssh git@host.com admin:user:rm username
   ssh git@host.com admin:user:email:add username email@server.com
   ssh git@host.com admin:user:email username

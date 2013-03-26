@@ -31,7 +31,7 @@ module Gritano
       it "should add users" do
         user = double()
         user.should_receive(:save).and_return(true)
-        User.should_receive(:new).with(login: "login").and_return(user)
+        User.should_receive(:new).with(login: "login", email: nil, admin: nil).and_return(user)
         create_executor('.', 'tmp').execute(["user:add", "login"])
       end
       
