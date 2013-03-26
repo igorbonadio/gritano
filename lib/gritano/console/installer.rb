@@ -20,7 +20,7 @@ module Gritano
       
       def create_sqlite_config
         File.open(File.join(@home_dir, '.gritano', 'database.yml'), "w") do |f|
-          f.write("adapter: sqlite3\ndatabase: #{File.join(Etc.getpwuid.dir, '.gritano', 'database.db')}\n")
+          f.write("adapter: sqlite3\ndatabase: #{File.join(@home_dir, '.gritano', 'database.db')}\n")
         end
         if File.exist?(File.join(@home_dir, '.gritano', 'database.db'))
           FileUtils.rm(File.join(@home_dir, '.gritano', 'database.db'))
