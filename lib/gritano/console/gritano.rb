@@ -53,7 +53,7 @@ module Gritano
       add_command "plugin:rm", "plugin_name" do |argv|
         name, = argv
         begin
-          Plugin.list[name][:klass].new.remove
+          Plugin.list[name][:klass].new(@stdin, @home_dir, @repo_path).remove
           return [true, "Plugin #{name} was removed"]
         rescue
           return [false, "There isn't a plugin called #{name}"]
@@ -65,7 +65,7 @@ module Gritano
         params = argv[1..-1]
         if Plugin.list[name]
           begin
-            return [true, Plugin.list[name][:klass].new.exec(params)]
+            return [true, Plugin.list[name][:klass].new(@stdin, @home_dir, @repo_path).exec(params)]
           rescue Exception => e
             return [true, Plugin.list[name][:klass].help]
           end
