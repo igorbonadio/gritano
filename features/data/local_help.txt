@@ -21,6 +21,7 @@
   gritano user:key:rm username keyname
   gritano user:admin:add username
   gritano user:admin:rm username
+  gritano user:admin username
   gritano repo:list 
   gritano repo:add reponame.git [username1 username2 ...]*
   gritano repo:user:list reponame.git

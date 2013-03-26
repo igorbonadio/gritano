@@ -171,6 +171,15 @@ module Gritano
         return [false, "User #{login} could not be modified"]
       end
 
+      add_command "user:admin", "username" do |argv|
+        login, = argv
+        user = User.find_by_login(login)
+        if user
+          return [true, user.admin]
+        end
+        return [false, "User #{login} does not exist"]
+      end
+
       add_command "repo:list" do |argv|
         repos = Repository.all
         msg = Terminal::Table.new do |t|

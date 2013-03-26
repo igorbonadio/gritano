@@ -21,6 +21,7 @@
   ssh git@host.com admin:user:key:rm username keyname
   ssh git@host.com admin:user:admin:add username
   ssh git@host.com admin:user:admin:rm username
+  ssh git@host.com admin:user:admin username
   ssh git@host.com admin:repo:list 
   ssh git@host.com admin:repo:add reponame.git [username1 username2 ...]*
   ssh git@host.com admin:repo:user:list reponame.git
