@@ -72,7 +72,7 @@ module Gritano
         end
       end
 
-      add_command "user:add", "username [email admin]" do |argv|
+      add_command "user:add", "username [email admin]*" do |argv|
         login, email, admin = argv
         user = User.new(login: login, email: email, admin: admin)
         return [true, "User #{login} added."] if user.save
