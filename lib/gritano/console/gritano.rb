@@ -79,7 +79,9 @@ module Gritano
         begin
           installer = Installer.new(@stdin, @home_dir)
           installer.execute(params)
-        rescue
+        rescue Exception => e
+          puts "exception method missing"
+          puts e
           executor = Executor.new(@stdin, @home_dir, @repo_path)
           executor.execute(params)
         end
