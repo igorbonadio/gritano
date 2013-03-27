@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "gritano"
-  s.version = "0.9.1"
+  s.version = "0.9.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Igor Bonadio"]
-  s.date = "2013-03-26"
+  s.date = "2013-03-27"
   s.description = "Gritano is the simplest way to configure your git server over ssh. You can create repositories and manage user access."
   s.email = "igorbonadio@gmail.com"
   s.executables = ["gritano", "gritano-pub-key", "gritano-remote"]
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     ".gritano/database.yml",
     ".rspec",
     ".ssh/.gitignore",
+    ".travis.yml",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
@@ -79,11 +80,11 @@ Gem::Specification.new do |s|
     "features/data/local_commands/user_admin_add_igorbonadio.txt",
     "features/data/local_commands/user_admin_rm_arybonadio.txt",
     "features/data/local_commands/user_admin_rm_igorbonadio.txt",
-    "features/data/local_commands/user_email_add_igorbonadio_igor@bonadio_com.txt",
-    "features/data/local_commands/user_email_add_wrong_igor@bonadio_com.txt",
-    "features/data/local_commands/user_email_igorbonadio.txt",
-    "features/data/local_commands/user_email_jessicaeto.txt",
-    "features/data/local_commands/user_email_wrong.txt",
+    "features/data/local_commands/user_email_get_igorbonadio.txt",
+    "features/data/local_commands/user_email_get_jessicaeto.txt",
+    "features/data/local_commands/user_email_get_wrong.txt",
+    "features/data/local_commands/user_email_update_igorbonadio_igor@bonadio_com.txt",
+    "features/data/local_commands/user_email_update_wrong_igor@bonadio_com.txt",
     "features/data/local_commands/user_key_add_igorbonadio_marvin.txt",
     "features/data/local_commands/user_key_add_userrr_marvino.txt",
     "features/data/local_commands/user_key_list_arybonadio.txt",
@@ -167,16 +168,16 @@ Gem::Specification.new do |s|
     "features/data/remote_commands/admin_user_admin_rm_arybonadio_jessicaeto.txt",
     "features/data/remote_commands/admin_user_admin_rm_igorbonadio_igorbonadio.txt",
     "features/data/remote_commands/admin_user_admin_rm_igorbonadio_jessicaeto.txt",
-    "features/data/remote_commands/admin_user_email_add_igorbonadio_igor@bonadio_com_igorbonadio.txt",
-    "features/data/remote_commands/admin_user_email_add_igorbonadio_igor@bonadio_com_jessicaeto.txt",
-    "features/data/remote_commands/admin_user_email_add_wrong_igor@bonadio_com_igorbonadio.txt",
-    "features/data/remote_commands/admin_user_email_add_wrong_igor@bonadio_com_jessicaeto.txt",
-    "features/data/remote_commands/admin_user_email_igorbonadio_igorbonadio.txt",
-    "features/data/remote_commands/admin_user_email_igorbonadio_jessicaeto.txt",
-    "features/data/remote_commands/admin_user_email_jessicaeto_igorbonadio.txt",
-    "features/data/remote_commands/admin_user_email_jessicaeto_jessicaeto.txt",
-    "features/data/remote_commands/admin_user_email_wrong_igorbonadio.txt",
-    "features/data/remote_commands/admin_user_email_wrong_jessicaeto.txt",
+    "features/data/remote_commands/admin_user_email_get_igorbonadio_igorbonadio.txt",
+    "features/data/remote_commands/admin_user_email_get_igorbonadio_jessicaeto.txt",
+    "features/data/remote_commands/admin_user_email_get_jessicaeto_igorbonadio.txt",
+    "features/data/remote_commands/admin_user_email_get_jessicaeto_jessicaeto.txt",
+    "features/data/remote_commands/admin_user_email_get_wrong_igorbonadio.txt",
+    "features/data/remote_commands/admin_user_email_get_wrong_jessicaeto.txt",
+    "features/data/remote_commands/admin_user_email_update_igorbonadio_igor@bonadio_com_igorbonadio.txt",
+    "features/data/remote_commands/admin_user_email_update_igorbonadio_igor@bonadio_com_jessicaeto.txt",
+    "features/data/remote_commands/admin_user_email_update_wrong_igor@bonadio_com_igorbonadio.txt",
+    "features/data/remote_commands/admin_user_email_update_wrong_igor@bonadio_com_jessicaeto.txt",
     "features/data/remote_commands/admin_user_key_add_igorbonadio_marvin_igorbonadio.txt",
     "features/data/remote_commands/admin_user_key_add_igorbonadio_marvin_jessicaeto.txt",
     "features/data/remote_commands/admin_user_key_add_userrr_marvino_igorbonadio.txt",
@@ -201,6 +202,10 @@ Gem::Specification.new do |s|
     "features/data/remote_commands/admin_user_rm_jose_jessicaeto.txt",
     "features/data/remote_commands/admin_version_igorbonadio.txt",
     "features/data/remote_commands/admin_version_jessicaeto.txt",
+    "features/data/remote_commands/email_get_igorbonadio.txt",
+    "features/data/remote_commands/email_get_jessicaeto.txt",
+    "features/data/remote_commands/email_update_email@server_com_igorbonadio.txt",
+    "features/data/remote_commands/email_update_email@server_com_jessicaeto.txt",
     "features/data/remote_commands/help_igorbonadio.txt",
     "features/data/remote_commands/help_jessicaeto.txt",
     "features/data/remote_commands/invalid_command_igorbonadio.txt",
