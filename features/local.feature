@@ -45,9 +45,9 @@ Feature: Local access
         | user:rm igorbonadio                            |
         | user:email:update igorbonadio igor@bonadio.com    |
         | user:email:update wrong igor@bonadio.com          |
-        | user:email igorbonadio                         |
-        | user:email jessicaeto                          |
-        | user:email wrong                               |
+        | user:email:get igorbonadio                         |
+        | user:email:get jessicaeto                          |
+        | user:email:get wrong                               |
         | user:list                                      |
         | user:key:list igorbonadio                      |
         | user:repo:list igorbonadio                     |

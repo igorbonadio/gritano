@@ -107,7 +107,7 @@ module Gritano
         return [false, "Email could not be added."]
       end
       
-      add_command "user:email", "username" do |argv|
+      add_command "user:email:get", "username" do |argv|
         login = argv
         user = User.find_by_login(login)
         if user
