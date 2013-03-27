@@ -15,7 +15,7 @@
   ssh git@host.com admin:user:repo:list username
   ssh git@host.com admin:user:add username [email admin]*
   ssh git@host.com admin:user:rm username
-  ssh git@host.com admin:user:email:add username email@server.com
+  ssh git@host.com admin:user:email:update username email@server.com
   ssh git@host.com admin:user:email username
   ssh git@host.com admin:user:key:add username keyname < key.pub
   ssh git@host.com admin:user:key:rm username keyname

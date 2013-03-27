@@ -43,8 +43,8 @@ Feature: Local access
         | user:key:add igorbonadio marvin                |
         | user:key:rm igorbonadio eva                    |
         | user:rm igorbonadio                            |
-        | user:email:add igorbonadio igor@bonadio.com    |
-        | user:email:add wrong igor@bonadio.com          |
+        | user:email:update igorbonadio igor@bonadio.com    |
+        | user:email:update wrong igor@bonadio.com          |
         | user:email igorbonadio                         |
         | user:email jessicaeto                          |
         | user:email wrong                               |
