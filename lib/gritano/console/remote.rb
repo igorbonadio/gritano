@@ -46,6 +46,11 @@ module Gritano
         keyname, login = args
         @executor.execute(["user:key:rm"] + [login, keyname])
       end
+
+      add_command "email:get" do |args|
+        login, = args
+        @executor.execute(["user:email:get"] + [login])
+      end
       
       add_command "admin:help" do |args|
         gritano = Gritano.new(@stdin)
