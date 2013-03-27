@@ -61,6 +61,7 @@ Feature: Remote access
         | key:add keyname                                      |
         | key:rm hal                                           |
         | email:get                                            |
+        | email:update email@server.com                        |
         | admin:help                                           |
         | admin:version                                        |
         | admin:user:add jose                                  |
@@ -127,6 +128,7 @@ Feature: Remote access
         | key:add keyname                                      |
         | key:rm hal                                           |
         | email:get                                            |
+        | email:update email@server.com                        |
         | admin:help                                           |
         | admin:version                                        |
         | admin:user:add jose                                  |

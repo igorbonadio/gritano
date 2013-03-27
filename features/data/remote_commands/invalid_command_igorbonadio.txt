@@ -8,6 +8,7 @@
   ssh git@host.com key:add keyname < key.pub
   ssh git@host.com key:rm keyname
   ssh git@host.com email:get 
+  ssh git@host.com email:update email@server.com
   ssh git@host.com admin:help 
 
   --
