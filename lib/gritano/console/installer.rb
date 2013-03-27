@@ -14,14 +14,8 @@ module Gritano
       end
 
       def create_gritano_dirs
-        begin
-          Dir.mkdir(File.join(@home_dir, '.gritano')) unless File.exist?(File.join(@home_dir, '.gritano'))
-        rescue Exception => e
-          puts "---------------------->"
-          puts e
-          puts "<----------------------"
-        end
-        Dir.mkdir(File.join(@home_dir, '.ssh')) unless File.exist?(File.join(@home_dir, '.ssh'))
+        FileUtils.mkdir_p(File.join(@home_dir, '.gritano')) unless File.exist?(File.join(@home_dir, '.gritano'))
+        FileUtils.mkdir_p(File.join(@home_dir, '.ssh')) unless File.exist?(File.join(@home_dir, '.ssh'))
       end
       
       def create_sqlite_config
