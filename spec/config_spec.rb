@@ -7,7 +7,16 @@ module Gritano
       config.ssh.should be == false
     end
 
-    it "should add parameters"
+    it "should add parameters" do
+      if File.exist?(File.join("tmp", "config_test.yml"))
+        FileUtils.rm(File.join("tmp", "config_test.yml"))
+      end
+      config = Config.new(File.join("tmp", "config_test.yml"))
+      config.ssh.should be == nil
+      config.ssh = true
+      config.ssh.should be == true
+    end
+
     it "should remove parameters"
     it "should modify parameters"
   end

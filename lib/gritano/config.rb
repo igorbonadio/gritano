@@ -6,11 +6,21 @@ module Gritano
     end
 
     def load
+      unless File.exist?(@config_file)
+        File.open(@config_file, "w").close
+      end
       @config = YAML::load(File.open(@config_file))
+      unless @config
+        @config = Hash.new
+      end
     end
 
     def method_missing(name, *args, &block)
-      @config[name.to_s]
+      if name[-1] == '='
+        @config[name.to_s[0..-2]] = args[0]
+      else
+        @config[name.to_s]
+      end
     end
   end
 end
