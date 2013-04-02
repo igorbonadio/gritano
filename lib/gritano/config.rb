@@ -19,6 +19,12 @@ module Gritano
       @config.delete(parameter.to_s)
     end
 
+    def save
+      File.open(@config_file, "w") do |f|
+        f.write(@config.to_yaml)
+      end
+    end
+
     def method_missing(name, *args, &block)
       if name[-1] == '='
         @config[name.to_s[0..-2]] = args[0]

@@ -41,5 +41,20 @@ module Gritano
       config.ssh = false
       config.ssh.should be == false
     end
+
+    it "should save a config file" do
+      if File.exist?(File.join("tmp", "config_test.yml"))
+        FileUtils.rm(File.join("tmp", "config_test.yml"))
+      end
+      config = Config.new(File.join("tmp", "config_test.yml"))
+      config.ssh = true
+      config.email = {login: 'igor', smtp: 'smtp.igor.com'}
+      config.save
+
+      config2 = Config.new(File.join("tmp", "config_test.yml"))
+      config2.ssh.should be == true
+      config2.email[:login].should be == "igor"
+      config2.email[:smtp].should be == "smtp.igor.com"
+    end
   end
 end
