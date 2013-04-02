@@ -15,6 +15,10 @@ module Gritano
       end
     end
 
+    def remove(parameter)
+      @config.delete(parameter.to_s)
+    end
+
     def method_missing(name, *args, &block)
       if name[-1] == '='
         @config[name.to_s[0..-2]] = args[0]
