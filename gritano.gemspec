@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "gritano"
-  s.version = "0.9.2"
+  s.version = "0.9.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Igor Bonadio"]
-  s.date = "2013-03-27"
+  s.date = "2013-04-02"
   s.description = "Gritano is the simplest way to configure your git server over ssh. You can create repositories and manage user access."
   s.email = "igorbonadio@gmail.com"
   s.executables = ["gritano", "gritano-pub-key", "gritano-remote"]
@@ -236,6 +236,7 @@ Gem::Specification.new do |s|
     "gritano.gemspec",
     "lib/gritano.rb",
     "lib/gritano/cli.rb",
+    "lib/gritano/config.rb",
     "lib/gritano/console.rb",
     "lib/gritano/console/base.rb",
     "lib/gritano/console/executor.rb",
@@ -250,6 +251,7 @@ Gem::Specification.new do |s|
     "lib/gritano/plugin.rb",
     "lib/gritano/plugin/ssh.rb",
     "spec/cli_spec.rb",
+    "spec/config_spec.rb",
     "spec/console_base_spec.rb",
     "spec/console_executor_spec.rb",
     "spec/console_gritano_spec.rb",
@@ -257,7 +259,6 @@ Gem::Specification.new do |s|
     "spec/console_remote_spec.rb",
     "spec/console_spec.rb",
     "spec/data/help_command_name.txt",
-    "spec/model_config_spec.rb",
     "spec/model_key_spec.rb",
     "spec/model_permission_spec.rb",
     "spec/model_repository_spec.rb",
