@@ -30,6 +30,16 @@ module Gritano
       config.ssh.should be == nil
     end
 
-    it "should modify parameters"
+    it "should modify parameters" do
+      if File.exist?(File.join("tmp", "config_test.yml"))
+        FileUtils.rm(File.join("tmp", "config_test.yml"))
+      end
+      config = Config.new(File.join("tmp", "config_test.yml"))
+      config.ssh.should be == nil
+      config.ssh = true
+      config.ssh.should be == true
+      config.ssh = false
+      config.ssh.should be == false
+    end
   end
 end
