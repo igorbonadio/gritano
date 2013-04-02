@@ -8,6 +8,7 @@ module Gritano
     end
 
     it "should add parameters" do
+      FileUtils.mkdir_p('tmp')
       if File.exist?(File.join(File.dirname(__FILE__) , "..", "tmp", "config_test.yml"))
         FileUtils.rm(File.join(File.dirname(__FILE__) , "..", "tmp", "config_test.yml"))
       end
@@ -18,6 +19,7 @@ module Gritano
     end
 
     it "should remove parameters" do
+      FileUtils.mkdir_p(File.join(File.dirname(__FILE__) , "..", 'tmp'))
       if File.exist?(File.join(File.dirname(__FILE__) , "..", "tmp", "config_test.yml"))
         FileUtils.rm(File.join(File.dirname(__FILE__) , "..", "tmp", "config_test.yml"))
       end
@@ -31,6 +33,7 @@ module Gritano
     end
 
     it "should modify parameters" do
+      FileUtils.mkdir_p(File.join(File.dirname(__FILE__) , "..", 'tmp'))
       if File.exist?(File.join(File.dirname(__FILE__) , "..", "tmp", "config_test.yml"))
         FileUtils.rm(File.join(File.dirname(__FILE__) , "..", "tmp", "config_test.yml"))
       end
@@ -43,6 +46,7 @@ module Gritano
     end
 
     it "should save a config file" do
+      FileUtils.mkdir_p(File.join(File.dirname(__FILE__) , "..", 'tmp'))
       if File.exist?(File.join(File.dirname(__FILE__) , "..", "tmp", "config_test.yml"))
         FileUtils.rm(File.join(File.dirname(__FILE__) , "..", "tmp", "config_test.yml"))
       end
