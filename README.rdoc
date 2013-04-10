@@ -1,6 +1,6 @@
-= Gritano v0.9.3
+= Gritano
 
-{<img src="https://travis-ci.org/igorbonadio/gritano.png" />}[https://travis-ci.org/igorbonadio/gritano]
+{<img src="https://badge.fury.io/rb/gritano.png" alt="Gem Version" />}[http://badge.fury.io/rb/gritano] {<img src="https://travis-ci.org/igorbonadio/gritano.png" />}[https://travis-ci.org/igorbonadio/gritano]
 
 Gritano is the simplest way to configure a git server over ssh. You can create repositories and manage user access using this practical tool.
 
