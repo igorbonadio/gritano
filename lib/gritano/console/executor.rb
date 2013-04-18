@@ -127,7 +127,7 @@ module Gritano
         user = User.find_by_login(login)
         if user
           begin
-            key_str = "#{@stdin.read.scan(/^ssh-(?:dss|rsa) [A-Za-z0-9+\/]+/)[0]}"
+            key_str = "#{@stdin.read.scan(/^ssh-(?:dss|rsa) .* /)[0][0..-2]}"
           rescue
             return [false, "Key could not be added."]
           end

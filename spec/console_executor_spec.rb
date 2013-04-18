@@ -52,6 +52,21 @@ module Gritano
         User.should_receive(:find_by_login).with("login").and_return(user)
         create_executor('.', 'tmp').execute(["user:key:add", "login", "keyname"])
       end
+
+      it "should add users' keys" do
+        user = double()
+        keys = double()
+        key = double()
+        
+        key.should_receive(:valid?).and_return(true)
+        keys.should_receive(:create).with(name: "keyname", key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9UnnlDwmvid+WRAyIhVzFhIjUUxA3Wul7LN8mk18dHZDv5HSVADmM4EoqbVSbpeVIyTIchqS3y3XF1rh8dfM41f/W3lcTcFihHM6RDx45Q3Lz9hfyrT8tttlWRA7prvlXu6bUOqMmNtvFFow+bJEo/HgCZHshvoDHcnlHfziU7bDCo+p50SdafFwZRe3AWp/f4TsxiP7jpBnluQM0Dl9Om8jfW8IYAJ+WxlKBsKLMkRH/HWSuigs4AQBD4ADiQfOm2RO4yeSiVFNwGFmgG7NmEq1sNALLAQw+ijN9vyiD99ybr0pqoJX3vhyRBWvCrgQdHjh8ucaoMXI89LxyYts==").and_return(key)
+        user.should_receive(:keys).and_return(keys)
+        User.should_receive(:find_by_login).with("login").and_return(user)
+        
+        stdin = double()
+        stdin.stub(:read).and_return("ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9UnnlDwmvid+WRAyIhVzFhIjUUxA3Wul7LN8mk18dHZDv5HSVADmM4EoqbVSbpeVIyTIchqS3y3XF1rh8dfM41f/W3lcTcFihHM6RDx45Q3Lz9hfyrT8tttlWRA7prvlXu6bUOqMmNtvFFow+bJEo/HgCZHshvoDHcnlHfziU7bDCo+p50SdafFwZRe3AWp/f4TsxiP7jpBnluQM0Dl9Om8jfW8IYAJ+WxlKBsKLMkRH/HWSuigs4AQBD4ADiQfOm2RO4yeSiVFNwGFmgG7NmEq1sNALLAQw+ijN9vyiD99ybr0pqoJX3vhyRBWvCrgQdHjh8ucaoMXI89LxyYts== igorbonadio@marvin.local")
+        Executor.new(stdin, '.', 'tmp').execute(["user:key:add", "login", "keyname"])
+      end
       
       it "should remove users' keys" do
         keys = double()
