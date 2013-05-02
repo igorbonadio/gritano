@@ -14,6 +14,7 @@
   gritano user:key:list username
   gritano user:repo:list username
   gritano user:add username [email admin]*
+  gritano user:password:set username
   gritano user:rm username
   gritano user:email:update username email@server.com
   gritano user:email:get username
