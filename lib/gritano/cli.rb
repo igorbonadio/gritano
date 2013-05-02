@@ -42,5 +42,17 @@ module Gritano
       end
       return false
     end
+
+    def CLI.check_access(login, repo, access, home_dir = Etc.getpwuid.dir, repo_dir = Etc.getpwuid.dir)
+      ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(home_dir, '.gritano', 'database.yml'))))
+      user = User.find_by_login(login)
+      if user
+        repo = Gritano::Repository.find_by_name(repo)
+        if repo
+          return user.check_access(repo, access)
+        end
+      end
+      return false
+    end
   end
 end
