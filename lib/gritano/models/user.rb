@@ -1,11 +1,24 @@
+require 'bcrypt'
+
 module Gritano
   class User < ActiveRecord::Base
+    include BCrypt
+
     validates :login, presence: true
     validates_uniqueness_of :login
     
     has_many :permissions
     has_many :repositories, through: :permissions
     has_many :keys
+
+    def password
+      @password ||= Password.new(crypted_password)
+    end
+
+    def password=(new_password)
+      @password = Password.create(new_password)
+      self.crypted_password = @password
+    end
     
     def add_access(repo, access)
       change_access(repo, "add", access)
