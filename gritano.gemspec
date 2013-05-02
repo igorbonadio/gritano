@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "gritano"
-  s.version = "0.9.4"
+  s.version = "0.10.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Igor Bonadio"]
-  s.date = "2013-04-18"
+  s.date = "2013-05-02"
   s.description = "Gritano is the simplest way to configure your git server over ssh. You can create repositories and manage user access."
   s.email = "igorbonadio@gmail.com"
   s.executables = ["gritano", "gritano-pub-key", "gritano-remote"]
@@ -40,6 +40,7 @@ Gem::Specification.new do |s|
     "db/migrate/004_create_keys.rb",
     "db/migrate/005_add_admin_to_users.rb",
     "db/migrate/006_add_email_to_users.rb",
+    "db/migrate/007_add_password_to_users.rb",
     "features/data/config_true.yml",
     "features/data/local_commands/addon_list.txt",
     "features/data/local_commands/addon_ssh_install.txt",
@@ -282,6 +283,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<grit>, [">= 2.5.0"])
       s.add_runtime_dependency(%q<terminal-table>, [">= 1.4.5"])
       s.add_runtime_dependency(%q<sshd_config>, [">= 0"])
+      s.add_runtime_dependency(%q<bcrypt-ruby>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 2.11.0"])
       s.add_development_dependency(%q<rdoc>, [">= 3.12"])
       s.add_development_dependency(%q<cucumber>, [">= 1.2.1"])
@@ -295,6 +297,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<grit>, [">= 2.5.0"])
       s.add_dependency(%q<terminal-table>, [">= 1.4.5"])
       s.add_dependency(%q<sshd_config>, [">= 0"])
+      s.add_dependency(%q<bcrypt-ruby>, [">= 0"])
       s.add_dependency(%q<rspec>, [">= 2.11.0"])
       s.add_dependency(%q<rdoc>, [">= 3.12"])
       s.add_dependency(%q<cucumber>, [">= 1.2.1"])
@@ -309,6 +312,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<grit>, [">= 2.5.0"])
     s.add_dependency(%q<terminal-table>, [">= 1.4.5"])
     s.add_dependency(%q<sshd_config>, [">= 0"])
+    s.add_dependency(%q<bcrypt-ruby>, [">= 0"])
     s.add_dependency(%q<rspec>, [">= 2.11.0"])
     s.add_dependency(%q<rdoc>, [">= 3.12"])
     s.add_dependency(%q<cucumber>, [">= 1.2.1"])
