@@ -30,7 +30,7 @@ module Gritano
       add_command "username" do |args|
         login, = args
         [true, login]
-      end      
+      end
       
       add_command "repo:list" do |args|
         login, = args
