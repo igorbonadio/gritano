@@ -9,6 +9,7 @@
   gritano key:rm keyname
   gritano email:get 
   gritano email:update email@server.com
+  gritano password:set 
   gritano admin:help 
 
   --

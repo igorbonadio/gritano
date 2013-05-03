@@ -56,6 +56,11 @@ module Gritano
         email, login = args
         @executor.execute(["user:email:update"] + [login, email])
       end
+
+      add_command "password:set" do |args|
+        login, = args
+        @executor.execute(["user:password:set"] + [login])
+      end
       
       add_command "admin:help" do |args|
         gritano = Gritano.new(@stdin)
