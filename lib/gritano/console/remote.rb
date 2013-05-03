@@ -26,6 +26,11 @@ module Gritano
       add_command "help" do |args|
         [true, Remote.help]
       end
+
+      add_command "username" do |args|
+        login, = args
+        [true, login]
+      end      
       
       add_command "repo:list" do |args|
         login, = args

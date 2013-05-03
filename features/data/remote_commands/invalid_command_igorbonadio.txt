@@ -3,6 +3,7 @@
   Examples:
   ssh git@host.com version 
   ssh git@host.com help 
+  ssh git@host.com username 
   ssh git@host.com repo:list 
   ssh git@host.com key:list 
   ssh git@host.com key:add keyname < key.pub

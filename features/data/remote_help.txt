@@ -3,6 +3,7 @@
   Examples:
   gritano version 
   gritano help 
+  gritano username 
   gritano repo:list 
   gritano key:list 
   gritano key:add keyname < key.pub
