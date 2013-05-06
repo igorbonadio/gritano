@@ -319,6 +319,22 @@ module Gritano
         end
         return [false, "An error occurred. Permissions was not modified."]
       end
+
+      add_command "repo:info", "reponame.git" do |argv|
+        repo_name, = argv
+        repo = Repository.find_by_name(repo_name)
+        if repo
+          msg = Terminal::Table.new do |t|
+            t << ['ssh', "git@server.com:#{repo_name}"]
+            if ::Gritano::Http.check_install
+              t << :separator
+              t << ['http', "git.server.com/#{repo_name}"]
+            end
+          end
+          return [true, msg]
+        end
+        return [false, "Repository #{repo_name} doesn't exist."]
+      end
       
     end
   end
