@@ -31,6 +31,16 @@ module Gritano
       end
     end
 
+    def self.servername
+      home = Etc.getpwuid.dir
+      config = Config.new(File.join(home, '.gritano', 'config.yml'))
+      if config.http_servername
+        return config.http_servername
+      else
+        return "http://git.server.com"
+      end
+    end
+
     add_command "help" do |params|
       Http.help
     end
@@ -43,6 +53,19 @@ module Gritano
         return "Done"
       end
       return "error"
+    end
+
+    add_command "servername:get" do |params|
+      return Http.servername
+    end
+
+    add_command "servername:set", "servername" do |params|
+      servername, = params
+      home = Etc.getpwuid.dir
+      config = Config.new(File.join(home, '.gritano', 'config.yml'))
+      config.http_servername = servername
+      config.save
+      return "done!"
     end
     
   end

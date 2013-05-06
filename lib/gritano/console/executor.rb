@@ -328,7 +328,7 @@ module Gritano
             t << ['ssh', "git@server.com:#{repo_name}"]
             if ::Gritano::Http.check_install
               t << :separator
-              t << ['http', "git.server.com/#{repo_name}"]
+              t << ['http', "#{Http.servername}/#{repo_name}"]
             end
           end
           return [true, msg]
