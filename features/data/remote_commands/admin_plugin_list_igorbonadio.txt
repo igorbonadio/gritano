@@ -2,4 +2,5 @@
 | plugin | installed |
 +--------+-----------+
 | ssh    | false     |
+| http   | false     |
 +--------+-----------+

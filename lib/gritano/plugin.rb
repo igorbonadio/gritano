@@ -47,7 +47,8 @@ module Gritano
     end
     
     def self.inherited(subclass)
-      @subclass = {subclass.name => {klass: subclass, installed: lambda { subclass.check_install }}}
+      @subclass ||= Hash.new
+      @subclass[subclass.name] = {klass: subclass, installed: lambda { subclass.check_install }}
     end
     
     def self.add_command(command, parameters = "", &block)
@@ -81,3 +82,4 @@ module Gritano
 end
 
 require File.join(ROOT_PATH, 'gritano/plugin/ssh')
+require File.join(ROOT_PATH, 'gritano/plugin/http')
