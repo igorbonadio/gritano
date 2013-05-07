@@ -36,6 +36,11 @@ module Gritano
         login, = args
         @executor.execute(["user:repo:list"] + [login])
       end
+
+      add_command "repo:info", "reponame" do |args|
+        reponame, login = args
+        @executor.execute(["repo:info"] + [reponame])
+      end
       
       add_command "key:list" do |args|
         login, = args
