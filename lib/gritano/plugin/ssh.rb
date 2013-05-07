@@ -37,6 +37,17 @@ module Gritano
           return false
       end
     end
+
+    def self.servername
+      home = Etc.getpwuid.dir
+      if File.exist?(File.join(home, '.gritano', 'config.yml'))
+        config = Config.new(File.join(home, '.gritano', 'config.yml'))
+        if config.ssh_servername
+          return config.ssh_servername
+        end
+      end
+      return "git@host.com"
+    end
     
     add_command "help" do |params|
       Ssh.help
@@ -73,6 +84,19 @@ module Gritano
     add_command "stop" do |params|
       pid = `ps aux | grep -e /usr/local/sbin/sshd | grep -v grep | tr -s \" \" | cut -d \" \" -f2`
       `kill -9 #{pid}`
+    end
+
+    add_command "servername:get" do |params|
+      return Ssh.servername
+    end
+
+    add_command "servername:set", "servername" do |params|
+      servername, = params
+      home = Etc.getpwuid.dir
+      config = Config.new(File.join(home, '.gritano', 'config.yml'))
+      config.ssh_servername = servername
+      config.save
+      return "done!"
     end
     
     def method_missing(name, *args, &body)

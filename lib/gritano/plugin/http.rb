@@ -33,12 +33,13 @@ module Gritano
 
     def self.servername
       home = Etc.getpwuid.dir
-      config = Config.new(File.join(home, '.gritano', 'config.yml'))
-      if config.http_servername
-        return config.http_servername
-      else
-        return "http://git.server.com"
+      if File.exist?(File.join(home, '.gritano', 'config.yml'))
+        config = Config.new(File.join(home, '.gritano', 'config.yml'))
+        if config.http_servername
+          return config.http_servername
+        end
       end
+      return "http://git.server.com"
     end
 
     add_command "help" do |params|

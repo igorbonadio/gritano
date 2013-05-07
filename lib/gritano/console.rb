@@ -8,12 +8,12 @@ module Gritano
   module Console
     def Console.remote_console(remote)
       if remote
-        Base.bin_name = "ssh git@host.com admin:"
-        Remote.bin_name = "ssh git@host.com "
-        Executor.bin_name = "ssh git@host.com admin:"
-        Gritano.bin_name = "ssh git@host.com admin:"
-        Installer.bin_name = "ssh git@host.com admin:"
-        Plugin.bin_name = "ssh git@host.com admin:"
+        Base.bin_name = "ssh #{::Gritano::Ssh.servername} admin:"
+        Remote.bin_name = "ssh #{::Gritano::Ssh.servername} "
+        Executor.bin_name = "ssh #{::Gritano::Ssh.servername} admin:"
+        Gritano.bin_name = "ssh #{::Gritano::Ssh.servername} admin:"
+        Installer.bin_name = "ssh #{::Gritano::Ssh.servername} admin:"
+        Plugin.bin_name = "ssh #{::Gritano::Ssh.servername} admin:"
       else
         Base.bin_name = "gritano "
         Remote.bin_name = "gritano "

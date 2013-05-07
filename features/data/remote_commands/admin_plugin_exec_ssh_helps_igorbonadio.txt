@@ -5,6 +5,8 @@
   ssh git@host.com admin:plugin:exec ssh install gritano_path
   ssh git@host.com admin:plugin:exec ssh start 
   ssh git@host.com admin:plugin:exec ssh stop 
+  ssh git@host.com admin:plugin:exec ssh servername:get 
+  ssh git@host.com admin:plugin:exec ssh servername:set servername
 
   --
   v{{VERSION}}

@@ -325,7 +325,7 @@ module Gritano
         repo = Repository.find_by_name(repo_name)
         if repo
           msg = Terminal::Table.new do |t|
-            t << ['ssh', "git@server.com:#{repo_name}"]
+            t << ['ssh', "#{Ssh.servername}:#{repo_name}"]
             if ::Gritano::Http.check_install
               t << :separator
               t << ['http', "#{Http.servername}/#{repo_name}"]
