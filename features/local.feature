@@ -82,14 +82,4 @@ Feature: Local access
         | repo:write:rm tmp/gritano.git arybonadio       |
         | repo:write:rm tmp/p-lang.git igorbonadio       |
         | repo:user:list tmp/ruby.git                    |
-        | plugin:list                                    |
-        | plugin:info ssh                                |
-        | plugin:add ssh                                 |
-        | plugin:rm ssh                                  |
-        | plugin:info sshs                               |
-        | plugin:exec ssh help                           |
-        | plugin:exec ssh helps                          |
-        | plugin:exec sshs help                          |
-        | plugin:add sshs                                |
-        | plugin:rm sshs                                 |
         

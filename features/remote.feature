@@ -107,12 +107,6 @@ Feature: Remote access
         | admin:repo:write:rm tmp/gritano.git arybonadio       |
         | admin:repo:write:rm tmp/p-lang.git igorbonadio       |
         | admin:repo:user:list tmp/ruby.git                    |
-        | admin:plugin:list                                    |
-        | admin:plugin:info ssh                                |
-        | admin:plugin:info sshs                               |
-        | admin:plugin:exec ssh help                           |
-        | admin:plugin:exec ssh helps                          |
-        | admin:plugin:exec sshs help                          |
 
   Scenario Outline: Admin user execute command
       Given I start the remote console with "igorbonadio"
@@ -174,9 +168,3 @@ Feature: Remote access
         | admin:repo:write:rm tmp/gritano.git arybonadio       |
         | admin:repo:write:rm tmp/p-lang.git igorbonadio       |
         | admin:repo:user:list tmp/ruby.git                    |
-        | admin:plugin:list                                    |
-        | admin:plugin:info ssh                                |
-        | admin:plugin:info sshs                               |
-        | admin:plugin:exec ssh help                           |
-        | admin:plugin:exec ssh helps                          |
-        | admin:plugin:exec sshs help                          |
