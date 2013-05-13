@@ -3,11 +3,6 @@
   Examples:
   ssh git@host.com admin:help 
   ssh git@host.com admin:version 
-  ssh git@host.com admin:plugin:list 
-  ssh git@host.com admin:plugin:info plugin_name
-  ssh git@host.com admin:plugin:add plugin_name
-  ssh git@host.com admin:plugin:rm plugin_name
-  ssh git@host.com admin:plugin:exec plugin_name command
   ssh git@host.com admin:setup:prepare 
   ssh git@host.com admin:setup:install 
   ssh git@host.com admin:user:list 

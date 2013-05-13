@@ -3,11 +3,6 @@
   Examples:
   gritano help 
   gritano version 
-  gritano plugin:list 
-  gritano plugin:info plugin_name
-  gritano plugin:add plugin_name
-  gritano plugin:rm plugin_name
-  gritano plugin:exec plugin_name command
   gritano setup:prepare 
   gritano setup:install 
   gritano user:list 
