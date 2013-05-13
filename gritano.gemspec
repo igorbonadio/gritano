@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "gritano"
-  s.version = "0.10.3"
+  s.version = "0.11.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Igor Bonadio"]
-  s.date = "2013-05-07"
+  s.date = "2013-05-13"
   s.description = "Gritano is the simplest way to configure your git server over ssh. You can create repositories and manage user access."
   s.email = "igorbonadio@gmail.com"
   s.executables = ["gritano", "gritano-pub-key", "gritano-remote"]
@@ -42,18 +42,6 @@ Gem::Specification.new do |s|
     "db/migrate/006_add_email_to_users.rb",
     "db/migrate/007_add_password_to_users.rb",
     "features/data/config_true.yml",
-    "features/data/local_commands/addon_list.txt",
-    "features/data/local_commands/addon_ssh_install.txt",
-    "features/data/local_commands/plugin_add_ssh.txt",
-    "features/data/local_commands/plugin_add_sshs.txt",
-    "features/data/local_commands/plugin_exec_ssh_help.txt",
-    "features/data/local_commands/plugin_exec_ssh_helps.txt",
-    "features/data/local_commands/plugin_exec_sshs_help.txt",
-    "features/data/local_commands/plugin_info_ssh.txt",
-    "features/data/local_commands/plugin_info_sshs.txt",
-    "features/data/local_commands/plugin_list.txt",
-    "features/data/local_commands/plugin_rm_ssh.txt",
-    "features/data/local_commands/plugin_rm_sshs.txt",
     "features/data/local_commands/repo_add_tmp_jeka_git.txt",
     "features/data/local_commands/repo_add_tmp_p_lang_git.txt",
     "features/data/local_commands/repo_add_tmp_p_lang_git_igorbonadio.txt",
@@ -99,22 +87,8 @@ Gem::Specification.new do |s|
     "features/data/local_commands/user_rm_jose.txt",
     "features/data/local_commands/version.txt",
     "features/data/local_help.txt",
-    "features/data/remote_commands/admin_addon_list_igorbonadio.txt",
-    "features/data/remote_commands/admin_addon_list_jessicaeto.txt",
     "features/data/remote_commands/admin_help_igorbonadio.txt",
     "features/data/remote_commands/admin_help_jessicaeto.txt",
-    "features/data/remote_commands/admin_plugin_exec_ssh_help_igorbonadio.txt",
-    "features/data/remote_commands/admin_plugin_exec_ssh_help_jessicaeto.txt",
-    "features/data/remote_commands/admin_plugin_exec_ssh_helps_igorbonadio.txt",
-    "features/data/remote_commands/admin_plugin_exec_ssh_helps_jessicaeto.txt",
-    "features/data/remote_commands/admin_plugin_exec_sshs_help_igorbonadio.txt",
-    "features/data/remote_commands/admin_plugin_exec_sshs_help_jessicaeto.txt",
-    "features/data/remote_commands/admin_plugin_info_ssh_igorbonadio.txt",
-    "features/data/remote_commands/admin_plugin_info_ssh_jessicaeto.txt",
-    "features/data/remote_commands/admin_plugin_info_sshs_igorbonadio.txt",
-    "features/data/remote_commands/admin_plugin_info_sshs_jessicaeto.txt",
-    "features/data/remote_commands/admin_plugin_list_igorbonadio.txt",
-    "features/data/remote_commands/admin_plugin_list_jessicaeto.txt",
     "features/data/remote_commands/admin_repo_add_tmp_jeka_git_igorbonadio.txt",
     "features/data/remote_commands/admin_repo_add_tmp_jeka_git_jessicaeto.txt",
     "features/data/remote_commands/admin_repo_add_tmp_p_lang_git_igorbonadio.txt",
@@ -222,7 +196,6 @@ Gem::Specification.new do |s|
     "features/data/remote_commands/version_igorbonadio.txt",
     "features/data/remote_commands/version_jessicaeto.txt",
     "features/data/remote_help.txt",
-    "features/data/ssh_help.txt",
     "features/install.feature",
     "features/local.feature",
     "features/pub_key.feature",
@@ -249,9 +222,6 @@ Gem::Specification.new do |s|
     "lib/gritano/models/permission.rb",
     "lib/gritano/models/repository.rb",
     "lib/gritano/models/user.rb",
-    "lib/gritano/plugin.rb",
-    "lib/gritano/plugin/http.rb",
-    "lib/gritano/plugin/ssh.rb",
     "spec/cli_spec.rb",
     "spec/config_spec.rb",
     "spec/console_base_spec.rb",
@@ -265,8 +235,6 @@ Gem::Specification.new do |s|
     "spec/model_permission_spec.rb",
     "spec/model_repository_spec.rb",
     "spec/model_user_spec.rb",
-    "spec/plugin_spec.rb",
-    "spec/plugin_ssh_spec.rb",
     "spec/spec_helper.rb"
   ]
   s.homepage = "http://igorbonadio.com.br/gritano"
@@ -283,7 +251,6 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<sqlite3>, [">= 1.3.6"])
       s.add_runtime_dependency(%q<grit>, [">= 2.5.0"])
       s.add_runtime_dependency(%q<terminal-table>, [">= 1.4.5"])
-      s.add_runtime_dependency(%q<sshd_config>, [">= 0"])
       s.add_runtime_dependency(%q<bcrypt-ruby>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 2.11.0"])
       s.add_development_dependency(%q<rdoc>, [">= 3.12"])
@@ -297,7 +264,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<sqlite3>, [">= 1.3.6"])
       s.add_dependency(%q<grit>, [">= 2.5.0"])
       s.add_dependency(%q<terminal-table>, [">= 1.4.5"])
-      s.add_dependency(%q<sshd_config>, [">= 0"])
       s.add_dependency(%q<bcrypt-ruby>, [">= 0"])
       s.add_dependency(%q<rspec>, [">= 2.11.0"])
       s.add_dependency(%q<rdoc>, [">= 3.12"])
@@ -312,7 +278,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<sqlite3>, [">= 1.3.6"])
     s.add_dependency(%q<grit>, [">= 2.5.0"])
     s.add_dependency(%q<terminal-table>, [">= 1.4.5"])
-    s.add_dependency(%q<sshd_config>, [">= 0"])
     s.add_dependency(%q<bcrypt-ruby>, [">= 0"])
     s.add_dependency(%q<rspec>, [">= 2.11.0"])
     s.add_dependency(%q<rdoc>, [">= 3.12"])
