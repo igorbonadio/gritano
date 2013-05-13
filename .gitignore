@@ -51,3 +51,6 @@ pkg
 *.sqlite3
 TODO
 tmp
+
+puppet
+Vagrantfile
