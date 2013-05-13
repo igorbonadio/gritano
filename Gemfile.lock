@@ -55,7 +55,6 @@ GEM
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
     sqlite3 (1.3.7)
-    sshd_config (0.1.0)
     terminal-table (1.4.5)
     tzinfo (0.3.35)
 
@@ -74,5 +73,4 @@ DEPENDENCIES
   rspec (>= 2.11.0)
   simplecov (>= 0.6.4)
   sqlite3 (>= 1.3.6)
-  sshd_config
   terminal-table (>= 1.4.5)

@@ -91,12 +91,6 @@ Starting from Gritano 0.3.0, administrators can execute commands via ssh:
   
   $ ssh git@host.com admin:repo:list
   
-== Plugins
-
-Starting from Gritano 0.7.0, Gritano can be extended by plugins:
-
-* SSH - It's a patched OpenSSH v6.1p1 used by Gritano that enables SSH lookup for public keys in a database.
-  
 == For more Information
 
 http://igorbonadio.com.br/gritano
