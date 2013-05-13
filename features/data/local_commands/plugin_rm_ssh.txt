@@ -1,1 +1,0 @@
-Plugin ssh was removed

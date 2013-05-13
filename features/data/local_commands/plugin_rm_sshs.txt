@@ -1,1 +1,0 @@
-error: There isn't a plugin called sshs
