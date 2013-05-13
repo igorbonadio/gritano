@@ -5,7 +5,6 @@
   gritano help 
   gritano username 
   gritano repo:list 
-  gritano repo:info reponame
   gritano key:list 
   gritano key:add keyname < key.pub
   gritano key:rm keyname

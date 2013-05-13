@@ -26,7 +26,6 @@
   gritano repo:write:add reponame.git username
   gritano repo:read:rm reponame.git username
   gritano repo:write:rm reponame.git username
-  gritano repo:info reponame.git
 
   --
   v{{VERSION}}
