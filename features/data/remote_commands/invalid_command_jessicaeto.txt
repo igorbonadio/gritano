@@ -1,17 +1,17 @@
-  ssh git@host.com [command]
+  ssh undefined@undefined [command]
 
   Examples:
-  ssh git@host.com version 
-  ssh git@host.com help 
-  ssh git@host.com username 
-  ssh git@host.com repo:list 
-  ssh git@host.com key:list 
-  ssh git@host.com key:add keyname < key.pub
-  ssh git@host.com key:rm keyname
-  ssh git@host.com email:get 
-  ssh git@host.com email:update email@server.com
-  ssh git@host.com password:set 
-  ssh git@host.com admin:help 
+  ssh undefined@undefined version 
+  ssh undefined@undefined help 
+  ssh undefined@undefined username 
+  ssh undefined@undefined repo:list 
+  ssh undefined@undefined key:list 
+  ssh undefined@undefined key:add keyname < key.pub
+  ssh undefined@undefined key:rm keyname
+  ssh undefined@undefined email:get 
+  ssh undefined@undefined email:update email@server.com
+  ssh undefined@undefined password:set 
+  ssh undefined@undefined admin:help 
 
   --
   v{{VERSION}}

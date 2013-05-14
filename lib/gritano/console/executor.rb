@@ -319,6 +319,32 @@ module Gritano
         end
         return [false, "An error occurred. Permissions was not modified."]
       end
+
+      add_command "config:host_url:set", "url" do |argv|
+        url, = argv
+        config = Config.new(File.join(@home_dir, '.gritano', 'config.yml'))
+        config.host_url = url
+        config.save
+        return [true, "done!"]
+      end
+
+      add_command "config:host_url:get" do |argv|
+        config = Config.new(File.join(@home_dir, '.gritano', 'config.yml'))
+        return [true, config.host_url]
+      end
+
+      add_command "config:ssh_user:set", "user" do |argv|
+        user, = argv
+        config = Config.new(File.join(@home_dir, '.gritano', 'config.yml'))
+        config.ssh_user = user
+        config.save
+        return [true, "done!"]
+      end
+
+      add_command "config:ssh_user:get" do |argv|
+        config = Config.new(File.join(@home_dir, '.gritano', 'config.yml'))
+        return [true, config.ssh_user]
+      end
       
     end
   end

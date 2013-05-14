@@ -1,2 +1,2 @@
----
-ssh: false
+host_url: "gritano.org"
+ssh_user: "git"

@@ -7,12 +7,13 @@ require File.join(ROOT_PATH, 'gritano/console/remote')
 module Gritano
   module Console
     def Console.remote_console(remote)
+      config = Config.new(File.join(Etc.getpwuid.dir, '.gritano', 'config.yml'))
       if remote
-        Base.bin_name = "ssh #{"git@host.com"} admin:"
-        Remote.bin_name = "ssh #{"git@host.com"} "
-        Executor.bin_name = "ssh #{"git@host.com"} admin:"
-        Gritano.bin_name = "ssh #{"git@host.com"} admin:"
-        Installer.bin_name = "ssh #{"git@host.com"} admin:"
+        Base.bin_name = "ssh #{config.ssh_user}@#{config.host_url} admin:"
+        Remote.bin_name = "ssh #{config.ssh_user}@#{config.host_url} "
+        Executor.bin_name = "ssh #{config.ssh_user}@#{config.host_url} admin:"
+        Gritano.bin_name = "ssh #{config.ssh_user}@#{config.host_url} admin:"
+        Installer.bin_name = "ssh #{config.ssh_user}@#{config.host_url} admin:"
       else
         Base.bin_name = "gritano "
         Remote.bin_name = "gritano "

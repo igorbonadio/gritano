@@ -12,11 +12,11 @@ module Gritano
     end
     
     it "should setup a remote console" do
-      Console::Base.should_receive(:bin_name=).with("ssh git@host.com admin:")
-      Console::Remote.should_receive(:bin_name=).with("ssh git@host.com ")
-      Console::Executor.should_receive(:bin_name=).with("ssh git@host.com admin:")
-      Console::Gritano.should_receive(:bin_name=).with("ssh git@host.com admin:")
-      Console::Installer.should_receive(:bin_name=).with("ssh git@host.com admin:")
+      Console::Base.should_receive(:bin_name=).with("ssh undefined@undefined admin:")
+      Console::Remote.should_receive(:bin_name=).with("ssh undefined@undefined ")
+      Console::Executor.should_receive(:bin_name=).with("ssh undefined@undefined admin:")
+      Console::Gritano.should_receive(:bin_name=).with("ssh undefined@undefined admin:")
+      Console::Installer.should_receive(:bin_name=).with("ssh undefined@undefined admin:")
       Console.remote_console(true)
     end
   end

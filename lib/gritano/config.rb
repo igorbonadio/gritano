@@ -29,7 +29,11 @@ module Gritano
       if name[-1] == '='
         @config[name.to_s[0..-2]] = args[0]
       else
-        @config[name.to_s]
+        if @config[name.to_s]
+          @config[name.to_s]
+        else
+          "undefined"
+        end
       end
     end
   end

@@ -26,6 +26,10 @@
   gritano repo:write:add reponame.git username
   gritano repo:read:rm reponame.git username
   gritano repo:write:rm reponame.git username
+  gritano config:host_url:set url
+  gritano config:host_url:get 
+  gritano config:ssh_user:set user
+  gritano config:ssh_user:get 
 
   --
   v{{VERSION}}
