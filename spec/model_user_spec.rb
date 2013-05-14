@@ -92,15 +92,5 @@ module Gritano
       user.add_access(repo, :write).should be_true
       user.check_access(repo, :write).should be_true
     end
-
-    it "can have a password" do
-      user = User.create(login: 'user', password: '123')
-      user.should be_valid
-    end
-
-    it "can if a password is valid" do
-      user = User.create(login: 'user', password: '123')
-      user.password.should be == '123'
-    end
   end
 end
