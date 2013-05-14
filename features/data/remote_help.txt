@@ -8,8 +8,6 @@
   gritano key:list 
   gritano key:add keyname < key.pub
   gritano key:rm keyname
-  gritano email:get 
-  gritano email:update email@server.com
   gritano password:set 
   gritano admin:help 
 

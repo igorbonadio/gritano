@@ -52,16 +52,6 @@ module Gritano
         @executor.execute(["user:key:rm"] + [login, keyname])
       end
 
-      add_command "email:get" do |args|
-        login, = args
-        @executor.execute(["user:email:get"] + [login])
-      end
-
-      add_command "email:update", "email@server.com" do |args|
-        email, login = args
-        @executor.execute(["user:email:update"] + [login, email])
-      end
-
       add_command "password:set" do |args|
         login, = args
         @executor.execute(["user:password:set"] + [login])

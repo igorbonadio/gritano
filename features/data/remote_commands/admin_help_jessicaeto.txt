@@ -11,8 +11,6 @@
   ssh undefined@undefined admin:user:add username [email admin]*
   ssh undefined@undefined admin:user:password:set username
   ssh undefined@undefined admin:user:rm username
-  ssh undefined@undefined admin:user:email:update username email@server.com
-  ssh undefined@undefined admin:user:email:get username
   ssh undefined@undefined admin:user:key:add username keyname < key.pub
   ssh undefined@undefined admin:user:key:rm username keyname
   ssh undefined@undefined admin:user:admin:add username

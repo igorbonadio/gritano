@@ -8,8 +8,6 @@
   ssh undefined@undefined key:list 
   ssh undefined@undefined key:add keyname < key.pub
   ssh undefined@undefined key:rm keyname
-  ssh undefined@undefined email:get 
-  ssh undefined@undefined email:update email@server.com
   ssh undefined@undefined password:set 
   ssh undefined@undefined admin:help 
 

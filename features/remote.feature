@@ -60,18 +60,11 @@ Feature: Remote access
         | key:list                                             |
         | key:add keyname                                      |
         | key:rm hal                                           |
-        | email:get                                            |
-        | email:update email@server.com                        |
         | admin:help                                           |
         | admin:version                                        |
         | admin:user:add jose                                  |
         | admin:user:key:add igorbonadio marvin                |
         | admin:user:key:rm igorbonadio eva                    |
-        | admin:user:email:update igorbonadio igor@bonadio.com |
-        | admin:user:email:update wrong igor@bonadio.com       |
-        | admin:user:email:get igorbonadio                     |
-        | admin:user:email:get wrong                           |
-        | admin:user:email:get jessicaeto                      |
         | admin:user:rm igorbonadio                            |
         | admin:user:list                                      |
         | admin:user:key:list igorbonadio                      |
@@ -121,16 +114,9 @@ Feature: Remote access
         | key:list                                             |
         | key:add keyname                                      |
         | key:rm hal                                           |
-        | email:get                                            |
-        | email:update email@server.com                        |
         | admin:help                                           |
         | admin:version                                        |
         | admin:user:add jose                                  |
-        | admin:user:email:update igorbonadio igor@bonadio.com |
-        | admin:user:email:update wrong igor@bonadio.com       |
-        | admin:user:email:get igorbonadio                     |
-        | admin:user:email:get wrong                           |
-        | admin:user:email:get jessicaeto                      |
         | admin:user:key:add igorbonadio marvin                |
         | admin:user:key:rm igorbonadio eva                    |
         | admin:user:rm igorbonadio                            |
