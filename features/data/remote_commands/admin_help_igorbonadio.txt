@@ -8,7 +8,7 @@
   ssh undefined@undefined admin:user:list 
   ssh undefined@undefined admin:user:key:list username
   ssh undefined@undefined admin:user:repo:list username
-  ssh undefined@undefined admin:user:add username [email admin]*
+  ssh undefined@undefined admin:user:add username [admin]*
   ssh undefined@undefined admin:user:rm username
   ssh undefined@undefined admin:user:key:add username keyname < key.pub
   ssh undefined@undefined admin:user:key:rm username keyname
