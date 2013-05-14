@@ -85,35 +85,6 @@ module Gritano
         return [false, "#{user.errors.full_messages.join(", ")}."]
       end
 
-      add_command "user:password:set", "username" do |argv|
-        login, = argv
-        user = User.find_by_login(login)
-        if user.crypted_password == nil
-          puts "You have not set your password yet."
-          print "Please, set one now: "
-          user.password = @stdin.noecho(&:gets).gsub("\n", "")
-          puts
-          if user.save
-            return [true, "Done!"]
-          end
-        else
-          print "Before you start, enter you current password: "
-          if user.password == @stdin.noecho(&:gets).gsub("\n", "")
-            puts
-            print "Now, enter you new password: "
-            user.password = @stdin.noecho(&:gets).gsub("\n", "")
-            puts
-            if user.save
-              return [true, "Done!"]
-            end
-          else
-            puts
-            return [false, "Password you entered do not match."]
-          end
-        end
-        return [false, "Password could not be changed."]
-      end
-
       add_command "user:rm", "username" do |argv|
         login, = argv
         user = User.find_by_login(login)

@@ -9,7 +9,6 @@
   gritano user:key:list username
   gritano user:repo:list username
   gritano user:add username [email admin]*
-  gritano user:password:set username
   gritano user:rm username
   gritano user:key:add username keyname < key.pub
   gritano user:key:rm username keyname

@@ -8,7 +8,6 @@
   gritano key:list 
   gritano key:add keyname < key.pub
   gritano key:rm keyname
-  gritano password:set 
   gritano admin:help 
 
   --
