@@ -24,5 +24,7 @@ require 'active_record'
 
 Before do
   ActiveRecord::Base.establish_connection(YAML::load(File.open('.gritano/database.yml')))
-  Gritano::Console.remote_console(false)
+  FileUtils.rm_rf(File.join("tmp", ".gritano"))
+  FileUtils.mkdir(File.join('tmp', '.gritano'))
+  Gritano::Console.remote_console(false, 'tmp')
 end
