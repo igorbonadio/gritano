@@ -19,7 +19,9 @@ module Gritano
       Console::Executor.should_receive(:bin_name=).with("ssh undefined@undefined admin:")
       Console::Gritano.should_receive(:bin_name=).with("ssh undefined@undefined admin:")
       Console::Installer.should_receive(:bin_name=).with("ssh undefined@undefined admin:")
-      Console.remote_console(true)
+      FileUtils.rm_rf(File.join("tmp", ".gritano"))
+      FileUtils.mkdir(File.join('tmp', '.gritano'))
+      Console.remote_console(true, 'tmp')
     end
   end
 end
