@@ -3,14 +3,14 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 module Gritano
   describe Console do
     it "should setup a local console" do
-      FileUtils.rm_rf(File.join("tmp", "config.yml"))
-      Etc.getpwuid.stub(:dir).and_return('tmp')
       Console::Base.should_receive(:bin_name=).with("gritano ")
       Console::Remote.should_receive(:bin_name=).with("gritano ")
       Console::Executor.should_receive(:bin_name=).with("gritano ")
       Console::Gritano.should_receive(:bin_name=).with("gritano ")
       Console::Installer.should_receive(:bin_name=).with("gritano ")
-      Console.remote_console(false)
+      FileUtils.rm_rf(File.join("tmp", ".gritano"))
+      FileUtils.mkdir(File.join('tmp', '.gritano'))
+      Console.remote_console(false, 'tmp')
     end
     
     it "should setup a remote console" do
