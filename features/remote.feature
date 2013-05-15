@@ -53,14 +53,11 @@ Feature: Remote access
       Then I should see a message via ssh
       Examples:
         | command                                              |
-        | invalid:command                                      |
         | version                                              |
-        | help                                                 |
         | repo:list                                            |
         | key:list                                             |
         | key:add keyname                                      |
         | key:rm hal                                           |
-        | admin:help                                           |
         | admin:version                                        |
         | admin:user:add jose                                  |
         | admin:user:key:add igorbonadio marvin                |
@@ -107,14 +104,11 @@ Feature: Remote access
       Then I should see a message via ssh
       Examples:
         | command                                              |
-        | invalid:command                                      |
         | version                                              |
-        | help                                                 |
         | repo:list                                            |
         | key:list                                             |
         | key:add keyname                                      |
         | key:rm hal                                           |
-        | admin:help                                           |
         | admin:version                                        |
         | admin:user:add jose                                  |
         | admin:user:key:add igorbonadio marvin                |
