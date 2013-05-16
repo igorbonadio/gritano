@@ -34,15 +34,6 @@ module Gritano
       end
     end
 
-    def CLI.check_password(login, password, home_dir = Etc.getpwuid.dir, repo_dir = Etc.getpwuid.dir)
-      ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(home_dir, '.gritano', 'database.yml'))))
-      user = User.find_by_login(login)
-      if user
-        return user.password == password
-      end
-      return false
-    end
-
     def CLI.check_access(login, repo, access, home_dir = Etc.getpwuid.dir, repo_dir = Etc.getpwuid.dir)
       ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(home_dir, '.gritano', 'database.yml'))))
       user = User.find_by_login(login)

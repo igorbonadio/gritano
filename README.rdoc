@@ -66,8 +66,6 @@ Gritano 0.2.0 introduced a new feature that enables users to execute some simple
   $ ssh git@host.com key:add mykey < id_rsa.pub
   
   $ ssh git@host.com key:add mykey
-
-  $ ssh git@host.com password:set # this password is used for http access
   
 For more information, execute
 
