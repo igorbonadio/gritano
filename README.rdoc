@@ -91,7 +91,7 @@ Starting from Gritano 0.3.0, administrators can execute commands via ssh:
   
 == For more Information
 
-http://igorbonadio.com.br/gritano
+http://gritano.org
 
 == Contributing to Gritano
  
