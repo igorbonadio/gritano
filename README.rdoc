@@ -1,99 +1,8 @@
-= Gritano
+= gritano
 
-{<img src="https://badge.fury.io/rb/gritano.png" alt="Gem Version" />}[http://badge.fury.io/rb/gritano] {<img src="https://travis-ci.org/igorbonadio/gritano.png" />}[https://travis-ci.org/igorbonadio/gritano]
+Description goes here.
 
-Gritano is the simplest way to configure a git server over ssh. You can create repositories and manage user access using this practical tool.
-
-== Requirements
-
-* ruby 1.9 or 2.0 (http://www.ruby-lang.org)
-* git (http://git-scm.com)
-
-== Install
-
-  $ gem install gritano
-  
-== Update
-
-If you are using a previous version, you should update your instalation:
-  
-  $ gem install gritano
-  
-  $ gritano setup:install
-  
-== Usage
-
-First of all you should create a git user who will be responsible for store and manipulate repositories. Lets suppose we are logged as this user.
-
-All you need to do to set up Gritano is
-
-  $ gritano setup:prepare && gritano setup:install
-  
-After that you can add users:
-
-  $ gritano user:add igorbonadio
-  
-add administrator rights to this user:
-
-  $ gritano user:admin:add igorbonadio
-
-add user's public keys:
-
-  $ gritano user:key:add igorbonadio mykey < id_rsa.pub
-
-create bare repositories:
-
-  $ gritano repo:add proj.git
-
-and control access:
-
-  $ gritano repo:read:add proj.git igorbonadio
-  
-For more information, execute
-
-  $ gritano help
-  
-== User Access
-
-Gritano 0.2.0 introduced a new feature that enables users to execute some simple commands via ssh:
-
-  $ ssh git@host.com username
-
-  $ ssh git@host.com repo:list
-  
-  $ ssh git@host.com key:list
-  
-  $ ssh git@host.com key:add mykey < id_rsa.pub
-  
-  $ ssh git@host.com key:add mykey
-  
-For more information, execute
-
-  $ ssh git@host.com help
-  
-== Admin Access
-
-Starting from Gritano 0.3.0, administrators can execute commands via ssh:
-
-  $ ssh git@host.com admin:user:add username
-  
-  $ ssh git@host.com admin:user:rm username
-  
-  $ ssh git@host.com admin:user:key:add username keyname < key.pub
-  
-  $ ssh git@host.com admin:user:key:rm username keyname
-  
-  $ ssh git@host.com admin:repo:add reponame.git
-  
-  $ ssh git@host.com admin:repo:rm reponame.git
-  
-  $ ssh git@host.com admin:repo:list
-  
-== For more Information
-
-http://gritano.org
-
-== Contributing to Gritano
+== Contributing to gritano
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
@@ -105,5 +14,6 @@ http://gritano.org
 
 == Copyright
 
-Copyright (c) 2012-2013 Ígor Bonadio. See LICENSE.txt for
+Copyright (c) 2013 Ígor Bonadio. See LICENSE.txt for
 further details.
+

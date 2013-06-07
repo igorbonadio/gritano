@@ -15,12 +15,12 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "gritano"
-  gem.homepage = "http://gritano.org"
+  gem.homepage = "http://github.com/igorbonadio/gritano"
   gem.license = "MIT"
-  gem.summary = %Q{Gritano is a tool to configure your git server over ssh}
-  gem.description = %Q{Gritano is the simplest way to configure your git server over ssh. You can create repositories and manage user access.}
+  gem.summary = %Q{TODO: one-line summary of your gem}
+  gem.description = %Q{TODO: longer description of your gem}
   gem.email = "igorbonadio@gmail.com"
-  gem.authors = ["Igor Bonadio"]
+  gem.authors = ["Ígor Bonadio"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
@@ -39,7 +39,7 @@ end
 require 'cucumber/rake/task'
 Cucumber::Rake::Task.new(:features)
 
-task :default => [:spec, :features]
+task :default => :spec
 
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
@@ -49,14 +49,4 @@ Rake::RDocTask.new do |rdoc|
   rdoc.title = "gritano #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
-end
-
-require 'active_record'
-require 'yaml'
-namespace :db do
-  desc "Migrate the database through scripts in db/migrate. Target specific version with VERSION=x"
-  task :migrate do
-    ActiveRecord::Base.establish_connection(YAML::load(File.open('.gritano/database.yml')))
-    ActiveRecord::Migrator.migrate('db/migrate', ENV["VERSION"] ? ENV["VERSION"].to_i : nil )
-  end
 end

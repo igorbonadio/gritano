@@ -1,1 +1,0 @@
-error: Repository tmp/p-lang.git could not be removed.

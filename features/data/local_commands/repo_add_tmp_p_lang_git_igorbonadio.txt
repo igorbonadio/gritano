@@ -1,1 +1,0 @@
-Repository tmp/p-lang.git created successfully.

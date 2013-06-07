@@ -1,6 +1,0 @@
-#!/usr/bin/env ruby
-$:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
-
-require 'gritano'
-
-puts Gritano::CLI::check((ENV['SSH_ORIGINAL_COMMAND'] || '').split(' '), ARGV[0])
