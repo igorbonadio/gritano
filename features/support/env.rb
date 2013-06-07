@@ -1,3 +1,8 @@
+require 'simplecov'
+SimpleCov.start do
+  add_filter "/spec/"
+end
+
 require 'bundler'
 begin
   Bundler.setup(:default, :development)
