@@ -9,4 +9,5 @@ group :development do
   gem "rdoc", "~> 4.0.0"
   gem "jeweler", "~> 1.8.4"
   gem "simplecov", "~> 0.7.0"
+  gem "sqlite3", "~> 1.3.7"
 end

@@ -47,3 +47,12 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+require 'gritano-core'
+namespace :db do
+  desc "Migrate the database. Target specific version with VERSION=x"
+  task :migrate do
+    FileUtils.mkdir 'tmp' unless File.exist? 'tmp'
+    Gritano::Core::Migration.migrate(YAML::load(File.open('spec/development.yml')))
+  end
+end
