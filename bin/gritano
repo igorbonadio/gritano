@@ -4,6 +4,4 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'gritano'
 
-ActiveRecord::Base.establish_connection(YAML::load(File.open('tmp/development.yml')))
-
 Gritano::CLI::Console.start
