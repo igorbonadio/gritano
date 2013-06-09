@@ -1,6 +1,8 @@
 source "http://rubygems.org"
 
 gem "thor", "~> 0.18.1"
+gem "terminal-table", "~> 1.4.5"
+gem "gritano-core", github: 'igorbonadio/gritano-core'
 
 group :development do
   gem "rspec", "~> 2.13.0"

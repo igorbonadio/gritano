@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+
+require 'gritano'
+
+#Gritano::Core::Migration.migrate(YAML::load(File.open('tmp/development.yml')))
+ActiveRecord::Base.establish_connection(YAML::load(File.open('tmp/development.yml')))
+
+Gritano::CLI::Console.start

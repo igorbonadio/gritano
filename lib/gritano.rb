@@ -1,3 +1,7 @@
-ROOT_PATH = File.expand_path(File.dirname(__FILE__))
+root_path = File.expand_path(File.dirname(__FILE__))
 
-require File.join(ROOT_PATH, 'gritano/thor')
+require "gritano-core"
+require 'terminal-table'
+
+require File.join(root_path, 'gritano/thor')
+require File.join(root_path, 'gritano/console')
