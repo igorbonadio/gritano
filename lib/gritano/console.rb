@@ -3,7 +3,7 @@ module Gritano
     class Console < Thor
 
       define_task("user:list", "list all gritano users") do
-        users = Gritano::Core::User.all.order(:login)
+        users = Gritano::Core::User.order(:login)
         table = Terminal::Table.new do |t|
           t << ['login', 'admin?']
           t << :separator
