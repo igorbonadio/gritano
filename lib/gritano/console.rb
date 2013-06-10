@@ -57,7 +57,7 @@ module Gritano
       end
 
       define_task("repo:add", "add a new repository") do |name|
-        create_model(Gritano::Core::Repository, name: name, path: "tmp")
+        create_model(Gritano::Core::Repository, name: name, path: Config.repository_path)
       end
 
       define_task("repo:rm", "remove a repository") do |name|

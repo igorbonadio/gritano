@@ -6,4 +6,5 @@ require 'gritano'
 
 Gritano::CLI.configure do |config|
   config.database_connection = YAML::load(File.open(File.join(File.dirname(__FILE__), '../spec/development.yml')))
+  config.repository_path = File.join(File.dirname(__FILE__), '../tmp')
 end

@@ -83,6 +83,7 @@ module Gritano::CLI
       it "should add a new repository" do
         repo = double("Repository")
         repo.should_receive(:save).and_return(true)
+        Config.repository_path = "tmp"
         Gritano::Core::Repository.should_receive(:new).with(name: 'repo.git', path: 'tmp').and_return(repo)
         Gritano::CLI::Console.start %w{repo:add repo.git}
       end
