@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 module Gritano::CLI
   describe Console do
     before (:each) do
-      Console.stub(:puts)
+      Console.stub(:render_text)
       $stdin.stub(:readlines).and_return(['some pubkey'])
     end
     describe "#user" do
