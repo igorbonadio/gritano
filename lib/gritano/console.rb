@@ -37,19 +37,19 @@ module Gritano
       end
 
       define_task("user:key:list", "list all user's keys") do |login|
-        execute_and_use_if Gritano::Core::User.where(login: login).first do |user|
+        use_if_not_nil Gritano::Core::User.where(login: login).first do |user|
           render_table(user.keys.order(:name), :name)
         end
       end
 
       define_task("user:key:add", "add a user's key") do |login, key_name|
-        execute_and_use_if Gritano::Core::User.where(login: login).first do |user|
+        use_if_not_nil Gritano::Core::User.where(login: login).first do |user|
           create_model(user.keys, name: key_name, key: $stdin.readlines.join)
         end
       end
 
       define_task("user:key:rm", "remove a user's key") do |login, key_name|
-        execute_and_use_if Gritano::Core::User.where(login: login).first do |user|
+        use_if_not_nil Gritano::Core::User.where(login: login).first do |user|
           destroy_model(user.keys, name: key_name)
         end
       end
@@ -67,63 +67,47 @@ module Gritano
       end
 
       define_task("repo:read:add", "add read access to a repository") do |repo_name, user_login|
-        repo = Gritano::Core::Repository.where(name: repo_name).first
-        user = Gritano::Core::User.where(login: user_login).first
-        if repo and user
+        use_if_not_nil Gritano::Core::User.where(login: user_login).first, Gritano::Core::Repository.where(name: repo_name).first do |user, repo|
           if user.add_access(repo, :read)
             puts "done"
           else
             puts "an error occurred"
           end
-        else
-          puts "repository or user doens't exist."
         end
       end
 
       define_task("repo:read:rm", "remove read access to a repository") do |repo_name, user_login|
-        repo = Gritano::Core::Repository.where(name: repo_name).first
-        user = Gritano::Core::User.where(login: user_login).first
-        if repo and user
+        use_if_not_nil Gritano::Core::User.where(login: user_login).first, Gritano::Core::Repository.where(name: repo_name).first do |user, repo|
           if user.remove_access(repo, :read)
             puts "done"
           else
             puts "an error occurred"
           end
-        else
-          puts "repository or user doens't exist."
         end
       end
 
       define_task("repo:write:add", "add write access to a repository") do |repo_name, user_login|
-        repo = Gritano::Core::Repository.where(name: repo_name).first
-        user = Gritano::Core::User.where(login: user_login).first
-        if repo and user
+        use_if_not_nil Gritano::Core::User.where(login: user_login).first, Gritano::Core::Repository.where(name: repo_name).first do |user, repo|
           if user.add_access(repo, :write)
             puts "done"
           else
             puts "an error occurred"
           end
-        else
-          puts "repository or user doens't exist."
         end
       end
 
       define_task("repo:write:rm", "remove write access to a repository") do |repo_name, user_login|
-        repo = Gritano::Core::Repository.where(name: repo_name).first
-        user = Gritano::Core::User.where(login: user_login).first
-        if repo and user
+        use_if_not_nil Gritano::Core::User.where(login: user_login).first, Gritano::Core::Repository.where(name: repo_name).first do |user, repo|
           if user.remove_access(repo, :write)
             puts "done"
           else
             puts "an error occurred"
           end
-        else
-          puts "repository or user doens't exist."
         end
       end
 
       define_task("repo:user:list", "list all user that have access to a repository") do |repo_name|
-        execute_and_use_if Gritano::Core::Repository.where(name: repo_name).first do |repo|
+        use_if_not_nil Gritano::Core::Repository.where(name: repo_name).first do |repo|
           render_table(repo.users.order(:login), :login, :access => repo)
         end
       end
@@ -176,9 +160,9 @@ module Gritano
         end
       end
 
-      def self.execute_and_use_if(variable, &block)
-        if variable
-          block.call(variable)
+      def self.use_if_not_nil(*variables, &block)
+        unless variables.index(nil)
+          block.call(*variables)
         else
           puts "an error occurred"
         end
