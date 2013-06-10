@@ -33,7 +33,7 @@ module Gritano::CLI
           keys.stub(:count).and_return(10)
           keys.stub(:each)
           Gritano::Core::User.should_receive(:where).with(login: 'user_login').and_return([user])
-          user.should_receive(:keys).twice.and_return(keys)
+          user.should_receive(:keys).and_return(keys)
           keys.should_receive(:order).with(:name).and_return(keys)
           Gritano::CLI::Console.start %w{user:key:list user_login}
         end
@@ -125,8 +125,7 @@ module Gritano::CLI
         Gritano::Core::Repository.should_receive(:where).with(name: 'repo.git').and_return([repo])
         repo.should_receive(:users).and_return(users)
         users.should_receive(:order).with(:login).and_return([user])
-        user.should_receive(:check_access).with(repo, :read)
-        user.should_receive(:check_access).with(repo, :write)
+        user.should_receive(:access).with(repo)
         user.stub(:login)
         Gritano::CLI::Console.start %w{repo:user:list repo.git}
       end

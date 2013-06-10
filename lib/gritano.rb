@@ -5,3 +5,4 @@ require 'terminal-table'
 
 require File.join(root_path, 'gritano/thor')
 require File.join(root_path, 'gritano/console')
+require File.join(root_path, 'gritano/core/user')

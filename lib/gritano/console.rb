@@ -3,15 +3,7 @@ module Gritano
     class Console < Thor
 
       define_task("user:list", "list all gritano users") do
-        users = Gritano::Core::User.order(:login)
-        table = Terminal::Table.new do |t|
-          t << ['login', 'admin?']
-          t << :separator
-          users.each do |user|
-           t.add_row [user.login, user.admin]
-          end
-        end
-        puts table
+        render_table(Gritano::Core::User.order(:login), :login, :admin)
       end
 
       define_task("user:add", "add a gritano user") do |login|
@@ -58,18 +50,7 @@ module Gritano
       define_task("user:key:list", "list all user's keys") do |login|
         user = Gritano::Core::User.where(login: login).first
         if user
-          if user.keys.count > 0
-            table = Terminal::Table.new do |t|
-              t << ['name']
-              t << :separator
-              user.keys.order(:name).each do |key|
-               t.add_row [key.name]
-              end
-            end
-            puts table
-          else
-            puts "user doesn't have keys"
-          end
+          render_table(user.keys.order(:name), :name)
         else
           puts "user doens't exist."
         end
@@ -105,15 +86,7 @@ module Gritano
       end
 
       define_task("repo:list", "list all repositories") do
-        repos = Gritano::Core::Repository.order(:name)
-        table = Terminal::Table.new do |t|
-          t << ['name']
-          t << :separator
-          repos.each do |repo|
-           t.add_row [repo.name]
-          end
-        end
-        puts table
+        render_table(Gritano::Core::Repository.order(:name), :name)
       end
 
       define_task("repo:add", "add a new repository") do |name|
@@ -194,20 +167,39 @@ module Gritano
       define_task("repo:user:list", "list all user that have access to a repository") do |repo_name|
         repo = Gritano::Core::Repository.where(name: repo_name).first
         if repo
-          table = Terminal::Table.new do |t|
-            t << ['login', 'access']
-            t << :separator
-            repo.users.order(:login).each do |user|
-              access = []
-              access << 'read' if user.check_access(repo, :read)
-              access << 'write' if user.check_access(repo, :write)
-             t.add_row [user.login, "#{access.join('+')}"]
-            end
-          end
-          puts table
+          render_table(repo.users.order(:login), :login, :access => repo)
         else
           puts "repo doens't exist."
         end
+      end
+
+      private
+
+      def self.render_table(elements, *attributes)
+        attributes_hash = {}
+        attributes.each do |a|
+          if a.respond_to?(:keys)
+            attributes_hash = attributes_hash.merge(a)
+          else
+            attributes_hash[a] = nil
+          end
+        end
+        table = Terminal::Table.new do |t|
+          t << attributes_hash.map { |key, value| key }
+          t << :separator
+          elements.each do |element|
+            row = []
+            attributes_hash.each do |attribute, params|
+              if params
+                row << element.send(attribute, params)
+              else
+                row << element.send(attribute)
+              end
+            end
+            t.add_row row
+          end
+        end
+        puts table
       end
 
     end
