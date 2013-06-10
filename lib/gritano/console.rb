@@ -123,11 +123,8 @@ module Gritano
       end
 
       define_task("repo:user:list", "list all user that have access to a repository") do |repo_name|
-        repo = Gritano::Core::Repository.where(name: repo_name).first
-        if repo
+        execute_and_use_if Gritano::Core::Repository.where(name: repo_name).first do |repo|
           render_table(repo.users.order(:login), :login, :access => repo)
-        else
-          puts "repo doens't exist."
         end
       end
 
