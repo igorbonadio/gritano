@@ -12,7 +12,7 @@ module Gritano
                  repo:write:add repo:write:rm
                  repo:user:list 
               } do
-        ActiveRecord::Base.establish_connection(YAML::load(File.open(File.join(File.dirname(__FILE__), '../../spec/development.yml'))))
+        ActiveRecord::Base.establish_connection(Config.database_connection)
       end
 
       define_task("user:list", "list all gritano users") do
@@ -29,7 +29,7 @@ module Gritano
 
       method_option :admin, :aliases => "-a", :desc => "change admin status of a user"
       define_task("user:update", "update user information") do |login|
-        use_if_not_nil Gritano::Core::User.where(login: login).first do |user|
+        use_if_not_nil Gritano::Core::User.where(login: login).first, valid_options?(options) do |user|
           update_model(user, options)
         end
       end
@@ -102,6 +102,10 @@ module Gritano
         else
           render_text "an error occurred"
         end
+      end
+
+      def valid_options?(options)
+        true unless options.empty?
       end
 
     end

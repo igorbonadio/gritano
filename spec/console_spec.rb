@@ -2,10 +2,11 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 module Gritano::CLI
   describe Console do
-    
+
     before (:each) do
       $stdout.stub(:puts)
       $stdin.stub(:readlines).and_return(['some pubkey'])
+      ActiveRecord::Base.stub(:establish_connection)
     end
 
     describe "#user" do

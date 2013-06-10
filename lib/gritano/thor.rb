@@ -6,9 +6,9 @@ module Gritano
       def self.define_task(name, description="", &block)
         params = block.parameters.map { |type, name| name.upcase }.join(' ')
         desc("#{name} #{params}".rstrip, description)
-        bf = before_filters[name]
+        bf = before_filters
         define_method(name.to_sym) do |*params|
-          instance_eval(&bf) if bf
+          instance_eval(&bf[name]) if bf[name]
           instance_exec(*params, &block)
         end
       end
