@@ -6,6 +6,7 @@ module Gritano::CLI
       $stdout.stub(:puts)
       $stdin.stub(:readlines).and_return(['some pubkey'])
     end
+    
     describe "#user" do
       it "should list all users ordered by login" do
         Gritano::Core::User.should_receive(:order).with(:login).and_return([])
