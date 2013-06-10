@@ -105,7 +105,7 @@ module Gritano
       end
 
       define_task("repo:list", "list all repositories") do
-        repos = Gritano::Core::Repository.all.order(:name)
+        repos = Gritano::Core::Repository.order(:name)
         table = Terminal::Table.new do |t|
           t << ['name']
           t << :separator
@@ -197,7 +197,7 @@ module Gritano
           table = Terminal::Table.new do |t|
             t << ['login', 'access']
             t << :separator
-            repo.users.each do |user|
+            repo.users.order(:login).each do |user|
               access = []
               access << 'read' if user.check_access(repo, :read)
               access << 'write' if user.check_access(repo, :write)

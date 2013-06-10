@@ -61,5 +61,75 @@ module Gritano::CLI
         end
       end
     end
+
+    describe "#repo" do
+      it "should list repositories ordered by name" do
+        Gritano::Core::Repository.should_receive(:order).with(:name).and_return([])
+        Gritano::CLI::Console.start %w{repo:list}
+      end
+
+      it "should add a new repository" do
+        repo = double("Repository")
+        repo.should_receive(:save).and_return(true)
+        Gritano::Core::Repository.should_receive(:new).with(name: 'repo.git', path: 'tmp').and_return(repo)
+        Gritano::CLI::Console.start %w{repo:add repo.git}
+      end
+
+      it "should remove a existing repository" do
+        repo = double("Repository")
+        repo.should_receive(:destroy)
+        Gritano::Core::Repository.should_receive(:where).with(name: 'repo.git').and_return([repo])
+        Gritano::CLI::Console.start %w{repo:rm repo.git}
+      end
+
+      it "should add read access to a repository" do
+        repo = double("Repository")
+        user = double("User")
+        Gritano::Core::Repository.should_receive(:where).with(name: 'repo.git').and_return([repo])
+        Gritano::Core::User.should_receive(:where).with(login: 'user_login').and_return([user])
+        user.should_receive(:add_access).with(repo, :read).and_return(true)
+        Gritano::CLI::Console.start %w{repo:read:add repo.git user_login}
+      end
+
+      it "should remove read access from a repository" do
+        repo = double("Repository")
+        user = double("User")
+        Gritano::Core::Repository.should_receive(:where).with(name: 'repo.git').and_return([repo])
+        Gritano::Core::User.should_receive(:where).with(login: 'user_login').and_return([user])
+        user.should_receive(:remove_access).with(repo, :read).and_return(true)
+        Gritano::CLI::Console.start %w{repo:read:rm repo.git user_login}
+      end
+
+      it "should add write access to a repository" do
+        repo = double("Repository")
+        user = double("User")
+        Gritano::Core::Repository.should_receive(:where).with(name: 'repo.git').and_return([repo])
+        Gritano::Core::User.should_receive(:where).with(login: 'user_login').and_return([user])
+        user.should_receive(:add_access).with(repo, :write).and_return(true)
+        Gritano::CLI::Console.start %w{repo:write:add repo.git user_login}
+      end
+
+      it "should remove write access from a repository" do
+        repo = double("Repository")
+        user = double("User")
+        Gritano::Core::Repository.should_receive(:where).with(name: 'repo.git').and_return([repo])
+        Gritano::Core::User.should_receive(:where).with(login: 'user_login').and_return([user])
+        user.should_receive(:remove_access).with(repo, :write).and_return(true)
+        Gritano::CLI::Console.start %w{repo:write:rm repo.git user_login}
+      end
+
+      it "should list repository's users ordered by login" do
+        repo = double("Repository")
+        users = [double("User")]
+        user = double("User")
+        Gritano::Core::Repository.should_receive(:where).with(name: 'repo.git').and_return([repo])
+        repo.should_receive(:users).and_return(users)
+        users.should_receive(:order).with(:login).and_return([user])
+        user.should_receive(:check_access).with(repo, :read)
+        user.should_receive(:check_access).with(repo, :write)
+        user.stub(:login)
+        Gritano::CLI::Console.start %w{repo:user:list repo.git}
+      end
+    end
   end
 end
