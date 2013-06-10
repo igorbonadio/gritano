@@ -2,8 +2,8 @@ module Gritano
   module CLI
     class Console < Thor
 
-      extend Gritano::CLI::Renderer
-      extend Gritano::CLI::Helpers
+      include Gritano::CLI::Renderer
+      include Gritano::CLI::Helpers
 
       define_task("user:list", "list all gritano users") do
         render_table(Gritano::Core::User.order(:login), :login, :admin)
@@ -15,6 +15,13 @@ module Gritano
 
       define_task("user:rm", "remove a gritano user") do |login|
         destroy_model(Gritano::Core::User, login: login)
+      end
+
+      method_option :admin, :aliases => "-a", :desc => "change admin status of a user"
+      define_task("user:update", "update user information") do |login|
+        use_if_not_nil Gritano::Core::User.where(login: login).first do |user|
+          update_model(user, options)
+        end
       end
 
       define_task("user:key:list", "list all user's keys") do |login|
@@ -79,7 +86,7 @@ module Gritano
 
       private
 
-      def self.try_change_access(user, repo, add_or_rm, read_or_write)
+      def try_change_access(user, repo, add_or_rm, read_or_write)
         if user.send("#{add_or_rm}_access", repo, read_or_write)
           render_text "done"
         else

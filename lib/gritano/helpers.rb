@@ -10,6 +10,14 @@ module Gritano
         end
       end
 
+      def update_model(instance, params)
+        if instance.update_attributes(params)
+          render_text "#{instance.class.name.split(':')[-1].downcase} was successfully updated."
+        else
+          render_text "an error occurred."
+        end
+      end
+
       def destroy_model(model, params)
         instance = model.where(params).first
         if instance

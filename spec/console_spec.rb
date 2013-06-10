@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 module Gritano::CLI
   describe Console do
     before (:each) do
-      Console.stub(:render_text)
+      $stdout.stub(:puts)
       $stdin.stub(:readlines).and_return(['some pubkey'])
     end
     describe "#user" do
@@ -19,11 +19,18 @@ module Gritano::CLI
         Gritano::CLI::Console.start %w{user:add user_login}
       end
 
-      it "should remove a existing user" do
+      it "should remove an existing user" do
         user = double("User")
         user.should_receive(:destroy)
         Gritano::Core::User.should_receive(:where).with(login: 'user_login').and_return([user])
         Gritano::CLI::Console.start %w{user:rm user_login}
+      end
+
+      it "should update the admin attribute of an existing user" do
+        user = double("User")
+        user.should_receive(:update_attributes).with({"admin" => "true"})
+        Gritano::Core::User.should_receive(:where).with(login: 'user_login').and_return([user])
+        Gritano::CLI::Console.start %w{user:update user_login --admin=true}
       end
 
       describe "#keys" do
