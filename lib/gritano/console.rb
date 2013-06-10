@@ -37,29 +37,20 @@ module Gritano
       end
 
       define_task("user:key:list", "list all user's keys") do |login|
-        user = Gritano::Core::User.where(login: login).first
-        if user
+        execute_and_use_if Gritano::Core::User.where(login: login).first do |user|
           render_table(user.keys.order(:name), :name)
-        else
-          puts "user doens't exist."
         end
       end
 
       define_task("user:key:add", "add a user's key") do |login, key_name|
-        user = Gritano::Core::User.where(login: login).first
-        if user
+        execute_and_use_if Gritano::Core::User.where(login: login).first do |user|
           create_model(user.keys, name: key_name, key: $stdin.readlines.join)
-        else
-          puts "user doens't exist."
         end
       end
 
       define_task("user:key:rm", "remove a user's key") do |login, key_name|
-        user = Gritano::Core::User.where(login: login).first
-        if user
+        execute_and_use_if Gritano::Core::User.where(login: login).first do |user|
           destroy_model(user.keys, name: key_name)
-        else
-          puts "user doens't exist."
         end
       end
 
@@ -185,6 +176,14 @@ module Gritano
           puts "#{model.name.split(':')[-1].downcase} was successfully destroyed."
         else
           puts "#{model.name.split(':')[-1].downcase} doens't exist."
+        end
+      end
+
+      def self.execute_and_use_if(variable, &block)
+        if variable
+          block.call(variable)
+        else
+          puts "an error occurred"
         end
       end
 
