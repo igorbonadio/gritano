@@ -49,47 +49,41 @@ module Gritano
 
       define_task("repo:read:add", "add read access to a repository") do |repo_name, user_login|
         use_if_not_nil Gritano::Core::User.where(login: user_login).first, Gritano::Core::Repository.where(name: repo_name).first do |user, repo|
-          if user.add_access(repo, :read)
-            render_text "done"
-          else
-            render_text "an error occurred"
-          end
+          try_change_access(user, repo, :add, :read)
         end
       end
 
       define_task("repo:read:rm", "remove read access to a repository") do |repo_name, user_login|
         use_if_not_nil Gritano::Core::User.where(login: user_login).first, Gritano::Core::Repository.where(name: repo_name).first do |user, repo|
-          if user.remove_access(repo, :read)
-            render_text "done"
-          else
-            render_text "an error occurred"
-          end
+          try_change_access(user, repo, :remove, :read)
         end
       end
 
       define_task("repo:write:add", "add write access to a repository") do |repo_name, user_login|
         use_if_not_nil Gritano::Core::User.where(login: user_login).first, Gritano::Core::Repository.where(name: repo_name).first do |user, repo|
-          if user.add_access(repo, :write)
-            render_text "done"
-          else
-            render_text "an error occurred"
-          end
+          try_change_access(user, repo, :add, :write)
         end
       end
 
       define_task("repo:write:rm", "remove write access to a repository") do |repo_name, user_login|
         use_if_not_nil Gritano::Core::User.where(login: user_login).first, Gritano::Core::Repository.where(name: repo_name).first do |user, repo|
-          if user.remove_access(repo, :write)
-            render_text "done"
-          else
-            render_text "an error occurred"
-          end
+          try_change_access(user, repo, :remove, :write)
         end
       end
 
       define_task("repo:user:list", "list all user that have access to a repository") do |repo_name|
         use_if_not_nil Gritano::Core::Repository.where(name: repo_name).first do |repo|
           render_table(repo.users.order(:login), :login, :access => repo)
+        end
+      end
+
+      private
+
+      def self.try_change_access(user, repo, add_or_rm, read_or_write)
+        if user.send("#{add_or_rm}_access", repo, read_or_write)
+          render_text "done"
+        else
+          render_text "an error occurred"
         end
       end
 
