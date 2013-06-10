@@ -62,7 +62,7 @@ module Gritano
             table = Terminal::Table.new do |t|
               t << ['name']
               t << :separator
-              user.keys.each do |key|
+              user.keys.order(:name).each do |key|
                t.add_row [key.name]
               end
             end
