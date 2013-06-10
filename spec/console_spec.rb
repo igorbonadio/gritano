@@ -41,6 +41,7 @@ module Gritano::CLI
         it "should add user's key" do
           user = double("User")
           keys = double("Key")
+          keys.stub(:name).and_return("Key")
           key = double("Key")
           Gritano::Core::User.should_receive(:where).with(login: 'user_login').and_return([user])
           user.should_receive(:keys).and_return(keys)

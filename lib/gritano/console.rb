@@ -7,12 +7,7 @@ module Gritano
       end
 
       define_task("user:add", "add a gritano user") do |login|
-        user = Gritano::Core::User.new(login: login)
-        if user.save
-          puts "user has been created successfully."
-        else
-          puts "an error occurred."
-        end
+        create_model(Gritano::Core::User, login: login)
       end
 
       define_task("user:rm", "remove a gritano user") do |login|
@@ -59,12 +54,7 @@ module Gritano
       define_task("user:key:add", "add a user's key") do |login, key_name|
         user = Gritano::Core::User.where(login: login).first
         if user
-          key = user.keys.new(name: key_name, key: $stdin.readlines.join)
-          if key.save
-            puts "key added."
-          else
-            puts "an error occurred."
-          end
+          create_model(user.keys, name: key_name, key: $stdin.readlines.join)
         else
           puts "user doens't exist."
         end
@@ -90,12 +80,7 @@ module Gritano
       end
 
       define_task("repo:add", "add a new repository") do |name|
-        repo = Gritano::Core::Repository.new(name: name, path: "tmp")
-        if repo.save
-          puts "repository has been created successfully."
-        else
-          puts "an error occurred."
-        end
+        create_model(Gritano::Core::Repository, name: name, path: "tmp")
       end
 
       define_task("repo:rm", "remove a repository") do |name|
@@ -200,6 +185,15 @@ module Gritano
           end
         end
         puts table
+      end
+
+      def self.create_model(model, params)
+        instance = model.new(params)
+        if instance.save
+          puts "#{model.name.split(':')[-1].downcase} has been created successfully."
+        else
+          puts "an error occurred."
+        end
       end
 
     end
