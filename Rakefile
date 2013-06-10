@@ -53,6 +53,6 @@ namespace :db do
   desc "Migrate the database. Target specific version with VERSION=x"
   task :migrate do
     FileUtils.mkdir 'tmp' unless File.exist? 'tmp'
-    Gritano::Core::Migration.migrate(YAML::load(File.open('spec/development.yml')))
+    Gritano::Core::Migration.migrate(YAML::load(File.open('spec/data/development.yml')))
   end
 end
