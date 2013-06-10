@@ -11,13 +11,7 @@ module Gritano
       end
 
       define_task("user:rm", "remove a gritano user") do |login|
-        user = Gritano::Core::User.where(login: login).first
-        if user
-          user.destroy
-          puts "user destroyed."
-        else
-          puts "user doens't exist."
-        end
+        destroy_model(Gritano::Core::User, login: login)
       end
 
       method_option :admin, :aliases => "-a", :desc => "change admin status of a user"
@@ -63,13 +57,7 @@ module Gritano
       define_task("user:key:rm", "remove a user's key") do |login, key_name|
         user = Gritano::Core::User.where(login: login).first
         if user
-          key = user.keys.where(name: key_name).first
-          if key
-            key.destroy
-            puts "key was destroyed."
-          else
-            puts "an error occurred."
-          end
+          destroy_model(user.keys, name: key_name)
         else
           puts "user doens't exist."
         end
@@ -84,13 +72,7 @@ module Gritano
       end
 
       define_task("repo:rm", "remove a repository") do |name|
-        repo = Gritano::Core::Repository.where(name: name).first
-        if repo
-          repo.destroy
-          puts "repo destroyed."
-        else
-          puts "repo doens't exist."
-        end
+        destroy_model(Gritano::Core::Repository, name: name)
       end
 
       define_task("repo:read:add", "add read access to a repository") do |repo_name, user_login|
@@ -190,9 +172,19 @@ module Gritano
       def self.create_model(model, params)
         instance = model.new(params)
         if instance.save
-          puts "#{model.name.split(':')[-1].downcase} has been created successfully."
+          puts "#{model.name.split(':')[-1].downcase} was successfully created."
         else
           puts "an error occurred."
+        end
+      end
+
+      def self.destroy_model(model, params)
+        instance = model.where(params).first
+        if instance
+          instance.destroy
+          puts "#{model.name.split(':')[-1].downcase} was successfully destroyed."
+        else
+          puts "#{model.name.split(':')[-1].downcase} doens't exist."
         end
       end
 
