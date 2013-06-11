@@ -1,13 +1,15 @@
+require File.join(File.dirname(__FILE__), 'base')
+
 module Gritano
   module CLI
-    class Console < Thor
-      before %w{ repo:list
-                 key:list key:add key:rm
-              } do
-        ActiveRecord::Base.establish_connection(YAML::load(Config.database_connection))
-      end
+    module Console
+      class Remote < Base
+        before %w{ repo:list
+                   key:list key:add key:rm
+                } do
+          ActiveRecord::Base.establish_connection(YAML::load(Config.database_connection))
+        end
       
-      if Config.remote
         define_task("repo:list", "list all repositories") do
           use_if_not_nil Gritano::Core::User.where(login: Config.remote_user).first do |user|
             render_table(user.repositories.order(:name), :name)

@@ -2,8 +2,13 @@ module Gritano
   module CLI
     def CLI.configure(&block)
       yield Config
-      require File.join(File.dirname(__FILE__), "console")
-      Gritano::CLI::Console.start
+      if Config.remote
+        require File.join(File.dirname(__FILE__), "console/remote")
+        Gritano::CLI::Console::Remote.start
+      else
+        require File.join(File.dirname(__FILE__), "console/local")
+        Gritano::CLI::Console::Local.start
+      end
     end
 
     class Config

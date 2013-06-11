@@ -1,13 +1,22 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 module Gritano::CLI
-  class Console < Thor
+
+  module Console
+    class Base < Thor; end
+    class Remote < Base; end
+    class Local < Base; end
   end
 
   describe "Config" do
-    it "should start a terminal app" do
-      Gritano::CLI::Console.should_receive(:start)
-      Gritano::CLI.configure {}
+    it "should start a remote terminal app" do
+      Gritano::CLI::Console::Remote.should_receive(:start)
+      Gritano::CLI.configure { |config| config.remote = true }
+    end
+
+    it "should start a local terminal app" do
+      Gritano::CLI::Console::Local.should_receive(:start)
+      Gritano::CLI.configure { |config| config.remote = false }
     end
   end
 end

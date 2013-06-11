@@ -1,18 +1,20 @@
+require File.join(File.dirname(__FILE__), 'base')
+
 module Gritano
   module CLI
-    class Console < Thor
+    module Console
+      class Local < Base
 
-      before %w{ user:list user:add user:rm user:update 
-                 user:key:list user:key:add user:key:rm
-                 repo:list repo:add repo:rm 
-                 repo:read:add repo:read:rm
-                 repo:write:add repo:write:rm
-                 repo:user:list
-              } do
-        ActiveRecord::Base.establish_connection(YAML::load(Config.database_connection))
-      end
+        before %w{ user:list user:add user:rm user:update 
+                   user:key:list user:key:add user:key:rm
+                   repo:list repo:add repo:rm 
+                   repo:read:add repo:read:rm
+                   repo:write:add repo:write:rm
+                   repo:user:list
+                } do
+          ActiveRecord::Base.establish_connection(YAML::load(Config.database_connection))
+        end
 
-      unless Config.remote
         define_task("user:list", "list all gritano users") do
           render_table(Gritano::Core::User.order(:login), :login, :admin)
         end
