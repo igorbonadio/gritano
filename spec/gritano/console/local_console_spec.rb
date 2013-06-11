@@ -1,10 +1,14 @@
-require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
-require File.join(File.dirname(__FILE__), '../../lib/gritano/console')
+require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
 module Gritano::CLI
-  describe Console do
+  describe "LocalConsole" do
 
-    before (:each) do
+    before(:all) do
+      Gritano::CLI::Config.remote = false
+      require File.join(File.dirname(__FILE__), '../../../lib/gritano/console')
+    end
+
+    before(:each) do
       $stdout.stub(:puts)
       $stdin.stub(:readlines).and_return(['some pubkey'])
       ActiveRecord::Base.stub(:establish_connection)

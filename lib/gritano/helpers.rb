@@ -35,6 +35,18 @@ module Gritano
           render_text "an error occurred"
         end
       end
+
+      def try_change_access(user, repo, add_or_rm, read_or_write)
+        if user.send("#{add_or_rm}_access", repo, read_or_write)
+          render_text "done"
+        else
+          render_text "an error occurred"
+        end
+      end
+
+      def valid_options?(options)
+        true unless options.empty?
+      end
     end
   end
 end
