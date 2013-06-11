@@ -6,20 +6,12 @@ module Gritano
     end
 
     class Config
-      def self.database_connection
-        @database_configuration
-      end
-
-      def self.database_connection=(value)
-        @database_configuration = value
-      end
-
-      def self.repository_path
-        @repository_path
-      end
-
-      def self.repository_path=(value)
-        @repository_path = value
+      def self.method_missing(method, *args)
+        if /\=$/.match(method)
+          instance_variable_set("@#{method.to_s.gsub("=", "")}", args[0])
+        else
+          instance_variable_get("@#{method}")
+        end
       end
     end
   end
