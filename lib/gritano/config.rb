@@ -2,6 +2,7 @@ module Gritano
   module CLI
     def CLI.configure(&block)
       yield Config
+      require File.join(File.dirname(__FILE__), "console")
       Gritano::CLI::Console.start
     end
 
