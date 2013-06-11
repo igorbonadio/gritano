@@ -4,7 +4,14 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'gritano'
 
+ENV['SSH_ORIGINAL_COMMAND'] ||= ''
+remote_user = ARGV[0]
+ARGV.replace(ENV['SSH_ORIGINAL_COMMAND'].split(' '))
+
+
 Gritano::CLI.configure do |config|
   config.database_connection = YAML::load(File.open(File.join(File.dirname(__FILE__), '../spec/data/development.yml')))
   config.repository_path = File.join(File.dirname(__FILE__), '../tmp')
+  config.remote = true
+  config.remote_user = remote_user
 end
