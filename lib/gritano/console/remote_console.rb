@@ -4,7 +4,7 @@ module Gritano
       before %w{ repo:list
                  key:list key:add key:rm
               } do
-        ActiveRecord::Base.establish_connection(Config.database_connection)
+        ActiveRecord::Base.establish_connection(YAML::load(Config.database_connection))
       end
       
       if Config.remote

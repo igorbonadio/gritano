@@ -12,6 +12,7 @@ module Gritano::CLI
       $stdout.stub(:puts)
       $stdin.stub(:readlines).and_return(['some pubkey'])
       ActiveRecord::Base.stub(:establish_connection)
+      YAML.stub(:load)
     end
 
     describe "#user" do

@@ -9,7 +9,7 @@ module Gritano
                  repo:write:add repo:write:rm
                  repo:user:list
               } do
-        ActiveRecord::Base.establish_connection(Config.database_connection)
+        ActiveRecord::Base.establish_connection(YAML::load(Config.database_connection))
       end
 
       unless Config.remote

@@ -3,8 +3,9 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'gritano'
+require 'etc'
 
 Gritano::CLI.configure do |config|
-  config.database_connection = YAML::load(File.open(File.join(File.dirname(__FILE__), '../spec/data/development.yml')))
-  config.repository_path = File.join(File.dirname(__FILE__), '../tmp')
+  config.database_connection = File.open(File.join(Etc.getpwuid.dir, '.gritano/database.yml'))
+  config.repository_path = File.join(Etc.getpwuid.dir, '.gritano/database.yml')
 end
