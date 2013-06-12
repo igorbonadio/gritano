@@ -1,7 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper')
 
-require File.join(File.dirname(__FILE__), '../../../lib/gritano/console/local')
-
 module Gritano::CLI::Console
   describe Local do
 
