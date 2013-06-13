@@ -3,7 +3,7 @@ module Gritano
     def CLI.configure(&block)
       yield Config
       if Config.remote
-        Gritano::CLI::Console::Remote.start
+        Gritano::CLI::Console::Remote.start ARGV
       else
         Gritano::CLI::Console::Local.start
       end

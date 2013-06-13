@@ -7,11 +7,12 @@ require 'gritano'
 ENV['SSH_ORIGINAL_COMMAND'] ||= ''
 remote_user = ARGV[0]
 ARGV.replace(ENV['SSH_ORIGINAL_COMMAND'].split(' '))
+ARGV[0] = ARGV[0].gsub('-', ':')
 
 
 Gritano::CLI.configure do |config|
   config.database_connection = File.open(File.join(Etc.getpwuid.dir, '.gritano/database.yml'))
-  config.repository_path = File.join(Etc.getpwuid.dir, '.gritano/database.yml')
+  config.repository_path = File.join(Etc.getpwuid.dir)
   config.remote = true
   config.remote_user = remote_user
 end
