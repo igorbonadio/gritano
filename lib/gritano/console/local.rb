@@ -24,7 +24,13 @@ module Gritano
               File.open(File.join(File.dirname(__FILE__), '../../../templates/local.gritano')).readlines.join)
             File.open(File.join(Etc.getpwuid.dir, '.gritano/remote.gritano'), "w").write(
               File.open(File.join(File.dirname(__FILE__), '../../../templates/remote.gritano')).readlines.join)
+            render_text "config files were successfully created."
           end
+        end
+
+        define_task("db:migrate", "create database tables") do
+          Gritano::Core::Migration.migrate(YAML::load(File.open(File.join(Etc.getpwuid.dir, '.gritano/database.yml'))))
+          render_text "done!"
         end
 
         define_task("user:list", "list all gritano users") do
