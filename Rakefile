@@ -17,10 +17,10 @@ Jeweler::Tasks.new do |gem|
   gem.name = "gritano"
   gem.homepage = "http://github.com/igorbonadio/gritano"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Gritano is a tool to configure git servers over ssh}
+  gem.description = %Q{Gritano is a tool to configure git servers over ssh}
   gem.email = "igorbonadio@gmail.com"
-  gem.authors = ["Ígor Bonadio"]
+  gem.authors = ["Igor Bonadio"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
