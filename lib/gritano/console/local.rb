@@ -15,6 +15,18 @@ module Gritano
           ActiveRecord::Base.establish_connection(YAML::load(Config.database_connection))
         end
 
+        define_task("init", "create a .gritano folder in your home directory which will store gritano configuration files.") do
+          unless File.exist? File.join(Etc.getpwuid.dir, '.gritano')
+            Dir.mkdir(File.join(Etc.getpwuid.dir, '.gritano'))
+            File.open(File.join(Etc.getpwuid.dir, '.gritano/database.yml'), "w").write(
+              File.open(File.join(File.dirname(__FILE__), '../../../templates/database.sqlite3.yml')).readlines.join)
+            File.open(File.join(Etc.getpwuid.dir, '.gritano/local.gritano'), "w").write(
+              File.open(File.join(File.dirname(__FILE__), '../../../templates/local.gritano')).readlines.join)
+            File.open(File.join(Etc.getpwuid.dir, '.gritano/remote.gritano'), "w").write(
+              File.open(File.join(File.dirname(__FILE__), '../../../templates/remote.gritano')).readlines.join)
+          end
+        end
+
         define_task("user:list", "list all gritano users") do
           render_table(Gritano::Core::User.order(:login), :login, :admin)
         end

@@ -5,6 +5,10 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'gritano'
 require 'etc'
 
-load File.join(Etc.getpwuid.dir, '.gritano/local.gritano')
+begin
+  load File.join(Etc.getpwuid.dir, '.gritano/local.gritano')
+rescue LoadError => e
+  puts "WARNING: GRITANO IS NOT INSTALLED." unless ARGV[0] == 'init'
+end
 
 Gritano::CLI::Console::Local.start
