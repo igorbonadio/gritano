@@ -1,0 +1,2 @@
+adapter: sqlite3
+database: /Users/igorbonadio/.gritano/database.sqlite3

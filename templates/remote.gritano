@@ -1,0 +1,5 @@
+Gritano::CLI.configure do |config|
+  config.database_connection = File.open(File.join(Etc.getpwuid.dir, '.gritano/database.yml'))
+  config.repository_path = File.join(Etc.getpwuid.dir)
+  config.remote_ssh_prefix = 'ssh git@server.com'
+end
