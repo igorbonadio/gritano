@@ -5,7 +5,6 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'gritano'
 require 'etc'
 
-Gritano::CLI.configure do |config|
-  config.database_connection = File.open(File.join(Etc.getpwuid.dir, '.gritano/database.yml'))
-  config.repository_path = File.join(Etc.getpwuid.dir)
-end
+load File.join(Etc.getpwuid.dir, '.gritano/local.gritano')
+
+Gritano::CLI::Console::Local.start

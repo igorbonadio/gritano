@@ -4,6 +4,11 @@ module Gritano
   module CLI
     module Console
       class Remote < Base
+
+        def self.basename
+          Gritano::CLI::Config.remote_ssh_prefix
+        end
+
         before %w{ repo:list
                    key:list key:add key:rm
                 } do

@@ -9,10 +9,12 @@ remote_user = ARGV[0]
 ARGV.replace(ENV['SSH_ORIGINAL_COMMAND'].split(' '))
 ARGV[0] = ARGV[0].gsub('-', ':') if ARGV[0]
 
+load File.join(Etc.getpwuid.dir, '.gritano/local.gritano')
 
-Gritano::CLI.configure do |config|
-  config.database_connection = File.open(File.join(Etc.getpwuid.dir, '.gritano/database.yml'))
-  config.repository_path = File.join(Etc.getpwuid.dir)
-  config.remote = true
-  config.remote_user = remote_user
+Gritano::CLI::Config.remote_user = remote_user
+
+if ['git:receive:pack', 'git:upload:pack'].include? ARGV[0]
+  Gritano::CLI::Console::Git.start
+else
+  Gritano::CLI::Console::Remote.start
 end
