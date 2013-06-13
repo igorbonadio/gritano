@@ -3,7 +3,11 @@ module Gritano
     def CLI.configure(&block)
       yield Config
       if Config.remote
-        Gritano::CLI::Console::Remote.start ARGV
+        if ['git:receive:pack', 'git:upload:pack'].include? ARGV[0]
+          Gritano::CLI::Console::Git.start
+        else
+          Gritano::CLI::Console::Remote.start
+        end
       else
         Gritano::CLI::Console::Local.start
       end

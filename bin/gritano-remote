@@ -7,7 +7,7 @@ require 'gritano'
 ENV['SSH_ORIGINAL_COMMAND'] ||= ''
 remote_user = ARGV[0]
 ARGV.replace(ENV['SSH_ORIGINAL_COMMAND'].split(' '))
-ARGV[0] = ARGV[0].gsub('-', ':')
+ARGV[0] = ARGV[0].gsub('-', ':') if ARGV[0]
 
 
 Gritano::CLI.configure do |config|
