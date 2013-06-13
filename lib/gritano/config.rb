@@ -1,16 +1,10 @@
 module Gritano
   module CLI
     def CLI.configure(&block)
+      Config.database_connection = File.open(File.join(Etc.getpwuid.dir, '.gritano/database.yml'))
+      Config.repository_path = File.join(Etc.getpwuid.dir)
+      Config.remote_ssh_prefix = 'ssh git@server.com'
       yield Config
-      # if Config.remote
-      #   if ['git:receive:pack', 'git:upload:pack'].include? ARGV[0]
-      #     Gritano::CLI::Console::Git.start
-      #   else
-      #     Gritano::CLI::Console::Remote.start
-      #   end
-      # else
-      #   Gritano::CLI::Console::Local.start
-      # end
     end
 
     class Config
