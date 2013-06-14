@@ -19,7 +19,7 @@ module Gritano
           unless File.exist? File.join(Etc.getpwuid.dir, '.gritano')
             Dir.mkdir(File.join(Etc.getpwuid.dir, '.gritano'))
             File.open(File.join(Etc.getpwuid.dir, '.gritano/database.yml'), "w").write(
-              File.open(File.join(File.dirname(__FILE__), '../../../templates/database.sqlite3.yml')).readlines.join)
+              {'adapter' => 'sqlite3', 'database' => File.join(Etc.getpwuid.dir, '.gritano/database.sqlite3')}.to_yaml)
             File.open(File.join(Etc.getpwuid.dir, '.gritano/local.gritano'), "w").write(
               File.open(File.join(File.dirname(__FILE__), '../../../templates/local.gritano')).readlines.join)
             File.open(File.join(Etc.getpwuid.dir, '.gritano/remote.gritano'), "w").write(
