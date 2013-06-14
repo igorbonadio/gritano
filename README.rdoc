@@ -1,8 +1,81 @@
-= gritano
+= Gritano
 
-Description goes here.
+{<img src="https://badge.fury.io/rb/gritano.png" alt="Gem Version" />}[http://badge.fury.io/rb/gritano] {<img src="https://travis-ci.org/igorbonadio/gritano.png" />}[https://travis-ci.org/igorbonadio/gritano]
 
-== Contributing to gritano
+Gritano is the simplest way to configure a git server over ssh. You can create repositories and manage user access using this practical tool.
+
+== Requirements
+
+* ruby 1.9 or 2.0 (http://www.ruby-lang.org)
+* git (http://git-scm.com)
+
+== Install
+
+  $ gem install gritano
+  
+== Update
+
+...
+
+== Usage
+
+First of all you should create a git user who will be responsible for store and manipulate repositories. Lets suppose we are logged as this user.
+
+All you need to do to set up Gritano is
+
+  $ gritano init && gritano db:migrate
+  
+After that you can add users:
+
+  $ gritano user:add igorbonadio
+  
+add administrator rights to this user:
+
+  $ gritano user:admin:add igorbonadio
+
+add user's public keys:
+
+  $ gritano user:key:add igorbonadio mykey < id_rsa.pub
+
+create bare repositories:
+
+  $ gritano repo:add proj.git
+
+and control access:
+
+  $ gritano repo:read:add proj.git igorbonadio
+  
+For more information, execute
+
+  $ gritano help
+  
+== User Access
+
+Gritano 0.2.0 introduced a new feature that enables users to execute some simple commands via ssh:
+
+  $ ssh git@host.com username
+
+  $ ssh git@host.com repo:list
+  
+  $ ssh git@host.com key:list
+  
+  $ ssh git@host.com key:add mykey < id_rsa.pub
+  
+  $ ssh git@host.com key:rm mykey
+  
+For more information, execute
+
+  $ ssh git@host.com help
+
+== Admin Access
+
+...
+
+== For more Information
+
+http://gritano.org
+
+== Contributing to Gritano
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
