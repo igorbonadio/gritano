@@ -28,7 +28,7 @@ GEM
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
       posix-spawn (~> 0.3.6)
-    gritano-core (1.1.1)
+    gritano-core (1.1.2)
       activerecord (~> 4.0.0.rc1)
       grit (~> 2.5.0)
     guard (1.8.0)
@@ -93,7 +93,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  gritano-core (~> 1.1.1)
+  gritano-core (~> 1.1.2)
   guard-rspec
   jeweler (~> 1.8.4)
   rdoc (~> 4.0.0)
