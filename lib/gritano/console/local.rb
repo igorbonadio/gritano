@@ -17,13 +17,9 @@ module Gritano
 
         define_task("init", "create a .gritano folder in your home directory which will store gritano configuration files.") do
           unless File.exist? File.join(Etc.getpwuid.dir, '.gritano')
-            Dir.mkdir(File.join(Etc.getpwuid.dir, '.gritano'))
-            File.open(File.join(Etc.getpwuid.dir, '.gritano/database.yml'), "w").write(
-              {'adapter' => 'sqlite3', 'database' => File.join(Etc.getpwuid.dir, '.gritano/database.sqlite3')}.to_yaml)
-            File.open(File.join(Etc.getpwuid.dir, '.gritano/local.gritano'), "w").write(
-              File.open(File.join(File.dirname(__FILE__), '../../../templates/local.gritano')).readlines.join)
-            File.open(File.join(Etc.getpwuid.dir, '.gritano/remote.gritano'), "w").write(
-              File.open(File.join(File.dirname(__FILE__), '../../../templates/remote.gritano')).readlines.join)
+            create_gritano_dirs
+            create_database_config_file
+            create_command_scripts
             render_text "config files were successfully created."
           end
         end
@@ -110,6 +106,24 @@ module Gritano
           use_if_not_nil Gritano::Core::Repository.where(name: repo_name).first do |repo|
             render_table(repo.users.order(:login), :login, :access => repo)
           end
+        end
+
+        private
+        def create_gritano_dirs
+          Dir.mkdir(File.join(Etc.getpwuid.dir, '.gritano')) unless File.exist? File.join(Etc.getpwuid.dir, '.gritano')
+          Dir.mkdir(File.join(Etc.getpwuid.dir, '.ssh')) unless File.exist? File.join(Etc.getpwuid.dir, '.ssh')
+        end
+
+        def create_database_config_file
+          File.open(File.join(Etc.getpwuid.dir, '.gritano/database.yml'), "w").write(
+              {'adapter' => 'sqlite3', 'database' => File.join(Etc.getpwuid.dir, '.gritano/database.sqlite3')}.to_yaml)
+        end
+
+        def create_command_scripts
+          File.open(File.join(Etc.getpwuid.dir, '.gritano/local.gritano'), "w").write(
+              File.open(File.join(File.dirname(__FILE__), '../../../templates/local.gritano')).readlines.join)
+          File.open(File.join(Etc.getpwuid.dir, '.gritano/remote.gritano'), "w").write(
+              File.open(File.join(File.dirname(__FILE__), '../../../templates/remote.gritano')).readlines.join)
         end
       end
     end
