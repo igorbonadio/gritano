@@ -2,7 +2,7 @@ source "http://rubygems.org"
 
 gem "thor", "~> 0.18.1"
 gem "terminal-table", "~> 1.4.5"
-gem "gritano-core", "~> 1.1.2"
+gem "gritano-core", "~> 2.0.0"
 gem "sqlite3", "~> 1.3.7"
 
 group :development do
