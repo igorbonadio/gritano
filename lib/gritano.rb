@@ -2,6 +2,8 @@ root_path = File.expand_path(File.dirname(__FILE__))
 
 require "gritano-core"
 require 'terminal-table'
+require 'rainbow'
+require "highline/import"
 
 require File.join(root_path, 'gritano/thor')
 require File.join(root_path, 'gritano/renderer')

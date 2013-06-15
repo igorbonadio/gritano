@@ -5,10 +5,21 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'gritano'
 require 'etc'
 
+def line(text, cols)
+  "% #{text}#{' ' * (cols - (text.length + 3))}%"
+end
+
+def table(lines)
+  cols = HighLine.new.output_cols
+  (['%' * cols] + lines.map { |l| line(l, cols) } + ['%' * cols]).join("\n")
+end
+
 begin
   load File.join(Etc.getpwuid.dir, '.gritano/local.gritano')
 rescue LoadError => e
-  puts "WARNING: GRITANO IS NOT INSTALLED." unless ARGV[0] == 'init'
+  unless ARGV[0] == 'init'
+    puts table(['WARNING!', 'GRITANO IS NOT INSTALLED']).color(:yellow)
+  end
 end
 
 Gritano::CLI::Console::Local.start
