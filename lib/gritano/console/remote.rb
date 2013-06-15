@@ -11,8 +11,9 @@ module Gritano
 
         before %w{ repo:list
                    key:list key:add key:rm
+                   admin
                 } do
-          ActiveRecord::Base.establish_connection(YAML::load(Config.database_connection))
+          ActiveRecord::Base.establish_connection(YAML::load(Config.database_connection)) unless ActiveRecord::Base.connected?
         end
       
         define_task("repo:list", "list all repositories") do
@@ -36,6 +37,19 @@ module Gritano
         define_task("key:rm", "remove a user's key") do |key_name|
           use_if_not_nil Gritano::Core::User.where(login: Config.remote_user).first do |user|
             destroy_model(user.keys, name: key_name)
+          end
+        end
+
+        define_task("admin", "execute admin commands") do |*command|
+          use_if_not_nil Gritano::Core::User.where(login: Config.remote_user).first do |user|
+            if user.admin?
+              def Local.basename
+                "#{Remote.basename} admin"
+              end
+              Local.start(command)
+            else
+              render_text "you are not an admin!"
+            end
           end
         end
       end
