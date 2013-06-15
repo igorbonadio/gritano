@@ -11,11 +11,18 @@ module Gritano::CLI::Console
       Gritano::CLI::Config.remote_user = "user_login"
     end
 
+    def model_array(model_name)
+      users = []
+      users.stub(:model).and_return(users)
+      users.stub(:name).and_return(model_name)
+      users
+    end
+
     it "should list user's repositories" do
       user = double('User')
       repos = double('Repositories')
       user.should_receive(:repositories).and_return(repos)
-      repos.should_receive(:order).with(:name).and_return([])
+      repos.should_receive(:order).with(:name).and_return(model_array("Gritano::Core::Repository"))
       Gritano::Core::User.should_receive(:where).with(login: 'user_login').and_return([user])
       Gritano::CLI::Console::Remote.start %w{repo:list}
     end
@@ -24,7 +31,7 @@ module Gritano::CLI::Console
       user = double('User')
       keys = double('Keys')
       user.should_receive(:keys).and_return(keys)
-      keys.should_receive(:order).with(:name).and_return([])
+      keys.should_receive(:order).with(:name).and_return(model_array("Gritano::Core::Key"))
       Gritano::Core::User.should_receive(:where).with(login: 'user_login').and_return([user])
       Gritano::CLI::Console::Remote.start %w{key:list}
     end

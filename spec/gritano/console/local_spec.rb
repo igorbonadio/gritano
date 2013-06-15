@@ -10,9 +10,16 @@ module Gritano::CLI::Console
       YAML.stub(:load)
     end
 
+    def model_array(model_name)
+      users = []
+      users.stub(:model).and_return(users)
+      users.stub(:name).and_return(model_name)
+      users
+    end
+
     describe "#user" do
       it "should list all users ordered by login" do
-        Gritano::Core::User.should_receive(:order).with(:login).and_return([])
+        Gritano::Core::User.should_receive(:order).with(:login).and_return(model_array("Gritano::Core::User"))
         Gritano::CLI::Console::Local.start %w{user:list}
       end
 
@@ -77,7 +84,7 @@ module Gritano::CLI::Console
 
     describe "#repo" do
       it "should list repositories ordered by name" do
-        Gritano::Core::Repository.should_receive(:order).with(:name).and_return([])
+        Gritano::Core::Repository.should_receive(:order).with(:name).and_return(model_array("Gritano::Core::Repository"))
         Gritano::CLI::Console::Local.start %w{repo:list}
       end
 
