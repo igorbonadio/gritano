@@ -48,7 +48,7 @@ module Gritano
               end
               Local.start(command)
             else
-              render_text "you are not an admin!"
+              render_text "you are not an admin!", :error
             end
           end
         end

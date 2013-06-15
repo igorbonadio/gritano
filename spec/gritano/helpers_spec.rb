@@ -27,7 +27,7 @@ module Gritano::CLI
         model.should_receive(:new).with(params).and_return(instance)
         model.stub(:name).and_return("Module::Class")
         instance.should_receive(:save).and_return(false)
-        @object.should_receive(:render_text).with(/an error occurred/)
+        @object.should_receive(:render_text).with(/an error occurred/, :error)
         @object.create_model(model, params)
       end
     end
@@ -45,7 +45,7 @@ module Gritano::CLI
         instance = double("Instance")
         params = {param: 'value'}
         instance.should_receive(:update_attributes).with(params).and_return(false)
-        @object.should_receive(:render_text).with(/an error occurred/)
+        @object.should_receive(:render_text).with(/an error occurred/, :error)
         @object.update_model(instance, params)
       end
     end
@@ -67,7 +67,7 @@ module Gritano::CLI
         params = {param: 'value'}
         model.should_receive(:where).with(params).and_return([])
         model.stub(:name).and_return("Module::Class")
-        @object.should_receive(:render_text).with(/doens't exist/)
+        @object.should_receive(:render_text).with(/doens't exist/, :error)
         @object.destroy_model(model, params)
       end
     end
@@ -82,7 +82,7 @@ module Gritano::CLI
       it "should not use nil objects" do
         obj = double("Nil")
         obj.should_not_receive(:touch)
-        @object.should_receive(:render_text).with(/an error occurred/)
+        @object.should_receive(:render_text).with(/an error occurred/, :error)
         @object.use_if_not_nil(nil) { obj.touch }
       end
     end
@@ -100,7 +100,7 @@ module Gritano::CLI
         user = double("User")
         repo = double("Repo")
         user.should_receive(:send).and_return(false)
-        @object.should_receive(:render_text).with(/an error occurred/)
+        @object.should_receive(:render_text).with(/an error occurred/, :error)
         @object.try_change_access(user, repo, :add, :read)
       end
     end

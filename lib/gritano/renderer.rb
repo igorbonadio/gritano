@@ -1,8 +1,12 @@
 module Gritano
   module CLI
     module Renderer
-      def render_text(text)
-        puts text
+      def render_text(text, level = :success)
+        if level == :success
+          puts text.color(:green)
+        else
+          puts text.color(:red)
+        end
       end
 
       def render_table(elements, *attributes)
@@ -29,7 +33,7 @@ module Gritano
             t.add_row row
           end
         end
-        render_text table
+        render_text table.to_s
       end
     end
   end

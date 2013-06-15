@@ -6,7 +6,7 @@ module Gritano
         if instance.save
           render_text "#{model.name.split(':')[-1].downcase} was successfully created."
         else
-          render_text "an error occurred."
+          render_text "an error occurred.", :error
         end
       end
 
@@ -14,7 +14,7 @@ module Gritano
         if instance.update_attributes(params)
           render_text "#{instance.class.name.split(':')[-1].downcase} was successfully updated."
         else
-          render_text "an error occurred."
+          render_text "an error occurred.", :error
         end
       end
 
@@ -24,7 +24,7 @@ module Gritano
           instance.destroy
           render_text "#{model.name.split(':')[-1].downcase} was successfully destroyed."
         else
-          render_text "#{model.name.split(':')[-1].downcase} doens't exist."
+          render_text "#{model.name.split(':')[-1].downcase} doens't exist.", :error
         end
       end
 
@@ -32,7 +32,7 @@ module Gritano
         unless variables.index(nil)
           block.call(*variables)
         else
-          render_text "an error occurred"
+          render_text "an error occurred", :error
         end
       end
 
@@ -40,7 +40,7 @@ module Gritano
         if user.send("#{add_or_rm}_access", repo, read_or_write)
           render_text "done"
         else
-          render_text "an error occurred"
+          render_text "an error occurred", :error
         end
       end
 
