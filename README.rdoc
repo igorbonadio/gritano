@@ -17,7 +17,7 @@ Gritano is the simplest way to configure a git server over ssh. You can create r
 
 === 0.x.x or 1.0.0 to 2.x.x
 
-Unfortunately, Gritano 2.x.x is not compatible with previous versions.
+Unfortunately, Gritano 2.x.x is not compatible with any version previous to 2.0.0.
 
 == Usage
 
