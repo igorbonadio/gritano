@@ -71,7 +71,21 @@ For more information, execute
 
 == Admin Access
 
-...
+Starting from Gritano 0.3.0, administrators can execute commands via ssh:
+
+  $ ssh git@host.com admin user:add username
+
+  $ ssh git@host.com admin user:rm username
+
+  $ ssh git@host.com admin user:key:add username keyname < key.pub
+
+  $ ssh git@host.com admin user:key:rm username keyname
+
+  $ ssh git@host.com admin repo:add reponame.git
+
+  $ ssh git@host.com admin repo:rm reponame.git
+
+  $ ssh git@host.com admin repo:list
 
 == For more Information
 
