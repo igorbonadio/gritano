@@ -15,7 +15,7 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "gritano"
-  gem.homepage = "http://github.com/igorbonadio/gritano"
+  gem.homepage = "http://gritano.org"
   gem.license = "MIT"
   gem.summary = %Q{Gritano is a tool to configure git servers over ssh}
   gem.description = %Q{Gritano is a tool to configure git servers over ssh}
