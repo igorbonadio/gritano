@@ -4,6 +4,7 @@ require "gritano-core"
 require 'terminal-table'
 require 'rainbow'
 require "highline/import"
+require 'active_support/inflector'
 
 require File.join(root_path, 'gritano/thor')
 require File.join(root_path, 'gritano/renderer')

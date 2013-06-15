@@ -6,6 +6,7 @@ gem "gritano-core", "~> 2.0.0"
 gem "sqlite3", "~> 1.3.7"
 gem "rainbow", "~> 1.1.4"
 gem "highline", "~> 1.6.19"
+gem 'activesupport', "~> 4.0.0.rc1"
 
 group :development do
   gem "rspec", "~> 2.13.0"
