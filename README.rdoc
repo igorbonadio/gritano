@@ -33,7 +33,7 @@ After that you can add users:
   
 add administrator rights to this user:
 
-  $ gritano user:admin:add igorbonadio
+  $ gritano user:update igorbonadio --admin=true
 
 add user's public keys:
 
