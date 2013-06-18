@@ -17,5 +17,14 @@ module Gritano::Core
       Key.stub(:all).and_return(keys)
       Key.authorized_keys.should be == "command=\"gritano-remote user_login\" some_key\ncommand=\"gritano-remote user_login\" some_key"
     end
+
+    it "should create the authorized_keys file when a new key is created" do
+      key = Key.new
+      file = double('File')
+      File.should_receive(:open).with(File.join(Etc.getpwuid.dir, '.ssh/authorized_keys'), "w").and_return(file)
+      Key.stub(:authorized_keys).and_return('authorized_keys')
+      file.should_receive(:write).with('authorized_keys')
+      key.update_authorized_keys
+    end
   end
 end
