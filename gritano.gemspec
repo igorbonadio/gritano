@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "gritano"
-  s.version = "2.0.1"
+  s.version = "2.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Igor Bonadio"]
-  s.date = "2013-06-15"
+  s.date = "2013-06-18"
   s.description = "Gritano is a tool to configure git servers over ssh"
   s.email = "igorbonadio@gmail.com"
   s.executables = ["gritano", "gritano-remote"]
@@ -44,6 +44,7 @@ Gem::Specification.new do |s|
     "lib/gritano/renderer.rb",
     "lib/gritano/thor.rb",
     "spec/data/development.yml",
+    "spec/gritano/config_spec.rb",
     "spec/gritano/console/git_spec.rb",
     "spec/gritano/console/local_spec.rb",
     "spec/gritano/console/remote_spec.rb",
