@@ -1,7 +1,7 @@
 module Gritano
   module CLI
     def CLI.configure(&block)
-      Config.database_connection = File.open(File.join(Etc.getpwuid.dir, '.gritano/database.yml'))
+      Config.database_connection = File.join(Etc.getpwuid.dir, '.gritano/database.yml')
       Config.repository_path = File.join(Etc.getpwuid.dir)
       Config.remote_ssh_prefix = 'ssh git@server.com'
       yield Config

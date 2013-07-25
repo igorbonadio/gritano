@@ -7,7 +7,7 @@ module Gritano
         before %w{ git:receive:pack
                    git:upload:pack
                 } do
-          ActiveRecord::Base.establish_connection(YAML::load(Config.database_connection))
+          ActiveRecord::Base.establish_connection(YAML::load(File.open(Config.database_connection)))
         end
 
         define_task("git:receive:pack", "") do |repo_name|

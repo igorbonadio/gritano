@@ -12,7 +12,7 @@ module Gritano
                    repo:write:add repo:write:rm
                    repo:user:list
                 } do
-          ActiveRecord::Base.establish_connection(YAML::load(Config.database_connection)) unless ActiveRecord::Base.connected?
+          ActiveRecord::Base.establish_connection(YAML::load(File.open(Config.database_connection))) unless ActiveRecord::Base.connected?
         end
 
         define_task("init", "create a .gritano folder in your home directory which will store gritano configuration files.") do

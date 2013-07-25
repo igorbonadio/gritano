@@ -7,6 +7,7 @@ module Gritano::CLI::Console
       $stdout.stub(:puts)
       $stdin.stub(:readlines).and_return(['some pubkey'])
       ActiveRecord::Base.stub(:establish_connection)
+      File.stub(:open)
       YAML.stub(:load)
       Gritano::CLI::Config.remote_user = "user_login"
     end

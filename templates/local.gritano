@@ -1,4 +1,4 @@
 Gritano::CLI.configure do |config|
-  config.database_connection = File.open(File.join(Etc.getpwuid.dir, '.gritano/database.yml'))
+  config.database_connection = File.join(Etc.getpwuid.dir, '.gritano/database.yml')
   config.repository_path = File.join(Etc.getpwuid.dir)
 end

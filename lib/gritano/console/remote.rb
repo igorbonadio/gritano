@@ -13,7 +13,7 @@ module Gritano
                    key:list key:add key:rm
                    admin
                 } do
-          ActiveRecord::Base.establish_connection(YAML::load(Config.database_connection)) unless ActiveRecord::Base.connected?
+          ActiveRecord::Base.establish_connection(YAML::load(File.open(Config.database_connection))) unless ActiveRecord::Base.connected?
         end
       
         define_task("repo:list", "list all repositories") do
